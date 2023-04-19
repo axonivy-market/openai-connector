@@ -1,1 +1,10 @@
 RestClients:
+  #APIs for sampling from and fine-tuning language models
+  openai (OpenAI API):
+    UUID: 6840e778-eb27-42a0-afdc-87588ffae871
+    Url: https://api.openai.com/v1
+    Features:
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
+    OpenAPI:
+      SpecUrl: https://raw.githubusercontent.com/openai/openai-openapi/master/openapi.yaml
+      Namespace: com.openai.api.v1.client

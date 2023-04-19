@@ -10,7 +10,8 @@
       "name" : "chatCompletionDemo.ivp",
       "config" : {
         "callSignature" : "chatCompletionDemo",
-        "outLink" : "chatCompletionDemo.ivp"
+        "outLink" : "chatCompletionDemo.ivp",
+        "tags" : "demo"
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
@@ -41,7 +42,8 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 248, "y" : 64 }
+        "at" : { "x" : 248, "y" : 64 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
       "connect" : { "id" : "f2", "to" : "f1" }
     } ]

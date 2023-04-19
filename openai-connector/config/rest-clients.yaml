@@ -3,6 +3,7 @@ RestClients:
   openai:
     UUID: 6840e778-eb27-42a0-afdc-87588ffae871
     Url: https://api.openai.com/v1
+    Icon: res:/webContent/logo/OpenAI_Logo.png
     Features:
     - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
     - com.axonivy.connector.openai.OpenAIAuthFeature

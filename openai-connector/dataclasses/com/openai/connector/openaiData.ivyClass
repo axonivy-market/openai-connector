@@ -1,2 +1,3 @@
 openaiData #class
 com.openai.connector #namespace
+message com.openai.api.v1.client.ChatCompletionRequestMessage #field

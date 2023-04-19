@@ -1,0 +1,21 @@
+{
+    "id": "chatcmpl-772HYqavHUb3RclST47IzpTO9uDhQ",
+    "object": "chat.completion",
+    "created": 1681911424,
+    "model": "gpt-3.5-turbo-0301",
+    "usage": {
+        "prompt_tokens": 11,
+        "completion_tokens": 123,
+        "total_tokens": 134
+    },
+    "choices": [
+        {
+            "message": {
+                "role": "assistant",
+                "content": "As an AI language model, I cannot have a personal experience and thoughts, but the meaning of life is a philosophical and existential question that has puzzled humans since the beginning of time. It refers to the purpose, significance, or reason for existence, and it's a question that has generated many different answers and perspectives from different cultures, religions, and belief systems. While some people believe that the meaning of life is to fulfill a divine or spiritual purpose, others see it as a pursuit of happiness or personal fulfillment. Ultimately, the meaning of life is a deeply personal and subjective matter that each individual must find for themselves."
+            },
+            "finish_reason": "stop",
+            "index": 0
+        }
+    ]
+}

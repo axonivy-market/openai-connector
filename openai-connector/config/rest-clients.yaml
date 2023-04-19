@@ -1,6 +1,6 @@
 RestClients:
   #APIs for sampling from and fine-tuning language models
-  openai (OpenAI API):
+  openai:
     UUID: 6840e778-eb27-42a0-afdc-87588ffae871
     Url: https://api.openai.com/v1
     Features:

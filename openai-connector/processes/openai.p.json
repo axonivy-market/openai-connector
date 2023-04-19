@@ -8,9 +8,35 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "chatGpt()",
+      "name" : "chatGpt(String)",
       "config" : {
-        "callSignature" : "chatGpt"
+        "callSignature" : "chatGpt",
+        "input" : {
+          "params" : [
+            { "name" : "what", "type" : "String" }
+          ],
+          "map" : {
+            "out.message.content" : "param.what",
+            "out.message.name" : "ivy.session.getSessionUserName()",
+            "out.message.role" : "com.openai.api.v1.client.ChatCompletionRequestMessage.RoleEnum.USER"
+          },
+          "code" : [
+            "import com.fasterxml.jackson.databind.node.ObjectNode;",
+            "import com.fasterxml.jackson.databind.node.JsonNodeFactory;",
+            "",
+            "ObjectNode logit = JsonNodeFactory.instance.objectNode();",
+            "logit.put(\"50256\", -100);",
+            "out.logitBias = logit;"
+          ]
+        },
+        "result" : {
+          "params" : [
+            { "name" : "answer", "type" : "String" }
+          ],
+          "map" : {
+            "result.answer" : "in.answer"
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
@@ -29,13 +55,18 @@
       "config" : {
         "path" : "/chat/completions",
         "bodyObjectMapping" : {
+          "param.logitBias" : "in.logitBias",
           "param.messages" : "[in.message]",
-          "param.model" : "\"gpt-3.5-turbo\""
+          "param.model" : "\"gpt-3.5-turbo\"",
+          "param.user" : "ivy.session.getSessionUserName()"
         },
         "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
         "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
         "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.answer" : "result.choices.get(0).message.content"
+        },
         "bodyObjectType" : "com.openai.api.v1.client.CreateChatCompletionRequest",
         "resultType" : "com.openai.api.v1.client.CreateChatCompletionResponse",
         "bodyInputType" : "ENTITY"

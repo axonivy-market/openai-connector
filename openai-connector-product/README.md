@@ -1,6 +1,6 @@
-# MY-PRODUCT-NAME
+# OpenAI connector
 
-YOUR DESCRIPTION GOES HERE
+Chat GPT 4 Axon Ivy
 
 ## Demo
 

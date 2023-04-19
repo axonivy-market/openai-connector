@@ -33,10 +33,10 @@ public class OpenAiTest{
     fixture.config("RestClients.openai.Url", MockAI.URI);
     fixture.var("openai.apiKey", "notMyKey");
     RestClients clients = RestClients.of(app);
-    RestClient deepL = clients.find("openai");
-    var testClient = deepL.toBuilder()
+    RestClient openAi = clients.find("openai");
+    var testClient = openAi.toBuilder()
       .feature(CsrfHeaderFeature.class.getName())
-      .property("AUTH.deepLKey", "notMyKey")
+      .property("AUTH.openaiKey", "notMyKey")
       .toRestClient();
     clients.set(testClient);
   }

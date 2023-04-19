@@ -27,7 +27,18 @@
       "type" : "SubProcessCall",
       "name" : "openai",
       "config" : {
-        "processCall" : "openai:chatGpt()"
+        "processCall" : "openai:chatGpt(String)",
+        "call" : {
+          "params" : [
+            { "name" : "what", "type" : "String" }
+          ],
+          "map" : {
+            "param.what" : "\"meaning of life\""
+          }
+        },
+        "output" : {
+          "code" : "ivy.log.info(\"chat GPT says: \"+result.answer);"
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 }

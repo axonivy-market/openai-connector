@@ -5,8 +5,8 @@
       "data": {
         "projects": [
           {
-            "groupId": "MY-GROUP-ID",
-            "artifactId": "MY-PRODUCT-NAME-demo",
+            "groupId": "com.axonivy.connector.openai",
+            "artifactId": "openai-connector-demo",
             "version": "${version}",
             "type": "iar"
           }
@@ -27,31 +27,10 @@
       "data": {
         "dependencies": [
           {
-            "groupId": "MY-GROUP-ID",
-            "artifactId": "MY-PRODUCT-NAME",
+            "groupId": "com.axonivy.connector.openai",
+            "artifactId": "openai-connector",
             "version": "${version}",
             "type": "iar"
-          }
-        ],
-        "repositories": [
-          {
-            "id": "maven.axonivy.com",
-            "url": "https://maven.axonivy.com",
-            "snapshots": {
-              "enabled": "true"
-            }
-          }
-        ]
-      }
-    }, 
-    {
-      "id": "maven-dropins",
-      "data": {
-        "dependencies": [
-          {
-            "groupId": "MY-GROUP-ID",
-            "artifactId": "MY-PRODUCT-NAME",
-            "version": "${version}"
           }
         ],
         "repositories": [

@@ -1,0 +1,82 @@
+{
+  "format" : "10.0.0",
+  "id" : "187997E4FAE2FBE9",
+  "kind" : "CALLABLE_SUB",
+  "config" : {
+    "data" : "com.openai.connector.openaiData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "CallSubStart",
+      "name" : "chatGpt(String)",
+      "config" : {
+        "callSignature" : "chatGpt",
+        "input" : {
+          "params" : [
+            { "name" : "what", "type" : "String" }
+          ],
+          "map" : {
+            "out.message.content" : "param.what",
+            "out.message.name" : "ivy.session.getSessionUserName()",
+            "out.message.role" : "com.openai.api.v1.client.ChatCompletionRequestMessage.RoleEnum.USER"
+          },
+          "code" : [
+            "import com.fasterxml.jackson.databind.node.ObjectNode;",
+            "import com.fasterxml.jackson.databind.node.JsonNodeFactory;",
+            "",
+            "ObjectNode logit = JsonNodeFactory.instance.objectNode();",
+            "logit.put(\"50256\", -100);",
+            "out.logitBias = logit;"
+          ]
+        },
+        "result" : {
+          "params" : [
+            { "name" : "answer", "type" : "String" }
+          ],
+          "map" : {
+            "result.answer" : "in.answer"
+          }
+        },
+        "tags" : "connector"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
+      },
+      "connect" : { "id" : "f4", "to" : "f3" }
+    }, {
+      "id" : "f1",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "RestClientCall",
+      "name" : "openai (OpenAI API)",
+      "config" : {
+        "path" : "/chat/completions",
+        "bodyObjectMapping" : {
+          "param.logitBias" : "in.logitBias",
+          "param.messages" : "[in.message]",
+          "param.model" : "com.axonivy.connector.openai.Model.GPT_35.getValue()",
+          "param.user" : "ivy.session.getSessionUserName()"
+        },
+        "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.answer" : "result.choices.get(0).message.content"
+        },
+        "bodyObjectType" : "com.openai.api.v1.client.CreateChatCompletionRequest",
+        "resultType" : "com.openai.api.v1.client.CreateChatCompletionResponse",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    } ]
+}

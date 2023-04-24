@@ -1,0 +1,36 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:f="http://xmlns.jcp.org/jsf/core"
+  xmlns:h="http://xmlns.jcp.org/jsf/html" xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+  xmlns:ic="http://ivyteam.ch/jsf/component" xmlns:p="http://primefaces.org/ui"
+  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+  <ui:composition template="/layouts/frame-10.xhtml">
+    <ui:define name="title">ChatWithAi</ui:define>
+    <ui:define name="content">
+
+      <h3>
+        AI Chat
+      </h3>
+
+      <h:form id="form">
+        <p:messages />
+        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank ui-fluid" >
+
+          <ui:repeat var="msg" value="#{data.conversation}">
+            <p:outputLabel value="#{msg.sender}" style="font-weight:bold;"/>
+            <p:outputLabel value="#{msg.text}" style="display:block; margin-bottom:20px;"/>
+          </ui:repeat>
+          <p:outputLabel value="How can I help you today?"/>
+          <p:inputTextarea value="#{data.message}"/>
+
+        </p:panelGrid>
+        <br />
+        <div class="command-btns">
+          <p:commandButton id="proceed" actionListener="#{logic.send}" value="send" update="form" icon="pi pi-check" />
+        </div>
+      </h:form>
+
+    </ui:define>
+  </ui:composition>
+</h:body>
+
+</html>

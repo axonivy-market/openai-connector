@@ -1,0 +1,6 @@
+ChatWithAiData #class
+com.openai.connector.demo.ChatWithAi #namespace
+message String #field
+message PERSISTENT #fieldModifier
+conversation java.util.List<com.openai.connector.demo.Message> #field
+conversation PERSISTENT #fieldModifier

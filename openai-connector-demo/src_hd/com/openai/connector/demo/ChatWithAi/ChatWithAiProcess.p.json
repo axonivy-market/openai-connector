@@ -1,0 +1,98 @@
+{
+  "format" : "10.0.0",
+  "id" : "0187B20AAAF83538",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "com.openai.connector.demo.ChatWithAi.ChatWithAiData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start()",
+      "config" : {
+        "callSignature" : "start",
+        "guid" : "187B20AAAFB337EB"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "187B20AAB06EE59F"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 }
+      },
+      "connect" : { "id" : "f5", "to" : "f4" }
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "HtmlDialogEventStart",
+      "name" : "send",
+      "config" : {
+        "guid" : "187B20F2387920B3"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 224 }
+      },
+      "connect" : { "id" : "f10", "to" : "f9" }
+    }, {
+      "id" : "f7",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 376, "y" : 224 }
+      }
+    }, {
+      "id" : "f9",
+      "type" : "SubProcessCall",
+      "name" : "openai",
+      "config" : {
+        "processCall" : "openai:chatGpt(String)",
+        "call" : {
+          "params" : [
+            { "name" : "what", "type" : "String" }
+          ],
+          "map" : {
+            "param.what" : "in.message"
+          }
+        },
+        "output" : {
+          "code" : [
+            "import com.openai.connector.demo.Message;",
+            "",
+            "Message msg;",
+            "msg.sender = ivy.session.getSessionUserName();",
+            "msg.text = in.message;",
+            "out.conversation.add(msg);",
+            "",
+            "Message ai;",
+            "ai.sender = \"AI\";",
+            "ai.text = result.answer;",
+            "out.conversation.add(ai);",
+            "",
+            "out.message = \"\";"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 240, "y" : 224 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
+      },
+      "connect" : { "id" : "f8", "to" : "f7" }
+    } ]
+}

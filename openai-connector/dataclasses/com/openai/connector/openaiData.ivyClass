@@ -1,0 +1,5 @@
+openaiData #class
+com.openai.connector #namespace
+message com.openai.api.v1.client.ChatCompletionRequestMessage #field
+logitBias com.fasterxml.jackson.databind.JsonNode #field
+answer String #field

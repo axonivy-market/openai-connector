@@ -59,7 +59,7 @@
         "bodyObjectMapping" : {
           "param.logitBias" : "in.logitBias",
           "param.messages" : "[in.message]",
-          "param.model" : "\"gpt-3.5-turbo\"",
+          "param.model" : "com.axonivy.connector.openai.Model.GPT_35.getValue()",
           "param.user" : "ivy.session.getSessionUserName()"
         },
         "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",

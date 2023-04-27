@@ -32,7 +32,8 @@
         "startMethod" : "start()"
       },
       "visual" : {
-        "at" : { "x" : 248, "y" : 64 }
+        "at" : { "x" : 248, "y" : 64 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
       "connect" : { "id" : "f4", "to" : "f1" }
     } ]

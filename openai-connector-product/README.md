@@ -1,6 +1,11 @@
-# OpenAI connector
+# OpenAI ChatGPT API
 
-Chat GPT 4 Axon Ivy
+Axon Ivy's OpenAI ChatGPT API connector is a powerful tool that can help accelerate any process automation project by integrating the most advanced conversational chatbot into your business processes. With the ability to understand natural language and provide personalized responses, ChatGPT can revolutionize how your business interacts with customers and employees. This connector:
+
+- Is based on the OpenAI API https://platform.openai.com/.
+- Provides a simple chat frontend to communicate with all available AI services.
+- Supports you with an easy-to-copy demo implementation to reduce your integration effort.
+- Enables low-code citizen developers to automate business processes with AI-led support.
 
 ## Demo
 
@@ -9,7 +14,7 @@ A simple chat frontend, to communicate with the AI.
 ## Setup
 
 Chat GPT requests do not come for free. However, when you register a new account,
-5$ are added to it. This is perfect to develop your Chat GPT integration free of charge.
+ 5$ are automatically added to it. This is perfect to develop your Chat GPT integration free of charge.
 
 1. Register an account on [platform.openai.com](https://platform.openai.com/overview).
 2. Once logged in, click on your user icon on the upper right corner.

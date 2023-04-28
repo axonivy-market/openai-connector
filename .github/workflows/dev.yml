@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v2
+    uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v21
     with:
-      mvnArgs: '"-Divy.engine.download.url=https://dev.axonivy.com/permalink/dev/axonivy-engine.zip" "-Divy.engine.version=(10.0.0,]"'
+      mvnArgs: '-X' #try passthrough
+      ivyVersion: 'nightly-11.1'

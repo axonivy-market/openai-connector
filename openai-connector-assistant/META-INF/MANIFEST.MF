@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Axon Ivy OpenAI assistant
+Bundle-SymbolicName: openai-assistant;singleton:=true
+Bundle-Version: 10.0.3.qualifier
+Require-Bundle: ch.ivyteam.ivy.runtime.env
+Bundle-ClassPath: .
+Bundle-ActivationPolicy: lazy

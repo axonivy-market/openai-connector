@@ -1,4 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
+<extension point="org.eclipse.ui.commands">
+      <command
+            name="Chat GPT assistance"
+            description="Chat GPT assistance for all sorts of problems"
+            id="openai.commands.assist">
+         <commandParameter
+               id="chatGpt.question"
+               name="question"
+               optional="true"
+               values="com.axonivy.connector.openai.assistant.ChatGPTquest">
+         </commandParameter>
+      </command>
+   </extension>
+   <extension point="org.eclipse.ui.handlers">
+      <handler commandId="openai.commands.assist"
+        class="com.axonivy.connector.openai.assistant.ChatGPTAssistantHandler">
+      </handler>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution locationURI="popup:org.eclipse.ui.popup.any">
+        <menu icon="res/OpenAI_Logo.png" label="Chat GPT assistance">
+          <command commandId="openai.commands.assist" label="Explain" style="push">
+            <parameter name="chatGpt.question" value="explain" />
+          </command>
+          <command commandId="openai.commands.assist" label="Fix Issues" style="push">
+            <parameter name="chatGpt.question" value="fix" />
+          </command>
+          <command commandId="openai.commands.assist" label="Insert" style="push">
+            <parameter name="chatGpt.question" value="insert" />
+          </command>
+          <command commandId="openai.commands.assist" label="Chat" style="push">
+            <parameter name="chatGpt.question" value="chat" />
+          </command>
+        </menu>
+      </menuContribution>
+   </extension>
+
 </plugin>

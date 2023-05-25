@@ -3,6 +3,10 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Axon Ivy OpenAI assistant
 Bundle-SymbolicName: openai-assistant;singleton:=true
 Bundle-Version: 10.0.3.qualifier
-Require-Bundle: ch.ivyteam.ivy.runtime.env
+Require-Bundle: ch.ivyteam.ivy.runtime.env,
+ org.eclipse.ui.workbench,
+ org.eclipse.core.commands,
+ org.eclipse.jface,
+ ch.ivyteam.swt
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

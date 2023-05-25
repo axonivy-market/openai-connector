@@ -7,6 +7,10 @@ Require-Bundle: ch.ivyteam.ivy.runtime.env,
  org.eclipse.ui.workbench,
  org.eclipse.core.commands,
  org.eclipse.jface,
- ch.ivyteam.swt
+ ch.ivyteam.swt,
+ ch.ivyteam.ivy.webservice.execution,
+ ch.ivyteam.ivy.application,
+ javax.ws.rs,
+ ch.ivyteam.lib.jackson
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

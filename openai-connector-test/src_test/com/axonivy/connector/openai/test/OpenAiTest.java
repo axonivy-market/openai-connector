@@ -22,10 +22,10 @@ import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
 @IvyProcessTest
 public class OpenAiTest{
 
-  private static final BpmProcess DEEPL = BpmProcess.path("openai");
+  private static final BpmProcess OPEN_AI = BpmProcess.path("openai");
 
   private interface Start {
-    BpmElement CHAT = DEEPL.elementName("chatGpt(String)");
+    BpmElement CHAT = OPEN_AI.elementName("chatGpt(String)");
   }
 
   @BeforeEach

@@ -74,7 +74,7 @@ public class MockAI {
       .build();
   }
 
-  private static String load(String json) {
+  public static String load(String json) {
     try (var is = MockAI.class.getResourceAsStream("json/"+json)) {
       if (is == null) {
         throw new RuntimeException("The json file '"+json+"' does not exist.");
@@ -85,7 +85,7 @@ public class MockAI {
     }
   }
 
-  private static JsonNode json(String raw) {
+  public static JsonNode json(String raw) {
     try {
       return MAPPER.readTree(raw);
     } catch (JsonProcessingException ex) {

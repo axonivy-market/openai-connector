@@ -1,5 +1,8 @@
 package com.axonivy.connector.openai.test;
 
+import static com.axonivy.connector.openai.mock.MockAI.URI;
+import static com.axonivy.connector.openai.mock.MockAI.json;
+import static com.axonivy.connector.openai.mock.MockAI.load;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.UUID;
@@ -11,7 +14,6 @@ import javax.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import com.axonivy.connector.openai.mock.MockAI;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import ch.ivyteam.ivy.application.IApplication;
@@ -29,7 +31,7 @@ public class AiAssistanceTest {
 
   @BeforeEach
   void setup(AppFixture fixture, IApplication app) {
-    fixture.config("RestClients.openai.Url", MockAI.URI);
+    fixture.config("RestClients.openai.Url", URI);
     fixture.var("openai.apiKey", "notMyKey");
     RestClients clients = RestClients.of(app);
     RestClient openAi = clients.find("openai");
@@ -42,13 +44,27 @@ public class AiAssistanceTest {
 
   @Test
   void explain() {
-    JsonNode explain = MockAI.json(MockAI.load("assist-selection-explain.json"));
-    WebTarget client = Ivy.rest().client(OPEN_AI);
-    Entity<JsonNode> request = Entity.entity(explain, MediaType.APPLICATION_JSON);
-    JsonNode result = client.path("completions").request()
-      .post(request).readEntity(JsonNode.class);
+    JsonNode explain = json(load("assist-selection-explain.json"));
+    JsonNode result = assist(explain);
     assertThat(result.toPrettyString())
       .contains("Primefaces");
+  }
+
+  @Test
+  void fix() {
+    JsonNode explain = json(load("assist-fix.json"));
+    JsonNode result = assist(explain);
+    assertThat(result.toPrettyString())
+      .as("returns fixed quoting statements around el-expression")
+      .contains("value=\"#{mail.subject}\" />");
+  }
+
+  private static JsonNode assist(JsonNode quest) {
+    WebTarget client = Ivy.rest().client(OPEN_AI);
+    Entity<JsonNode> request = Entity.entity(quest, MediaType.APPLICATION_JSON);
+    JsonNode result = client.path("completions").request()
+      .post(request).readEntity(JsonNode.class);
+    return result;
   }
 
 }

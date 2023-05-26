@@ -17,6 +17,10 @@ public class DesignerClient {
 
   private static final UUID OPEN_AI = UUID.fromString("6840e778-eb27-42a0-afdc-87588ffae871");
 
+  public static WebTarget get() {
+    return getWorkspaceClient();
+  }
+
   public static WebTarget getWorkspaceClient() {
     return getDesignerWsClient(client -> client);
   }

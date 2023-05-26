@@ -21,7 +21,7 @@
   </scm>
 
 <properties>
-    <tycho.version>3.0.4</tycho.version>
+    <tycho.version>2.7.5</tycho.version>
     <maven.scm.plugin>2.0.0-M3</maven.scm.plugin>
     <release.goals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin}:add org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin}:checkin</release.goals>
   </properties>

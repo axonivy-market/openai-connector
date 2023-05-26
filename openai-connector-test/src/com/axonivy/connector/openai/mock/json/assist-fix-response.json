@@ -1,0 +1,19 @@
+{
+	"id": "cmpl-7KNSGNJCnjh9xFLSGquZzXbJUgMkg",
+	"object": "text_completion",
+	"created": 1685091076,
+	"model": "text-davinci-003",
+	"choices": [
+		{
+			"text": "<p:outputLabel value=\"#{mail.subject}\" />",
+			"index": 0,
+			"logprobs": null,
+			"finish_reason": "stop"
+		}
+	],
+	"usage": {
+		"prompt_tokens": 16,
+		"completion_tokens": 16,
+		"total_tokens": 32
+	}
+}

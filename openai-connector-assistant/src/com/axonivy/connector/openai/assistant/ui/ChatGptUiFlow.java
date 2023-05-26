@@ -5,6 +5,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import org.eclipse.compare.CompareUI;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
@@ -14,6 +16,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import com.axonivy.connector.openai.assistant.ChatGptRequest;
 import com.axonivy.connector.openai.assistant.DesignerClient;
+import com.axonivy.connector.openai.assistant.ui.ChatGPTAssistantHandler.Quests;
 
 import ch.ivyteam.swt.dialogs.SwtCommonDialogs;
 
@@ -34,14 +37,30 @@ public class ChatGptUiFlow {
       .filter(Predicate.not(String::isBlank))
       .or(()->getEditorContent())
       .orElse(selected.toString());
-    boolean doIt = SwtCommonDialogs.openQuestionDialog(site.getShell(), "need assistance?", """
+    boolean assist = SwtCommonDialogs.openQuestionDialog(site.getShell(), "need assistance?", """
         ready for asking chat GPT on ?
         """+quest+": \n"+abbrev(what));
-    if (doIt) {
-      var client = DesignerClient.getWorkspaceClient();
-      var response = new ChatGptRequest(client).ask(abbrev(what), quest);
+    if (assist) {
+      var client = DesignerClient.get();
+      var response = new ChatGptRequest(client).ask(what, quest);
+      if (quest.equalsIgnoreCase(Quests.FIX)) {
+        if (selected instanceof TextSelection text) {
+          response = toFullResponse(response, text);
+        }
+        var input = new GptDiffInput(getEditorResource(), response);
+        CompareUI.openCompareEditorOnPage(input, site.getPage());
+        return;
+      }
       SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
     }
+  }
+
+  private String toFullResponse(String response, TextSelection text) {
+    String full = getEditorContent().get();
+    String start = full.substring(0, text.getOffset());
+    String end = full.substring(text.getLength()+text.getOffset());
+    var patched = start+response+end;
+    return patched;
   }
 
   private static String abbrev(String what) {
@@ -60,19 +79,27 @@ public class ChatGptUiFlow {
   }
 
   private Optional<String> getEditorContent() {
-    var input = Optional.ofNullable(site.getPage())
-      .map(IWorkbenchPage::getActiveEditor)
-      .map(IEditorPart::getEditorInput)
-      .orElse(null);
-    if (input instanceof FileEditorInput fileIn) {
-      var store = fileIn.getStorage();
-      try(InputStream contents = store.getContents()) {
+    var input = getEditorIn().map(FileEditorInput::getStorage);
+    if (input.isPresent()) {
+      try(InputStream contents = input.get().getContents()) {
         var content = new String(contents.readAllBytes(), StandardCharsets.UTF_8);
-        return Optional.of(abbrev(content));
+        return Optional.of(content);
       } catch (Exception ex) {
       }
     }
     return Optional.empty();
+  }
+
+  private IResource getEditorResource() {
+    return getEditorIn().map(FileEditorInput::getFile).orElse(null);
+  }
+
+  private Optional<FileEditorInput> getEditorIn() {
+    return Optional.ofNullable(site.getPage())
+      .map(IWorkbenchPage::getActiveEditor)
+      .map(IEditorPart::getEditorInput)
+      .filter(FileEditorInput.class::isInstance)
+      .map(FileEditorInput.class::cast);
   }
 
 }

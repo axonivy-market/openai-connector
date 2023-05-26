@@ -38,7 +38,10 @@ public class MockAI {
 
   private final Map<String, JsonNode> examples = Map.of(
     "assist-selection-explain", json(load("assist-selection-explain.json")),
-    "assist-selection-explain-reponse", json(load("assist-selection-explain-response.json"))
+    "assist-selection-explain-reponse", json(load("assist-selection-explain-response.json")),
+    "assist-fix", json(load("assist-fix.json")),
+    "assist-fix-reponse", json(load("assist-fix-response.json"))
+
   );
 
   @POST

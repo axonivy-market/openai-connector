@@ -1,4 +1,4 @@
-package com.axonivy.connector.openai.assistant;
+package com.axonivy.connector.openai.assistant.ui;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -11,6 +11,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.part.FileEditorInput;
+
+import com.axonivy.connector.openai.assistant.ChatGptRequest;
+import com.axonivy.connector.openai.assistant.DesignerClient;
 
 import ch.ivyteam.swt.dialogs.SwtCommonDialogs;
 

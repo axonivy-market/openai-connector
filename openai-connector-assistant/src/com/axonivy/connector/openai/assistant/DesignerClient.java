@@ -13,7 +13,7 @@ import ch.ivyteam.ivy.rest.client.RestClient;
 import ch.ivyteam.ivy.rest.client.RestClients;
 import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
 
-class DesignerClient {
+public class DesignerClient {
 
   private static final UUID OPEN_AI = UUID.fromString("6840e778-eb27-42a0-afdc-87588ffae871");
 

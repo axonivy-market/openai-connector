@@ -1,4 +1,4 @@
-package com.axonivy.connector.openai.assistant;
+package com.axonivy.connector.openai.assistant.ui;
 
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;

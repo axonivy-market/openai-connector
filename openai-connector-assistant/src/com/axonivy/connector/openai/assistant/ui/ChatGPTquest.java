@@ -1,9 +1,9 @@
-package com.axonivy.connector.openai.assistant;
+package com.axonivy.connector.openai.assistant.ui;
 import java.util.Map;
 
 import org.eclipse.core.commands.IParameterValues;
 
-import com.axonivy.connector.openai.assistant.ChatGPTAssistantHandler.Quests;
+import com.axonivy.connector.openai.assistant.ui.ChatGPTAssistantHandler.Quests;
 
 
 public class ChatGPTquest implements IParameterValues {

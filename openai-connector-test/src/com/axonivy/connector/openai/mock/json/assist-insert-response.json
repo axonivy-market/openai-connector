@@ -1,0 +1,19 @@
+{
+	"id": "cmpl-7KQabj5TwHjjvgURpJnnXffRHegn9",
+	"object": "text_completion",
+	"created": 1685103125,
+	"model": "text-davinci-003",
+	"choices": [
+		{
+			"text": "<html xmlns=\"http://www.w3.org/1999/xhtml\"\n\txmlns:f=\"http://xmlns.jcp.org/jsf/core\"\n\txmlns:h=\"http://xmlns.jcp.org/jsf/html\"\n\txmlns:ui=\"http://xmlns.jcp.org/jsf/facelets\"\n\txmlns:ic=\"http://ivyteam.ch/jsf/component\"\n\txmlns:p=\"http://primefaces.org/ui\"\n\txmlns:pe=\"http://primefaces.org/ui/extensions\">\n<h:body>\n  <ui:composition template=\"/layouts/frame-9.xhtml\">\n    <ui:define name=\"title\">Events</ui:define>\n    <ui:define name=\"content\">\n\n      <h3>Your Inbox</h3>\n\n      <h:form id=\"form\">\n        <h:panelGroup id=\"data\" layout=\"block\">\n          <p>Live from your Microsoft account</p><f:facet name=\"header\">\n            <p:messages></p:messages>\n          </f:facet>\n          \n          <p:selectOneMenu id=\"selectBrand\" value=\"#{logic.selectedBrand}\" required=\"true\">\n            <f:selectItem itemLabel=\"Mercedes\" itemValue=\"Mercedes\"/>\n            <f:selectItem itemLabel=\"BMW\" itemValue=\"BMW\"/>\n            <f:selectItem itemLabel=\"Tesla\" itemValue=\"Tesla\"/>\n          </p:selectOneMenu>\n\n          <p:dataTable id=\"theTable\" var=\"mail\" widgetVar=\"theTable\" value=\"#{mailsBean.mailDataModel}\" rows=\"10\"\n            paginatorTemplate=\"{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}\"\n            paginator=\"true\" paginatorPosition=\"bottom\" rowsPerPageTemplate=\"10,20,50\" lazy=\"true\">\n          \n            <p:column headerText=\"Sender\" id=\"sender\" style=\"width: 30%;\">\n              <p:outputLabel value=\"#{mail.from.emailAddress.name}\"/>\n              <br/>\n              <p:outputLabel value=\"#{mail.from.emailAddress.address}\"/>\n            </p:column>\n\n            <p:column headerText=\"Mail\" id=\"subject\">\n              <h4> \n                <p:outputLabel value=\"#{mail.subject}\" />\n              </h4>\n              <p:outputLabel value=\"#{mail.bodyPreview}\" />\n            </p:column>\n           \n          </p:dataTable>\n\n        </h:panelGroup>\n        <br />\n        <div class=\"command-btns\">\n          <p:commandButton id=\"proceed\" actionListener=\"#{logic.close}\" value=\"Close\" update=\"form\" icon=\"si si-close\" />\n        </div>\n      </h:form>\n      \n      <style>\n        body .ui-widget-content {\n          border: none;\n        }\n        #form .ui-datatable thead tr th,\n        #form .ui-datatable tbody tr.ui-widget-content {\n          border-left: none;\n          border-right: none;\n        }\n      </style>\n\n    </ui:define>\n  </ui:composition>\n</h:body>\n</html>",
+			"index": 0,
+			"logprobs": null,
+			"finish_reason": "stop"
+		}
+	],
+	"usage": {
+		"prompt_tokens": 730,
+		"completion_tokens": 805,
+		"total_tokens": 1535
+	}
+}

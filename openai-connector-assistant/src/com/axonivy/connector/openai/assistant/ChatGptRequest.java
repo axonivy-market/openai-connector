@@ -1,5 +1,7 @@
 package com.axonivy.connector.openai.assistant;
 
+import java.util.function.Supplier;
+
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
@@ -13,14 +15,14 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ChatGptRequest {
 
-  private final WebTarget client;
+  private final Supplier<WebTarget> client;
 
-  public ChatGptRequest(WebTarget client) {
+  public ChatGptRequest(Supplier<WebTarget> client) {
     this.client = client;
   }
 
   public String ask(String context, String question) {
-    WebTarget chat = client.path("completions");
+    WebTarget chat = client.get().path("completions");
     ObjectNode request = completion()
       .put("prompt", context + "\n\n"+question);
     var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
@@ -37,7 +39,7 @@ public class ChatGptRequest {
   private ObjectNode completion() {
     ObjectNode request = JsonNodeFactory.instance.objectNode();
     request.put("model", "text-davinci-003");
-    request.put("max_tokens", 256);// raise
+    request.put("max_tokens", 1024);// raise
     request.put("temperature", 1);
     request.put("top_p", 1);
     request.put("frequency_penalty", 0);

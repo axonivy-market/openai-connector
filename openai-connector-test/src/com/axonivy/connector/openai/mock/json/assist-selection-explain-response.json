@@ -1,0 +1,19 @@
+{
+	"id": "cmpl-7KKl7RqiFHbBKKaxl0n3nv0EJCPlf",
+	"object": "text_completion",
+	"created": 1685080713,
+	"model": "text-davinci-003",
+	"choices": [
+		{
+			"text": "The above code snippet is written in JSF. It is a part of a Primefaces table. The column tag encloses the following two tags: the outputlabel tag and the h4 tag. The headerText attribute is set to the value \"Mail\" and the id attribute is set to the value \"subject\". The outputLabel tag has its value attribute set to the expression \"#{mail.subject}\", which retrieves the mail's subject from the mail object. The h4 tag encloses another outputLabel tag and its value attribute is set to the expression \"#{mail.bodyPreview}\", which retrieves the mail's body preview from the mail object.",
+			"index": 0,
+			"logprobs": null,
+			"finish_reason": "stop"
+		}
+	],
+	"usage": {
+		"prompt_tokens": 68,
+		"completion_tokens": 138,
+		"total_tokens": 206
+	}
+}

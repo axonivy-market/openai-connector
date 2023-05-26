@@ -10,8 +10,9 @@ Require-Bundle: org.eclipse.core.runtime,
  ch.ivyteam.swt,
  ch.ivyteam.ivy.application;resolution:=optional,
  ch.ivyteam.ivy.webservice.execution;resolution:=optional,
- javax.ws.rs,
  ch.ivyteam.lib.jackson,
- org.eclipse.compare
+ org.eclipse.compare,
+ ch.ivyteam.ivy.jersey.client,
+ javax.ws.rs
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

@@ -18,6 +18,7 @@ public class ChatGPTquest implements IParameterValues {
         "Fix", Quests.FIX,
         "Insert", Quests.INSERT,
         "Edit (beta)", Quests.EDIT,
-        "Chat", Quests.CHAT);
+        "Chat", Quests.CHAT,
+        "Api Key", Quests.KEY);
   }
 }

@@ -1,28 +1,6 @@
 {
   "installers": [
     {
-      "id": "maven-import",
-      "data": {
-        "projects": [
-          {
-            "groupId": "com.axonivy.connector.openai",
-            "artifactId": "openai-connector",
-            "version": "${version}",
-            "type": "iar"
-          }
-        ],
-        "repositories": [
-          {
-            "id": "maven.axonivy.com",
-            "url": "https://maven.axonivy.com",
-            "snapshots": {
-              "enabled": "true"
-            }
-          }
-        ]
-      }
-    },
-    {
       "id": "maven-dropins",
       "data": {
         "dependencies": [

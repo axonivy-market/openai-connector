@@ -38,6 +38,9 @@
           <command commandId="openai.commands.assist" label="Chat" style="push">
             <parameter name="chatGpt.question" value="chat" />
           </command>
+          <command commandId="openai.commands.assist" label="Set apiKey" style="push">
+            <parameter name="chatGpt.question" value="apiKey" />
+          </command>
         </menu>
       </menuContribution>
    </extension>

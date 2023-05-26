@@ -48,6 +48,15 @@ public class ChatGptUiFlow {
       }
       return;
     }
+    if (quest.equalsIgnoreCase(Quests.CHAT)) {
+      String instruction = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?",
+        "what can Chat GPT do for you?", "");
+      if (instruction != null) {
+        var response = chatGpt.ask(what, instruction);
+        diffResult(response);
+      }
+      return;
+    }
 
     boolean assist = SwtCommonDialogs.openQuestionDialog(site.getShell(), "need assistance?", """
         ready for asking chat GPT on ?

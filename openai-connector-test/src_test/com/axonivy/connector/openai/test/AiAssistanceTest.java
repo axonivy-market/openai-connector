@@ -68,6 +68,15 @@ public class AiAssistanceTest {
       .contains("<p:selectOneMenu id=\"selectBrand\"");
   }
 
+  @Test
+  void chat() {
+    JsonNode chat = json(load("assist-chat.json"));
+    JsonNode result = assist(chat);
+    assertThat(result.toPrettyString())
+      .as("complains about inline CSS")
+      .contains("Inline styling should be avoided");
+  }
+
   private static JsonNode assist(JsonNode quest) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = Entity.entity(quest, MediaType.APPLICATION_JSON);

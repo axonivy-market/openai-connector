@@ -27,13 +27,17 @@ public class ChatGptRequest {
       .put("prompt", context + "\n\n"+question);
     var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
     Response resp = chat.request().post(payload);
+    return read(resp);
+  }
+
+  private String read(Response resp) {
     JsonNode result = resp.readEntity(JsonNode.class);
     if (resp.getStatusInfo().getFamily() == Family.SUCCESSFUL) {
       if (result.get("choices") instanceof ArrayNode choices) {
         return choices.get(0).get("text").asText();
       }
     }
-    return "nothing serious yet :=) \n" + result;
+    return result.toPrettyString();
   }
 
   private ObjectNode completion() {
@@ -44,6 +48,24 @@ public class ChatGptRequest {
     request.put("top_p", 1);
     request.put("frequency_penalty", 0);
     request.put("presence_penalty", 0);
+    return request;
+  }
+
+  public String edit(String code, String instruction) {
+    WebTarget edits = client.get().path("edits");
+    ObjectNode request = edit()
+      .put("input", code)
+      .put("instruction", instruction);
+    var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
+    Response resp = edits.request().post(payload);
+    return read(resp);
+  }
+
+  private ObjectNode edit() {
+    ObjectNode request = JsonNodeFactory.instance.objectNode();
+    request.put("model", "code-davinci-edit-001");
+    request.put("temperature", 1);
+    request.put("top_p", 1);
     return request;
   }
 

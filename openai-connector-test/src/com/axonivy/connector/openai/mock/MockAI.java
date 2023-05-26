@@ -44,7 +44,11 @@ public class MockAI {
     "assist-insert", json(load("assist-insert.json")),
     "assist-insert-reponse", json(load("assist-insert-response.json")),
     "assist-chat", json(load("assist-chat.json")),
-    "assist-chat-reponse", json(load("assist-chat-response.json"))
+    "assist-chat-reponse", json(load("assist-chat-response.json")),
+
+    // codex beta
+    "assist-edit", json(load("assist-edit.json")),
+    "assist-edit-reponse", json(load("assist-edit-response.json"))
   );
 
   @POST
@@ -52,6 +56,19 @@ public class MockAI {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response assist(JsonNode request) {
+    var in = input(request);
+    Ivy.log().info("in="+in+" /from="+request);
+    var node= examples.get(in+"-reponse");
+    return Response.ok()
+      .entity(node)
+      .build();
+  }
+
+  @POST
+  @Path("edits")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response edit(JsonNode request) {
     var in = input(request);
     Ivy.log().info("in="+in+" /from="+request);
     var node= examples.get(in+"-reponse");

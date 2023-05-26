@@ -56,7 +56,7 @@ public class AiAssistanceTest {
     JsonNode result = assist(fix);
     assertThat(result.toPrettyString())
       .as("returns fixed quoting statements around el-expression")
-      .contains("value=\"#{mail.subject}\" />");
+      .contains("value=\\\"#{mail.subject}\\\" />");
   }
 
   @Test
@@ -65,7 +65,16 @@ public class AiAssistanceTest {
     JsonNode result = assist(insert);
     assertThat(result.toPrettyString())
       .as("writes a complex selectOne for the user")
-      .contains("<p:selectOneMenu id=\"selectBrand\"");
+      .contains("<p:selectOneMenu id=\\\"selectBrand\\\"");
+  }
+
+  @Test
+  void edit_codexBeta() {
+    JsonNode edit = json(load("assist-edit.json"));
+    JsonNode result = assist(edit);
+    assertThat(result.toPrettyString())
+      .as("writes a complex selectOne for the user")
+      .contains("<p:selectOneMenu");
   }
 
   @Test

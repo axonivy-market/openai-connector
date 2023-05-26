@@ -11,6 +11,8 @@
     <module>${project.name}-demo</module>
     <module>${project.name}-test</module>
     <module>${project.name}-product</module>
+    <module>${project.name}-assistant</module>
+    <module>${project.name}-assistant-product</module>
   </modules>
 
   <scm>

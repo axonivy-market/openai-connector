@@ -14,8 +14,9 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchSite;
 import org.eclipse.ui.part.FileEditorInput;
 
+import com.axonivy.connector.openai.assistant.ChatGptClientFactory;
 import com.axonivy.connector.openai.assistant.ChatGptRequest;
-import com.axonivy.connector.openai.assistant.DesignerClient;
+import com.axonivy.connector.openai.assistant.KeyRepo;
 import com.axonivy.connector.openai.assistant.ui.ChatGPTAssistantHandler.Quests;
 
 import ch.ivyteam.swt.dialogs.SwtCommonDialogs;
@@ -33,12 +34,19 @@ public class ChatGptUiFlow {
   }
 
   public void run() {
+    KeyRepo repo = new KeyRepo();
+    if (quest.equals(Quests.KEY)) {
+      updateKey(repo);
+      return;
+    }
+
+    promptKey(repo);
     String what = getSelectedText()
       .filter(Predicate.not(String::isBlank))
       .or(()->getEditorContent())
       .orElse(selected.toString());
 
-    var chatGpt = new ChatGptRequest(()->DesignerClient.get());
+    var chatGpt = new ChatGptRequest(()->new ChatGptClientFactory().chatGptClient());
     if (quest.equalsIgnoreCase(Quests.EDIT)) {
       String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
         "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
@@ -77,6 +85,22 @@ public class ChatGptUiFlow {
         return;
       }
       SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
+    }
+  }
+
+  private void promptKey(KeyRepo repo) {
+    var key = repo.getInternal();
+    if (key.isEmpty()) {
+      updateKey(repo);
+    }
+  }
+
+  public void updateKey(KeyRepo repo) {
+    var secret = PasswordDialog.open(site.getShell(),
+      "OpenAI auth key required",
+      "Please insert your OpenAI key");
+    if (secret != null) {
+      repo.storeKey(secret);
     }
   }
 

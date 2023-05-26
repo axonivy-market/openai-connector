@@ -40,8 +40,9 @@ public class MockAI {
     "assist-selection-explain", json(load("assist-selection-explain.json")),
     "assist-selection-explain-reponse", json(load("assist-selection-explain-response.json")),
     "assist-fix", json(load("assist-fix.json")),
-    "assist-fix-reponse", json(load("assist-fix-response.json"))
-
+    "assist-fix-reponse", json(load("assist-fix-response.json")),
+    "assist-insert", json(load("assist-insert.json")),
+    "assist-insert-reponse", json(load("assist-insert-response.json"))
   );
 
   @POST

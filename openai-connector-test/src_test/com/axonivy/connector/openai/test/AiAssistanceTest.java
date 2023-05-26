@@ -52,11 +52,20 @@ public class AiAssistanceTest {
 
   @Test
   void fix() {
-    JsonNode explain = json(load("assist-fix.json"));
-    JsonNode result = assist(explain);
+    JsonNode fix = json(load("assist-fix.json"));
+    JsonNode result = assist(fix);
     assertThat(result.toPrettyString())
       .as("returns fixed quoting statements around el-expression")
       .contains("value=\"#{mail.subject}\" />");
+  }
+
+  @Test
+  void insert() {
+    JsonNode insert = json(load("assist-insert.json"));
+    JsonNode result = assist(insert);
+    assertThat(result.toPrettyString())
+      .as("writes a complex selectOne for the user")
+      .contains("<p:selectOneMenu id=\"selectBrand\"");
   }
 
   private static JsonNode assist(JsonNode quest) {

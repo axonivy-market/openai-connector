@@ -37,22 +37,38 @@ public class ChatGptUiFlow {
       .filter(Predicate.not(String::isBlank))
       .or(()->getEditorContent())
       .orElse(selected.toString());
+
+    var chatGpt = new ChatGptRequest(()->DesignerClient.get());
+    if (quest.equalsIgnoreCase(Quests.INSERT)) {
+      String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
+        "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
+      if (insert != null) {
+        var response = chatGpt.ask(what, insert);
+        diffResult(response);
+      }
+      return;
+    }
+
     boolean assist = SwtCommonDialogs.openQuestionDialog(site.getShell(), "need assistance?", """
         ready for asking chat GPT on ?
         """+quest+": \n"+abbrev(what));
     if (assist) {
-      var client = DesignerClient.get();
-      var response = new ChatGptRequest(client).ask(what, quest);
+      var response = chatGpt.ask(what, quest);
       if (quest.equalsIgnoreCase(Quests.FIX)) {
-        if (selected instanceof TextSelection text) {
-          response = toFullResponse(response, text);
-        }
-        var input = new GptDiffInput(getEditorResource(), response);
-        CompareUI.openCompareEditorOnPage(input, site.getPage());
+        response = diffResult(response);
         return;
       }
       SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
     }
+  }
+
+  private String diffResult(String response) {
+    if (selected instanceof TextSelection text && !text.getText().isBlank()) {
+      response = toFullResponse(response, text);
+    }
+    var input = new GptDiffInput(getEditorResource(), response);
+    CompareUI.openCompareEditorOnPage(input, site.getPage());
+    return response;
   }
 
   private String toFullResponse(String response, TextSelection text) {

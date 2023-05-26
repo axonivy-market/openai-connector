@@ -42,6 +42,8 @@
           <version>3.0.0-M4</version>
           <configuration>
             <tagNameFormat>v@{project.version}</tagNameFormat>
+            <preparationGoals>${release.goals}</preparationGoals>
+            <completionGoals>${release.goals}</completionGoals>
           </configuration>
         </plugin>
         <plugin>

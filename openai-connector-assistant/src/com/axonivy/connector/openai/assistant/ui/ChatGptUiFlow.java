@@ -39,6 +39,15 @@ public class ChatGptUiFlow {
       .orElse(selected.toString());
 
     var chatGpt = new ChatGptRequest(()->DesignerClient.get());
+    if (quest.equalsIgnoreCase(Quests.EDIT)) {
+      String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
+        "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
+      if (insert != null) {
+        var response = chatGpt.edit(what, insert);
+        diffResult(response);
+      }
+      return;
+    }
     if (quest.equalsIgnoreCase(Quests.INSERT)) {
       String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
         "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
@@ -53,7 +62,7 @@ public class ChatGptUiFlow {
         "what can Chat GPT do for you?", "");
       if (instruction != null) {
         var response = chatGpt.ask(what, instruction);
-        diffResult(response);
+        SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
       }
       return;
     }

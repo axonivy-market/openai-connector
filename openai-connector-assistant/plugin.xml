@@ -31,6 +31,10 @@
           <command commandId="openai.commands.assist" label="Insert" style="push">
             <parameter name="chatGpt.question" value="insert" />
           </command>
+          <command commandId="openai.commands.assist" label="Edit (beta)" 
+            tooltip="beta: code-davinci-edit-001" style="push">
+            <parameter name="chatGpt.question" value="edit" />
+          </command>
           <command commandId="openai.commands.assist" label="Chat" style="push">
             <parameter name="chatGpt.question" value="chat" />
           </command>

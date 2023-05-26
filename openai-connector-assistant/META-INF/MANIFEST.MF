@@ -11,6 +11,7 @@ Require-Bundle: ch.ivyteam.ivy.runtime.env,
  ch.ivyteam.ivy.webservice.execution,
  ch.ivyteam.ivy.application,
  javax.ws.rs,
- ch.ivyteam.lib.jackson
+ ch.ivyteam.lib.jackson,
+ org.eclipse.core.runtime
 Bundle-ClassPath: .
 Bundle-ActivationPolicy: lazy

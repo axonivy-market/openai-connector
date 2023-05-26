@@ -20,6 +20,12 @@
     <tag>HEAD</tag>
   </scm>
 
+<properties>
+    <tycho.version>3.0.4</tycho.version>
+    <maven.scm.plugin>2.0.0-M3</maven.scm.plugin>
+    <release.goals>org.eclipse.tycho:tycho-versions-plugin:${tycho.version}:update-eclipse-metadata org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin}:add org.apache.maven.plugins:maven-scm-plugin:${maven.scm.plugin}:checkin</release.goals>
+  </properties>
+
   <build>
     <pluginManagement>
       <plugins>
@@ -37,6 +43,25 @@
           <configuration>
             <tagNameFormat>v@{project.version}</tagNameFormat>
           </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-scm-plugin</artifactId>
+          <version>${maven.scm.plugin}</version>
+          <executions>
+            <execution>
+              <id>default-cli</id>
+              <goals>
+                <goal>add</goal>
+                <goal>checkin</goal>
+              </goals>
+              <configuration>
+                <includes>**/META-INF/MANIFEST.MF,pom.xml</includes>
+                <excludes>**/target/**</excludes>
+                <message>Changing the version to reflect the pom versions for the release</message>
+              </configuration>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

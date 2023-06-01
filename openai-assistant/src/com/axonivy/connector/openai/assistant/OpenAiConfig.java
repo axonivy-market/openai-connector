@@ -5,6 +5,7 @@ import java.util.Optional;
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.application.app.IApplicationRepository;
 import ch.ivyteam.ivy.application.config.Config;
+import ch.ivyteam.ivy.application.config.Property;
 
 public class OpenAiConfig {
 
@@ -12,6 +13,8 @@ public class OpenAiConfig {
     String OPENAI_PREFIX = "Variables.openai-connector.";
 
     String API_KEY = OPENAI_PREFIX + "apiKey";
+    String TIMEOUT_SECONDS = OPENAI_PREFIX + "timeoutSeconds";
+    String MAX_TOKENS = OPENAI_PREFIX + "maxTokens";
   }
 
   private final Config config;
@@ -31,7 +34,13 @@ public class OpenAiConfig {
   }
 
   public Optional<String> getValue(String key) {
-    return Optional.ofNullable(config.get(key)).map(String.class::cast);
+    return Optional.ofNullable(config.get(key))
+      .map(Property::value)
+      .map(String.class::cast);
+  }
+
+  public Optional<Integer> getIntValue(String key) {
+    return getValue(key).map(Integer::parseInt);
   }
 
 }

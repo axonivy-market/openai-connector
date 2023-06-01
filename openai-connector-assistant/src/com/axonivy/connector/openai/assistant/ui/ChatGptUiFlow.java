@@ -16,7 +16,8 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import com.axonivy.connector.openai.assistant.ChatGptClientFactory;
 import com.axonivy.connector.openai.assistant.ChatGptRequest;
-import com.axonivy.connector.openai.assistant.KeyRepo;
+import com.axonivy.connector.openai.assistant.OpenAiConfig;
+import com.axonivy.connector.openai.assistant.OpenAiConfig.Key;
 import com.axonivy.connector.openai.assistant.ui.ChatGPTAssistantHandler.Quests;
 
 import ch.ivyteam.swt.dialogs.SwtCommonDialogs;
@@ -34,7 +35,7 @@ public class ChatGptUiFlow {
   }
 
   public void run() {
-    KeyRepo repo = new KeyRepo();
+    OpenAiConfig repo = new OpenAiConfig();
     if (quest.equals(Quests.KEY)) {
       updateKey(repo);
       return;
@@ -88,19 +89,19 @@ public class ChatGptUiFlow {
     }
   }
 
-  private void promptKey(KeyRepo repo) {
-    var key = repo.getInternal();
+  private void promptKey(OpenAiConfig repo) {
+    var key = repo.getValue(Key.API_KEY);
     if (key.isEmpty()) {
       updateKey(repo);
     }
   }
 
-  public void updateKey(KeyRepo repo) {
+  public void updateKey(OpenAiConfig repo) {
     var secret = PasswordDialog.open(site.getShell(),
       "OpenAI auth key required",
       "Please insert your OpenAI key");
     if (secret != null) {
-      repo.storeKey(secret);
+      repo.storeSecret(Key.API_KEY, secret);
     }
   }
 

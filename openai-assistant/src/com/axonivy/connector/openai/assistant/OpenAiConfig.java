@@ -10,11 +10,12 @@ import ch.ivyteam.ivy.application.config.Property;
 public class OpenAiConfig {
 
   public interface Key {
-    String OPENAI_PREFIX = "Variables.openai-connector.";
+    String OPENAI_PREFIX = "Variables.openai-assistant.";
 
     String API_KEY = OPENAI_PREFIX + "apiKey";
     String TIMEOUT_SECONDS = OPENAI_PREFIX + "timeoutSeconds";
     String MAX_TOKENS = OPENAI_PREFIX + "maxTokens";
+    String PLATFORM_URI = OPENAI_PREFIX + "platformUri";
   }
 
   private final Config config;

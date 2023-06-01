@@ -1,0 +1,12 @@
+Variables:
+  # parameters for your openai:chatGPT Designer assistant
+  openai-assistant:
+    # your personal openai platform api key
+    # [password]
+    apiKey: ''
+    # chatGPT request timeout in seconds
+    timeoutSeconds: 30
+    # tokens to spend on analyzation and response
+    maxTokens: 1024
+    # base uri to use for chatGPT calls
+    platformUri: 'https://api.openai.com/v1'

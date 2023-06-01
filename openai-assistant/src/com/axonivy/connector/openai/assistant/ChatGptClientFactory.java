@@ -12,18 +12,19 @@ import ch.ivyteam.ivy.jersey.client.JerseyClientBuilder;
 
 public class ChatGptClientFactory {
 
-  private static final int TIMEOUT_DEFAULT = 30;
+  private interface Defaults {
+    String OPENAI_V1 = "https://api.openai.com/v1";
+    int TIMEOUT = 30;
+  }
 
   private static Client client = create();
 
   public WebTarget chatGptClient() {
-    return client.target("https://api.openai.com/v1");
+    return client.target(getPlatformUri());
   }
 
   private static Client create() {
-    int timeout = new OpenAiConfig()
-      .getIntValue(Key.TIMEOUT_SECONDS)
-      .orElse(TIMEOUT_DEFAULT);
+    int timeout = getTimeoutSeconds();
     var clt = JerseyClientBuilder
       .create("Chat GPT Assistant")
       .readTimeoutInMillis((int)TimeUnit.SECONDS.toMillis(timeout))
@@ -31,6 +32,18 @@ public class ChatGptClientFactory {
       .toClient();
     clt.register(new OpenAIAuthFeature());
     return clt;
+  }
+
+  private static String getPlatformUri() {
+    return new OpenAiConfig()
+      .getValue(Key.PLATFORM_URI)
+      .orElse(Defaults.OPENAI_V1);
+  }
+
+  private static Integer getTimeoutSeconds() {
+    return new OpenAiConfig()
+      .getIntValue(Key.TIMEOUT_SECONDS)
+      .orElse(Defaults.TIMEOUT);
   }
 
 }

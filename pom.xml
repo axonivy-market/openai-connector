@@ -7,8 +7,8 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>openai-connector-assistant</module><!-- do not use dynamic project.version: for tycho release update!-->
-    <module>${project.name}-assistant-product</module>
+    <module>openai-assistant</module><!-- do not use dynamic project.version: for tycho release update!-->
+    <module>openai-assistant-product</module>
     <module>${project.name}</module>
     <module>${project.name}-demo</module>
     <module>${project.name}-test</module>

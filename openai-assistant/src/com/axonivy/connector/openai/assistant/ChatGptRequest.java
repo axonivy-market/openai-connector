@@ -16,9 +16,15 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class ChatGptRequest {
 
   private final Supplier<WebTarget> client;
+  private int maxTokens = 1024;
 
   public ChatGptRequest(Supplier<WebTarget> client) {
     this.client = client;
+  }
+
+  public ChatGptRequest maxTokens(int tokens) {
+    this.maxTokens = tokens;
+    return this;
   }
 
   public String ask(String context, String question) {
@@ -43,7 +49,7 @@ public class ChatGptRequest {
   private ObjectNode completion() {
     ObjectNode request = JsonNodeFactory.instance.objectNode();
     request.put("model", "text-davinci-003");
-    request.put("max_tokens", 1024);// raise
+    request.put("max_tokens", maxTokens);
     request.put("temperature", 1);
     request.put("top_p", 1);
     request.put("frequency_penalty", 0);

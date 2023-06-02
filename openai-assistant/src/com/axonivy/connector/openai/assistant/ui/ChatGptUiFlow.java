@@ -3,15 +3,22 @@ package com.axonivy.connector.openai.assistant.ui;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
 import org.eclipse.compare.CompareUI;
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchSite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 
 import com.axonivy.connector.openai.assistant.ChatGptClientFactory;
@@ -54,7 +61,7 @@ public class ChatGptUiFlow {
       String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
         "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
       if (insert != null) {
-        var response = chatGpt.edit(what, insert);
+        var response = runWithProgress(()->chatGpt.edit(what, insert));
         diffResult(response);
       }
       return;
@@ -63,7 +70,7 @@ public class ChatGptUiFlow {
       String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
         "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
       if (insert != null) {
-        var response = chatGpt.ask(what, insert);
+        var response = runWithProgress(()->chatGpt.ask(what, insert));
         diffResult(response);
       }
       return;
@@ -72,7 +79,7 @@ public class ChatGptUiFlow {
       String instruction = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?",
         "what can Chat GPT do for you?", "");
       if (instruction != null) {
-        var response = chatGpt.ask(what, instruction);
+        var response = runWithProgress(()->chatGpt.ask(what, instruction));
         SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
       }
       return;
@@ -82,12 +89,38 @@ public class ChatGptUiFlow {
         ready for asking chat GPT on ?
         """+quest+": \n"+abbrev(what));
     if (assist) {
-      var response = chatGpt.ask(what, quest);
+      var response = runWithProgress(()->chatGpt.ask(what, quest));
       if (quest.equalsIgnoreCase(Quests.FIX)) {
         response = diffResult(response);
         return;
       }
       SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
+    }
+  }
+
+  private String runWithProgress(Supplier<String> gptAction) {
+    var response = new AtomicReference<String>();
+    run(pm -> {
+      pm.setTaskName("waiting for chatGPT response");
+      response.set(gptAction.get());
+    });
+    return response.get();
+  }
+
+  public void run(Consumer<IProgressMonitor> monitorable) {
+    try {
+      if (!Platform.isRunning()) {
+        monitorable.accept(new NullProgressMonitor());
+        return;
+      }
+      PlatformUI.getWorkbench().getProgressService().busyCursorWhile(m -> {
+        try {
+          monitorable.accept(m);
+        } catch (Exception ex) {
+          SwtCommonDialogs.openErrorDialog(site.getShell(), "request failed", ex.getLocalizedMessage(), ex);
+        }
+      });
+    } catch (Exception ex) {
     }
   }
 

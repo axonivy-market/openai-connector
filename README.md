@@ -5,4 +5,4 @@
 Read our documentation:
 
 - [openai-connector](openai-connector-product/README.md)
-- [openai-assistant](openai-connector-assistant-product/README.md)
+- [openai-assistant](openai-assistant-product/README.md)

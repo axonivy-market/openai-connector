@@ -9,8 +9,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.compiler.compliance>17</java.compiler.compliance>
-    <tycho.version>2.7.5</tycho.version>
-    <maven.scm.plugin>2.0.0-M3</maven.scm.plugin>
+    <tycho.version>3.0.4</tycho.version>
   </properties>
 
   <repositories>

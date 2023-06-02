@@ -21,7 +21,7 @@
    </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution locationURI="popup:org.eclipse.ui.popup.any">
-        <menu icon="res/OpenAI_Logo.png" label="Chat GPT assistance">
+        <menu icon="res/OpenAI_Logo_16.png" label="Chat GPT assistance">
           <command commandId="openai.commands.assist" label="Explain" style="push">
             <parameter name="chatGpt.question" value="explain" />
           </command>

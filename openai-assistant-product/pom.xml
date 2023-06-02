@@ -6,7 +6,7 @@
   <packaging>pom</packaging>
 
   <properties>
-    <variables.yaml.file>../openai-connector/config/variables.yaml</variables.yaml.file>
+    <variables.yaml.file>../openai-assistant/res/variables.yaml</variables.yaml.file>
   </properties>
 
   <build>

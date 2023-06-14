@@ -13,7 +13,8 @@ public class OpenAiConfig {
     String OPENAI_PREFIX = "Variables.openai-assistant.";
 
     String API_KEY = OPENAI_PREFIX + "apiKey";
-    String TIMEOUT_SECONDS = OPENAI_PREFIX + "timeoutSeconds";
+    String READ_TIMEOUT_SECONDS = OPENAI_PREFIX + "readTimeoutSeconds";
+    String CONNECT_TIMEOUT_SECONDS = OPENAI_PREFIX + "connectTimeoutSeconds";
     String MAX_TOKENS = OPENAI_PREFIX + "maxTokens";
     String PLATFORM_URI = OPENAI_PREFIX + "platformUri";
   }

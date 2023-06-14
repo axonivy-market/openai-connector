@@ -24,10 +24,12 @@ public class ChatGptClientFactory {
   }
 
   private static Client create() {
-    int timeout = getTimeoutSeconds();
+    int readTimeout = getTimeoutSeconds(Key.READ_TIMEOUT_SECONDS);
+    int connectTimeout = getTimeoutSeconds(Key.CONNECT_TIMEOUT_SECONDS);
     var clt = JerseyClientBuilder
       .create("Chat GPT Assistant")
-      .readTimeoutInMillis((int)TimeUnit.SECONDS.toMillis(timeout))
+      .readTimeoutInMillis(readTimeout)
+      .connectTimeoutInMillis(connectTimeout)
       .useJacksonJson()
       .toClient();
     clt.register(new OpenAIAuthFeature());
@@ -40,10 +42,11 @@ public class ChatGptClientFactory {
       .orElse(Defaults.OPENAI_V1);
   }
 
-  private static Integer getTimeoutSeconds() {
-    return new OpenAiConfig()
-      .getIntValue(Key.TIMEOUT_SECONDS)
+  private static int getTimeoutSeconds(String timeout) {
+    var secs = new OpenAiConfig()
+      .getIntValue(timeout)
       .orElse(Defaults.TIMEOUT);
+    return (int) TimeUnit.SECONDS.toMillis(secs);
   }
 
 }

@@ -1,6 +1,6 @@
-# ChatGPT Code Assistance
+# ChatGPT Code Assistant
 
-AI Context Assistance for all your code works within the Designer IDE. 
+AI Context assistance for all your code works within the Designer IDE. 
 
 Helps you by:
 
@@ -8,6 +8,20 @@ Helps you by:
 - fixing broken codes
 - inserting new statements
 - answering questions about your code
+
+## Demo
+
+The assistant context menu, popping up in all code-editors:
+![context](docs/chat-gpt-context.png)
+
+Supports you in reviews, by explaining existing code:
+![explain](docs/chat-gpt-explain.png)
+
+Accepts insert or change code change requests in natural language:
+![explain](docs/chat-gpt-insert.png)
+
+Allows you to select and apply the changes you were asking for:
+![explain](docs/chat-gpt-insert-review.png)
 
 ## Setup
 
@@ -17,15 +31,15 @@ Helps you by:
 
 ### OpenAI API key
 
-Chat GPT requests do not come for free. However, when you register a new account,
- 5$ are automatically added to it. This is perfect to develop your Chat GPT integration free of charge.
+ChatGPT requests do not come for free. However, when you register a new account,
+ 5$ are automatically added to it. This is perfect to develop your ChatGPT integration free of charge.
 
 1. Register an account on [platform.openai.com](https://platform.openai.com/overview).
 2. Once logged in, click on your user icon on the upper right corner.
 3. In the menu, use the "View API keys" option.
 4. Generate a new API key
 5. Open a Designer where the openai-assistant was installed.
-6. Right click into a code editor: select `Chat GPT assistant` > `Set apiKey` > fill in your secret key.
+6. Right click into a code editor: select `ChatGPT assistant` > `Set apiKey` > fill in your secret key.
 
 ### Customization
 

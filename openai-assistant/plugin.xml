@@ -3,8 +3,8 @@
 <plugin>
 <extension point="org.eclipse.ui.commands">
       <command
-            name="Chat GPT assistance"
-            description="Chat GPT assistance for all sorts of problems"
+            name="ChatGPT assistant"
+            description="ChatGPT assistant for all sorts of problems"
             id="openai.commands.assist">
          <commandParameter
                id="chatGpt.question"

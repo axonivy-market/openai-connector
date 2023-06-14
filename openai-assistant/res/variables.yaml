@@ -5,8 +5,10 @@ Variables:
     # [password]
     apiKey: ''
     # chatGPT request timeout in seconds
-    timeoutSeconds: 30
-    # tokens to spend on analyzation and response
+    connectTimeoutSeconds: 30
+    # chatGPT read timeout in seconds
+    readTimeoutSeconds: 30
+    # tokens to spend on analyzation and response; at max 4097
     maxTokens: 1024
     # base uri to use for chatGPT calls
     platformUri: 'https://api.openai.com/v1'

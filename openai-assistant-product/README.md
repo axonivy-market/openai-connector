@@ -9,6 +9,20 @@ Helps you by:
 - inserting new statements
 - answering questions about your code
 
+## Demo
+
+The assistance context menu, popping up in all code-editors, to assist you:
+![context](docs/chat-gpt-context.png)
+
+Supports you in reviews, by explaining existing code:
+![explain](docs/chat-gpt-explain.png)
+
+Accepts insert or change code change requests in natural language:
+![explain](docs/chat-gpt-insert.png)
+
+Allows you to select and apply the changes you were asking for:
+![explain](docs/chat-gpt-insert-review.png)
+
 ## Setup
 
 1. Install this Dropin extension by pressing the 'install' button in the market.

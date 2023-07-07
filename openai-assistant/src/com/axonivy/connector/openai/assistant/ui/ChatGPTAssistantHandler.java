@@ -16,9 +16,15 @@ public class ChatGPTAssistantHandler extends AbstractHandler {
 
   @Override
   public Object execute(ExecutionEvent event) throws ExecutionException {
-    ISelection selected = HandlerUtil.getCurrentSelection(event);
     IWorkbenchSite site = HandlerUtil.getActiveSite(event);
+    ISelection selected = HandlerUtil.getCurrentSelection(event);
+    if (selected == null) {
+      site.getPage().getActiveEditor();
+    }
     String quest = event.getParameter(ChatGPTquest.PARAMETER_ID);
+    if (quest == null) {
+      quest = Quests.CHAT;
+    }
     var flow = new ChatGptUiFlow(site, selected, quest);
     flow.run();
     return null;

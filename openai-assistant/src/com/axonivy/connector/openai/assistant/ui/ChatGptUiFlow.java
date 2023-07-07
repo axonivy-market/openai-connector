@@ -52,7 +52,7 @@ public class ChatGptUiFlow {
     String what = getSelectedText()
       .filter(Predicate.not(String::isBlank))
       .or(()->getEditorContent())
-      .orElse(selected.toString());
+      .orElseGet(()->selected.toString());
 
     var chatGpt = new ChatGptRequest(()->new ChatGptClientFactory().chatGptClient());
     repo.getIntValue(Key.MAX_TOKENS).ifPresent(chatGpt::maxTokens);

@@ -52,7 +52,7 @@ public class ChatGptUiFlow {
     String what = getSelectedText()
       .filter(Predicate.not(String::isBlank))
       .or(()->getEditorContent())
-      .orElse(selected.toString());
+      .orElseGet(()->selected.toString());
 
     var chatGpt = new ChatGptRequest(()->new ChatGptClientFactory().chatGptClient());
     repo.getIntValue(Key.MAX_TOKENS).ifPresent(chatGpt::maxTokens);
@@ -158,7 +158,7 @@ public class ChatGptUiFlow {
   }
 
   private static String abbrev(String what) {
-    int limit = 1000;
+    int limit = 500;
     if (what.length() > limit) {
       return what.substring(0, limit)+"...";
     }

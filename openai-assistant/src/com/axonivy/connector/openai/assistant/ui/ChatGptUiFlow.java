@@ -158,7 +158,7 @@ public class ChatGptUiFlow {
   }
 
   private static String abbrev(String what) {
-    int limit = 1000;
+    int limit = 500;
     if (what.length() > limit) {
       return what.substring(0, limit)+"...";
     }

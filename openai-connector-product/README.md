@@ -9,7 +9,10 @@ Axon Ivy's OpenAI ChatGPT API connector is a powerful tool that can help acceler
 
 ## Demo
 
-A simple chat frontend, to communicate with the AI.
+This demo showcases a simple prompt window to chat directly with ChatGPT. Enter in any language a question that is of interest, and you will immediately get ChatGPT’s answer within the Axon Ivy business process.
+
+![demo-dialog](images/demo1.png)
+![demo-dialog](images/demo0.png)
 
 ## Setup
 

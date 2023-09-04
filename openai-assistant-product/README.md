@@ -1,13 +1,12 @@
 # ChatGPT Code Assistant
 
-AI Context assistance for all your code works within the Designer IDE. 
+Axon Ivy’s ChatGPT Assistant for your design environment helps you to accelerate process automation initiatives by adding a context menu providing AI features via the OpenAI API. This connector:
 
-Helps you by:
+- Is based on the OpenAI API [platform.openai.com](https://platform.openai.com/).
+- Extends your existing Axon Ivy Designer IDE
+- Needs an API key from Open AI API
+- Helps you develop business processes by explaining code snippets, fixing broken code, inserting new statements, answering questions about your code, and adding new BPMN elements.
 
-- explaining code snippets
-- fixing broken codes
-- inserting new statements
-- answering questions about your code
 
 ## Demo
 

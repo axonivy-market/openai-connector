@@ -1,0 +1,199 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:body>
+	<ui:composition template="/layouts/frame-10.xhtml">
+		<ui:define name="title">AI Mail Generator</ui:define>
+		<ui:define name="content">
+			<h3>AI Mail Generator</h3>
+			<h:form id="content-form">
+				<div class="p-formgrid p-grid p-align-baseline ui-fluid">
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Candidate name" for="candidate-name">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="candidate-name"
+							value="#{data.candidateInformation.name}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="candidate-name" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Candidate email" for="candidate-email">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="candidate-email"
+							value="#{data.candidateInformation.email}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="candidate-email" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Job position" for="job-position">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:selectOneMenu id="job-position"
+							value="#{data.candidateInformation.jobPosition}">
+							<f:selectItem itemLabel="Select Job Position" itemValue="" />
+							<f:selectItem itemLabel="Software Developer"
+								itemValue="Software Developer" />
+							<f:selectItem itemLabel="Database Administrator"
+								itemValue="Database Administrator" />
+							<f:selectItem itemLabel="Network Engineer"
+								itemValue="Network Engineer" />
+							<f:selectItem itemLabel="System Analyst"
+								itemValue="System Analyst" />
+							<f:selectItem itemLabel="IT Project Manager"
+								itemValue="IT Project Manager" />
+							<f:validator validatorId="commonValidator" />
+						</p:selectOneMenu>
+						<p:message for="job-position" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Candidate most important skill"
+							for="most-important-skill">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="most-important-skill"
+							value="#{data.candidateInformation.mostImportantSkill}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="most-important-skill" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Interviewer name" for="interviewer-name">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="interviewer-name"
+							value="#{data.candidateInformation.interviewerName}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="interviewer-name" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Interview date" for="interview-date">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:datePicker id="interview-date"
+							value="#{data.candidateInformation.interviewDate}"
+							showIcon="true" pattern="dd/MM/yyyy"
+							converterMessage="#{ivy.cms.co('/Labels/WrongDateFormat')}"
+							mask="true">
+							<f:validator validatorId="commonValidator" />
+						</p:datePicker>
+						<p:message for="interview-date" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Interviewer position"
+							for="interviewer-job-position">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:selectOneMenu id="interviewer-job-position"
+							value="#{data.candidateInformation.interviewerPosition}">
+							<f:selectItem itemLabel="Select Job Position" itemValue="" />
+							<f:selectItem itemLabel="Software Developer"
+								itemValue="Software Developer" />
+							<f:selectItem itemLabel="Database Administrator"
+								itemValue="Database Administrator" />
+							<f:selectItem itemLabel="Network Engineer"
+								itemValue="Network Engineer" />
+							<f:selectItem itemLabel="System Analyst"
+								itemValue="System Analyst" />
+							<f:selectItem itemLabel="IT Project Manager"
+								itemValue="IT Project Manager" />
+							<f:validator validatorId="commonValidator" />
+						</p:selectOneMenu>
+						<p:message for="interviewer-job-position" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Company" for="company">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="company"
+							value="#{data.candidateInformation.company}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="company" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Decision" for="interviewer-job-position">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:selectOneRadio id="decision"
+							value="#{data.candidateInformation.isApprove}">
+							<f:selectItem itemLabel="Approve" itemValue="true" />
+							<f:selectItem itemLabel="Reject" itemValue="false" />
+							<f:validator validatorId="commonValidator" />
+						</p:selectOneRadio>
+						<p:message for="decision" />
+					</div>
+					<div class="p-field p-col-12 p-m-4 p-p-1"></div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Subject" for="mail-subject">
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-10">
+						<p:inputText id="mail-subject" value="#{data.subject}" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="Content" for="mail-content">
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-10">
+						<p:inputTextarea id="mail-content" value="#{data.content}" />
+					</div>
+
+				</div>
+			</h:form>
+			<div>
+				<h:panelGroup styleClass="p-text-right" layout="block">
+					<p:commandButton id="proceed" actionListener="#{logic.generate}"
+						value="Generate email" update="content-form" icon="pi pi-check" />
+					<p:commandButton id="send-mail" actionListener="#{logic.sendMail}"
+						value="Send to candidate" update="content-form" icon="pi pi-check" />
+				</h:panelGroup>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

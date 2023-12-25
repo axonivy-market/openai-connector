@@ -1,0 +1,16 @@
+package utils;
+
+import com.openai.connector.demo.CandidateInformation;
+
+public class PromptUtils {
+	public static String createPrompt(CandidateInformation data) {
+		if (data == null) {
+			return null;
+		}
+
+		return String.format(
+				"The candidate Name is '%s', Candidate most important skill is '%s', Interviewers Name is '%s', Job Position is '%s', Interview date is '%s', company is '%s'. Please create a '%s' follow up email, written in the name of the interviewer. The position of the Interview is '%s'. Return in json string with attributes subject, content",
+				data.getName(), data.getMostImportantSkill(), data.getInterviewerName(), data.getJobPosition(),
+				data.getInterviewerName(), data.getCompany(), data.getIsApprove(), data.getInterviewerPosition());
+	}
+}

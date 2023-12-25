@@ -1,0 +1,154 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/11.2.1/process.json",
+  "id" : "18C91499292B78F6",
+  "kind" : "HTML_DIALOG",
+  "config" : {
+    "data" : "com.openai.connector.demo.AIMailGenerator.AIMailGeneratorData"
+  },
+  "elements" : [ {
+      "id" : "f0",
+      "type" : "HtmlDialogStart",
+      "name" : "start()",
+      "config" : {
+        "signature" : "start",
+        "guid" : "18C914992928153D"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 64 }
+      },
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
+    }, {
+      "id" : "f1",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 64 }
+      }
+    }, {
+      "id" : "f3",
+      "type" : "HtmlDialogEventStart",
+      "name" : "close",
+      "config" : {
+        "guid" : "18C914992935A915"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 160 }
+      },
+      "connect" : [
+        { "id" : "f5", "to" : "f4" }
+      ]
+    }, {
+      "id" : "f4",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 224, "y" : 160 }
+      }
+    }, {
+      "id" : "f6",
+      "type" : "HtmlDialogEventStart",
+      "name" : "generate",
+      "config" : {
+        "guid" : "18C914A6985CAA99"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f8", "to" : "f7" }
+      ]
+    }, {
+      "id" : "f7",
+      "type" : "Script",
+      "name" : "Generate promt",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import utils.PromptUtils;",
+            "in.message = PromptUtils.createPrompt(in.candidateInformation);"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 248, "y" : 256 }
+      },
+      "connect" : [
+        { "id" : "f10", "to" : "f9" }
+      ]
+    }, {
+      "id" : "f9",
+      "type" : "SubProcessCall",
+      "name" : "openai",
+      "config" : {
+        "processCall" : "openai:chatGpt(String)",
+        "call" : {
+          "map" : {
+            "param.what" : "in.message"
+          }
+        },
+        "output" : {
+          "code" : [
+            "import com.openai.connector.demo.AIGeneratedMail;",
+            "import utils.MailUtils;",
+            "",
+            "AIGeneratedMail emailObject = MailUtils.convert(result.answer);",
+            "",
+            "in.subject = emailObject.getSubject();",
+            "in.content = emailObject.getContent();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 424, "y" : 256 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "HtmlDialogEnd",
+      "visual" : {
+        "at" : { "x" : 600, "y" : 256 }
+      }
+    }, {
+      "id" : "f13",
+      "type" : "HtmlDialogEventStart",
+      "name" : "sendMail",
+      "config" : {
+        "guid" : "18C9166EB21C7F99"
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 392 }
+      },
+      "connect" : [
+        { "id" : "f15", "to" : "f17" }
+      ]
+    }, {
+      "id" : "f17",
+      "type" : "EMail",
+      "name" : "Send mail to candidate",
+      "config" : {
+        "headers" : {
+          "subject" : "<%=in.subject%>",
+          "from" : "wawa@axongroupio.ch",
+          "to" : "<%=in.candidateInformation.email%>"
+        },
+        "message" : {
+          "body" : "<%=in.content%>"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 248, "y" : 392 }
+      },
+      "connect" : [
+        { "id" : "f16", "to" : "f14" }
+      ]
+    }, {
+      "id" : "f14",
+      "type" : "HtmlDialogExit",
+      "visual" : {
+        "at" : { "x" : 392, "y" : 392 }
+      }
+    } ]
+}

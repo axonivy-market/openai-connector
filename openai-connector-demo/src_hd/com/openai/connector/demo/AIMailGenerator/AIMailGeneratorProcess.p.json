@@ -122,7 +122,7 @@
         "at" : { "x" : 96, "y" : 392 }
       },
       "connect" : [
-        { "id" : "f15", "to" : "f17" }
+        { "id" : "f15", "to" : "f18" }
       ]
     }, {
       "id" : "f17",
@@ -139,7 +139,7 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 248, "y" : 392 }
+        "at" : { "x" : 456, "y" : 392 }
       },
       "connect" : [
         { "id" : "f16", "to" : "f14" }
@@ -148,7 +148,22 @@
       "id" : "f14",
       "type" : "HtmlDialogExit",
       "visual" : {
-        "at" : { "x" : 392, "y" : 392 }
+        "at" : { "x" : 680, "y" : 392 }
       }
+    }, {
+      "id" : "f18",
+      "type" : "Alternative",
+      "config" : {
+        "conditions" : {
+          "f19" : "org.apache.commons.lang3.StringUtils.isNotEmpty(in.subject) && org.apache.commons.lang3.StringUtils.isNotEmpty(in.content) && org.apache.commons.lang3.StringUtils.isNotEmpty(in.candidateInformation.email)"
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 264, "y" : 392 }
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f17" },
+        { "id" : "f20", "to" : "f14", "via" : [ { "x" : 264, "y" : 512 }, { "x" : 680, "y" : 512 } ] }
+      ]
     } ]
 }

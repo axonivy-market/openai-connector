@@ -33,7 +33,7 @@
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-4">
-						<p:inputText id="candidate-email"
+						<p:inputText id="candidate-email" type="email"
 							value="#{data.candidateInformation.email}">
 							<f:validator validatorId="commonValidator" />
 						</p:inputText>
@@ -171,7 +171,8 @@
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-10">
-						<p:inputText id="mail-subject" value="#{data.subject}" />
+						<p:inputText id="mail-subject" value="#{data.subject}"
+							disabled="true"></p:inputText>
 					</div>
 
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
@@ -179,17 +180,21 @@
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-10">
-						<p:inputTextarea id="mail-content" value="#{data.content}" />
+						<p:inputTextarea id="mail-content" value="#{data.content}"
+							disabled="true" />
 					</div>
 
 				</div>
 			</h:form>
 			<div>
-				<h:panelGroup styleClass="p-text-right" layout="block">
+				<h:panelGroup id="command-button" styleClass="p-text-right"
+					layout="block">
 					<p:commandButton id="proceed" actionListener="#{logic.generate}"
-						value="Generate email" update="content-form" icon="pi pi-check" />
+						value="Generate email" update="content-form command-button" icon="pi pi-check" />
 					<p:commandButton id="send-mail" actionListener="#{logic.sendMail}"
-						value="Send to candidate" update="content-form" icon="pi pi-check" />
+						value="Send to candidate"
+						disabled="#{data.content == null || data.subject == null}"
+						update="content-form" icon="pi pi-check" />
 				</h:panelGroup>
 			</div>
 		</ui:define>

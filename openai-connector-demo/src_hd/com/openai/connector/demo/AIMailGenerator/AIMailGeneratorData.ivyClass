@@ -1,13 +1,7 @@
 AIMailGeneratorData #class
 com.openai.connector.demo.AIMailGenerator #namespace
-generatedEmail String #field
-generatedEmail PERSISTENT #fieldModifier
-subject String #field
-subject PERSISTENT #fieldModifier
-content String #field
-content PERSISTENT #fieldModifier
-email String #field
-email PERSISTENT #fieldModifier
+mail com.openai.connector.demo.AIGeneratedMail #field
+mail PERSISTENT #fieldModifier
 message String #field
 message PERSISTENT #fieldModifier
 candidateInformation com.openai.connector.demo.CandidateInformation #field

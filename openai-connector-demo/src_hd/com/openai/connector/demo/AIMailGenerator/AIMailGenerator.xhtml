@@ -15,7 +15,8 @@
 				<div class="p-formgrid p-grid p-align-baseline ui-fluid">
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Candidate name" for="candidate-name">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/CandidateName')}"
+							for="candidate-name">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
@@ -28,7 +29,8 @@
 					</div>
 
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Candidate email" for="candidate-email">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/CandidateEmail')}"
+							for="candidate-email">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
@@ -42,7 +44,8 @@
 
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Job position" for="job-position">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/JobPosition')}"
+							for="job-position">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
@@ -50,23 +53,17 @@
 						<p:selectOneMenu id="job-position"
 							value="#{data.candidateInformation.jobPosition}">
 							<f:selectItem itemLabel="Select Job Position" itemValue="" />
-							<f:selectItem itemLabel="Software Developer"
-								itemValue="Software Developer" />
-							<f:selectItem itemLabel="Database Administrator"
-								itemValue="Database Administrator" />
-							<f:selectItem itemLabel="Network Engineer"
-								itemValue="Network Engineer" />
-							<f:selectItem itemLabel="System Analyst"
-								itemValue="System Analyst" />
-							<f:selectItem itemLabel="IT Project Manager"
-								itemValue="IT Project Manager" />
+							<f:selectItems value="#{aIMailGeneratorBean.jobPositions}"
+								var="position" itemValue="#{position.getCmsName()}"
+								itemLabel="#{position.getCmsName()}" />
 							<f:validator validatorId="commonValidator" />
 						</p:selectOneMenu>
 						<p:message for="job-position" />
 					</div>
 
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Candidate most important skill"
+						<p:outputLabel
+							value="#{ivy.cms.co('/Labels/CandiateMostImportantSkill')}"
 							for="most-important-skill">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
@@ -81,7 +78,8 @@
 
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Interviewer name" for="interviewer-name">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/InterviewerName')}"
+							for="interviewer-name">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
@@ -94,7 +92,8 @@
 					</div>
 
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Interview date" for="interview-date">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/InterviewerDate')}"
+							for="interview-date">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
@@ -111,7 +110,8 @@
 
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Interviewer position"
+						<p:outputLabel
+							value="#{ivy.cms.co('/Labels/InterviewerPosition')}"
 							for="interviewer-job-position">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
@@ -120,16 +120,9 @@
 						<p:selectOneMenu id="interviewer-job-position"
 							value="#{data.candidateInformation.interviewerPosition}">
 							<f:selectItem itemLabel="Select Job Position" itemValue="" />
-							<f:selectItem itemLabel="Software Developer"
-								itemValue="Software Developer" />
-							<f:selectItem itemLabel="Database Administrator"
-								itemValue="Database Administrator" />
-							<f:selectItem itemLabel="Network Engineer"
-								itemValue="Network Engineer" />
-							<f:selectItem itemLabel="System Analyst"
-								itemValue="System Analyst" />
-							<f:selectItem itemLabel="IT Project Manager"
-								itemValue="IT Project Manager" />
+							<f:selectItems value="#{aIMailGeneratorBean.jobPositions}"
+								var="position" itemValue="#{position.getCmsName()}"
+								itemLabel="#{position.getCmsName()}" />
 							<f:validator validatorId="commonValidator" />
 						</p:selectOneMenu>
 						<p:message for="interviewer-job-position" />
@@ -137,7 +130,8 @@
 
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Company" for="company">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Company')}"
+							for="company">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
@@ -151,36 +145,41 @@
 
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Decision" for="interviewer-job-position">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Decision')}"
+							for="interviewer-job-position">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-4">
 						<p:selectOneRadio id="decision"
 							value="#{data.candidateInformation.isApprove}">
-							<f:selectItem itemLabel="Approve" itemValue="true" />
-							<f:selectItem itemLabel="Reject" itemValue="false" />
+							<f:selectItem itemLabel="#{ivy.cms.co('/Labels/Approve')}"
+								itemValue="true" />
+							<f:selectItem itemLabel="#{ivy.cms.co('/Labels/Reject')}"
+								itemValue="false" />
 							<f:validator validatorId="commonValidator" />
 						</p:selectOneRadio>
 						<p:message for="decision" />
 					</div>
-					<div class="p-field p-col-12 p-m-4 p-p-1"></div>
+					<div class="p-field p-col-12"></div>
 
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Subject" for="mail-subject">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Subject')}"
+							for="mail-subject">
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-10">
-						<p:inputText id="mail-subject" value="#{data.subject}"
+						<p:inputText id="mail-subject" value="#{data.mail.subject}"
 							disabled="true"></p:inputText>
 					</div>
 
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
-						<p:outputLabel value="Content" for="mail-content">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Content')}"
+							for="mail-content">
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-10">
-						<p:inputTextarea id="mail-content" value="#{data.content}"
+						<p:inputTextarea id="mail-content" value="#{data.mail.content}"
 							disabled="true" />
 					</div>
 
@@ -190,10 +189,11 @@
 				<h:panelGroup id="command-button" styleClass="p-text-right"
 					layout="block">
 					<p:commandButton id="proceed" actionListener="#{logic.generate}"
-						value="Generate email" update="content-form command-button" icon="pi pi-check" />
+						value="#{ivy.cms.co('/Labels/GenerateEmail')}"
+						update="content-form command-button" icon="pi pi-check" />
 					<p:commandButton id="send-mail" actionListener="#{logic.sendMail}"
-						value="Send to candidate"
-						disabled="#{data.content == null || data.subject == null}"
+						value="#{ivy.cms.co('/Labels/SendToCandidate')}"
+						disabled="#{data.mail.content == null || data.mail.subject == null}"
 						update="content-form" icon="pi pi-check" />
 				</h:panelGroup>
 			</div>

@@ -1,4 +1,4 @@
-package validators;
+package com.openai.connector.demo.validators;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

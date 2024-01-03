@@ -64,7 +64,8 @@
       "config" : {
         "output" : {
           "code" : [
-            "import utils.PromptUtils;",
+            "import com.openai.connector.demo.utils.PromptUtils;",
+            "",
             "in.message = PromptUtils.createPrompt(in.candidateInformation);"
           ]
         }
@@ -88,13 +89,13 @@
         },
         "output" : {
           "code" : [
+            "import com.openai.connector.demo.utils.MailUtils;",
             "import com.openai.connector.demo.AIGeneratedMail;",
-            "import utils.MailUtils;",
             "",
             "AIGeneratedMail emailObject = MailUtils.convert(result.answer);",
             "",
-            "in.subject = emailObject.getSubject();",
-            "in.content = emailObject.getContent();"
+            "in.mail.subject = emailObject.getSubject();",
+            "in.mail.content = emailObject.getContent();"
           ]
         }
       },
@@ -131,7 +132,6 @@
       "config" : {
         "headers" : {
           "subject" : "<%=in.subject%>",
-          "from" : "wawa@axongroupio.ch",
           "to" : "<%=in.candidateInformation.email%>"
         },
         "message" : {
@@ -153,13 +153,15 @@
     }, {
       "id" : "f18",
       "type" : "Alternative",
+      "name" : "canSend?",
       "config" : {
         "conditions" : {
-          "f19" : "org.apache.commons.lang3.StringUtils.isNotEmpty(in.subject) && org.apache.commons.lang3.StringUtils.isNotEmpty(in.content) && org.apache.commons.lang3.StringUtils.isNotEmpty(in.candidateInformation.email)"
+          "f19" : "com.openai.connector.demo.utils.MailUtils.isCanSendMail(in.mail, in.candidateInformation)"
         }
       },
       "visual" : {
-        "at" : { "x" : 264, "y" : 392 }
+        "at" : { "x" : 264, "y" : 392 },
+        "labelOffset" : { "x" : 14, "y" : 34 }
       },
       "connect" : [
         { "id" : "f19", "to" : "f17" },

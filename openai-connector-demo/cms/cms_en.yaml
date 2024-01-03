@@ -1,0 +1,33 @@
+Enums:
+  com:
+    openai:
+      connector:
+        demo:
+          enums:
+            JobPosition:
+              DATABASE_ADMINISTRATOR:
+                name: Database Administrator
+              IT_PROJECT_MANAGER:
+                name: IT Project Manager
+              NETWORK_ENGINEER:
+                name: Network Engineer
+              SOFTWARE_DEVELOPER:
+                name: Software Developer
+              SYSTEM_ANALYST:
+                name: System Analyst
+Labels:
+  Approve: Approve
+  CandiateMostImportantSkill: Candidate most important skill
+  CandidateEmail: Candidate email
+  CandidateName: Candidate name
+  Company: Company
+  Content: Content
+  Decision: Decision
+  GenerateEmail: Generate email
+  InterviewerDate: Interviewer date
+  InterviewerName: Interviewer name
+  InterviewerPosition: Interviewer position
+  JobPosition: Job position
+  Reject: Reject
+  SendToCandidate: Send to candidate
+  Subject: Subject

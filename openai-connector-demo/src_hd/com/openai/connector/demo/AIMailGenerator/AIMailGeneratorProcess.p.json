@@ -131,11 +131,11 @@
       "name" : "Send mail to candidate",
       "config" : {
         "headers" : {
-          "subject" : "<%=in.subject%>",
+          "subject" : "<%=in.mail.subject%>",
           "to" : "<%=in.candidateInformation.email%>"
         },
         "message" : {
-          "body" : "<%=in.content%>"
+          "body" : "<%=in.mail.content%>"
         }
       },
       "visual" : {

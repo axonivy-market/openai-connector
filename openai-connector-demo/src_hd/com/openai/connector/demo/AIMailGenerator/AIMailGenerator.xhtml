@@ -154,9 +154,9 @@
 						<p:selectOneRadio id="decision"
 							value="#{data.candidateInformation.isApprove}">
 							<f:selectItem itemLabel="#{ivy.cms.co('/Labels/Approve')}"
-								itemValue="true" />
+								itemValue="#{ivy.cms.co('/Labels/Approve')}" />
 							<f:selectItem itemLabel="#{ivy.cms.co('/Labels/Reject')}"
-								itemValue="false" />
+								itemValue="#{ivy.cms.co('/Labels/Reject')}" />
 							<f:validator validatorId="commonValidator" />
 						</p:selectOneRadio>
 						<p:message for="decision" />

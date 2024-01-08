@@ -8,4 +8,4 @@ company String #field
 mostImportantSkill String #field
 interviewDate java.time.LocalDate #field
 email String #field
-isApprove Boolean #field
+status com.openai.connector.demo.enums.CandidateStatus #field

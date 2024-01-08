@@ -146,17 +146,16 @@
 					<!-- Row -->
 					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
 						<p:outputLabel value="#{ivy.cms.co('/Labels/Decision')}"
-							for="interviewer-job-position">
+							for="decision">
 							<span class="ui-outputlabel-rfi">*</span>
 						</p:outputLabel>
 					</div>
 					<div class="p-field p-col-12 p-md-4">
 						<p:selectOneRadio id="decision"
-							value="#{data.candidateInformation.isApprove}">
-							<f:selectItem itemLabel="#{ivy.cms.co('/Labels/Approve')}"
-								itemValue="#{ivy.cms.co('/Labels/Approve')}" />
-							<f:selectItem itemLabel="#{ivy.cms.co('/Labels/Reject')}"
-								itemValue="#{ivy.cms.co('/Labels/Reject')}" />
+							value="#{data.candidateInformation.status}">
+							<f:selectItems value="#{aIMailGeneratorBean.candidateStatuses}"
+								var="status" itemValue="#{status}"
+								itemLabel="#{status.getCmsName()}" />
 							<f:validator validatorId="commonValidator" />
 						</p:selectOneRadio>
 						<p:message for="decision" />
@@ -184,19 +183,20 @@
 					</div>
 
 				</div>
+				<div class="p-pb-4">
+					<h:panelGroup id="command-button" styleClass="p-text-right"
+						layout="block">
+						<p:commandButton id="proceed" actionListener="#{logic.generate}"
+							value="#{ivy.cms.co('/Labels/GenerateEmail')}"
+							process="content-form" update="content-form command-button"
+							icon="pi pi-check" />
+						<p:commandButton id="send-mail" actionListener="#{logic.sendMail}"
+							value="#{ivy.cms.co('/Labels/SendToCandidate')}"
+							disabled="#{data.mail.content == null || data.mail.subject == null}"
+							update="content-form" icon="pi pi-check" />
+					</h:panelGroup>
+				</div>
 			</h:form>
-			<div>
-				<h:panelGroup id="command-button" styleClass="p-text-right"
-					layout="block">
-					<p:commandButton id="proceed" actionListener="#{logic.generate}"
-						value="#{ivy.cms.co('/Labels/GenerateEmail')}"
-						update="content-form command-button" icon="pi pi-check" />
-					<p:commandButton id="send-mail" actionListener="#{logic.sendMail}"
-						value="#{ivy.cms.co('/Labels/SendToCandidate')}"
-						disabled="#{data.mail.content == null || data.mail.subject == null}"
-						update="content-form" icon="pi pi-check" />
-				</h:panelGroup>
-			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>

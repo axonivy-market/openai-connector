@@ -20,6 +20,6 @@ public class PromptUtils {
 				Return in json string with attributes subject, content\"""
 				""".formatted(
 				data.getName(), data.getMostImportantSkill(), data.getInterviewerName(), data.getJobPosition(),
-				data.getInterviewDate(), data.getCompany(), data.getIsApprove(), data.getInterviewerPosition());
+				data.getInterviewDate(), data.getCompany(), data.getStatus(), data.getInterviewerPosition());
 	}
 }

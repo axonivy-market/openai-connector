@@ -4,6 +4,11 @@ Enums:
       connector:
         demo:
           enums:
+            CandidateStatus:
+              APPROVE:
+                name: Approve
+              REJECT:
+                name: Reject
             JobPosition:
               DATABASE_ADMINISTRATOR:
                 name: Database Administrator

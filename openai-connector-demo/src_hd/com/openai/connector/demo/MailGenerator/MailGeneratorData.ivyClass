@@ -1,5 +1,5 @@
-AIMailGeneratorData #class
-com.openai.connector.demo.AIMailGenerator #namespace
+MailGeneratorData #class
+com.openai.connector.demo.MailGenerator #namespace
 mail com.openai.connector.demo.AIGeneratedMail #field
 mail PERSISTENT #fieldModifier
 message String #field

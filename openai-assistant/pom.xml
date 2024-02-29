@@ -12,13 +12,13 @@
     <tycho.version>3.0.4</tycho.version>
   </properties>
 
-  <repositories>
+  <!-- <repositories>
     <repository>
       <id>ivy.nightly.release</id>
       <layout>p2</layout>
       <url>https://download.axonivy.rocks/p2/nightly/</url>
     </repository>
-  </repositories>
+  </repositories> -->
 
   <build>
     <testSourceDirectory>test</testSourceDirectory>

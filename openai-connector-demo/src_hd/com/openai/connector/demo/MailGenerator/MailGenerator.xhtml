@@ -152,10 +152,10 @@
 					</div>
 					<div class="p-field p-col-12 p-md-4">
 						<p:selectOneRadio id="decision"
-							value="#{data.candidateInformation.status}">
+							value="#{data.candidateInformation.decision}">
 							<f:selectItems value="#{aIMailGeneratorBean.candidateStatuses}"
-								var="status" itemValue="#{status}"
-								itemLabel="#{status.getCmsName()}" />
+								var="decision" itemValue="#{decision}"
+								itemLabel="#{decision.getCmsName()}" />
 							<f:validator validatorId="commonValidator" />
 						</p:selectOneRadio>
 						<p:message for="decision" />

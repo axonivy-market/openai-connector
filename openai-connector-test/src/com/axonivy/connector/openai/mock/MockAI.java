@@ -51,12 +51,19 @@ public class MockAI {
     "assist-edit-reponse", json(load("assist-edit-response.json"))
   );
 
+  private final Map<String, JsonNode> openAIExamples = Map.of(
+      "completions", json(load("completions.json")),
+      "completions-response", json(load("completions-response.json")),
+      "mail-generator", json(load("mail-generator.json")),
+      "mail-generator-response", json(load("mail-generator-response.json"))
+  );
+
   @POST
   @Path("completions")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response assist(JsonNode request) {
-    var in = input(request);
+    var in = input(request, examples);
     Ivy.log().info("in="+in+" /from="+request);
     var node= examples.get(in+"-reponse");
     return Response.ok()
@@ -69,7 +76,7 @@ public class MockAI {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response edit(JsonNode request) {
-    var in = input(request);
+    var in = input(request, examples);
     Ivy.log().info("in="+in+" /from="+request);
     var node= examples.get(in+"-reponse");
     return Response.ok()
@@ -77,7 +84,7 @@ public class MockAI {
       .build();
   }
 
-  private String input(JsonNode request) {
+  private String input(JsonNode request, Map<String, JsonNode> examples) {
     for(var entry : examples.entrySet()) {
       if (Objects.equals(entry.getValue(), request)) {
         return entry.getKey();
@@ -86,14 +93,15 @@ public class MockAI {
     return null;
   }
 
-
-  @POST
+   @POST
   @Path("chat/completions")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response chat() {
+  public Response chat(JsonNode request) {
+    var in = input(request, openAIExamples);
+    var node = openAIExamples.get(in+"-response");
     return Response.ok()
-      .entity(load("completions.json"))
+      .entity(node)
       .build();
   }
 

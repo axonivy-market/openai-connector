@@ -1,0 +1,204 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:ic="http://ivyteam.ch/jsf/component"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:body>
+	<ui:composition template="/layouts/frame-10-full-width.xhtml">
+		<ui:define name="title">AI Mail Generator</ui:define>
+		<ui:define name="content">
+			<h3>AI Mail Generator</h3>
+			<h:form id="content-form">
+				<div class="p-formgrid p-grid p-align-baseline ui-fluid">
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/CandidateName')}"
+							for="candidate-name">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="candidate-name"
+							value="#{data.candidateInformation.name}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="candidate-name" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/CandidateEmail')}"
+							for="candidate-email">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="candidate-email" type="email"
+							value="#{data.candidateInformation.email}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="candidate-email" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/JobPosition')}"
+							for="job-position">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:selectOneMenu id="job-position"
+							value="#{data.candidateInformation.jobPosition}">
+							<f:selectItem itemLabel="Select Job Position" itemValue="" />
+							<f:selectItems value="#{aIMailGeneratorBean.jobPositions}"
+								var="position" itemValue="#{position.getCmsName()}"
+								itemLabel="#{position.getCmsName()}" />
+							<f:validator validatorId="commonValidator" />
+						</p:selectOneMenu>
+						<p:message for="job-position" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel
+							value="#{ivy.cms.co('/Labels/CandiateMostImportantSkill')}"
+							for="most-important-skill">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="most-important-skill"
+							value="#{data.candidateInformation.mostImportantSkill}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="most-important-skill" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/InterviewerName')}"
+							for="interviewer-name">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="interviewer-name"
+							value="#{data.candidateInformation.interviewerName}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="interviewer-name" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/InterviewerDate')}"
+							for="interview-date">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:datePicker id="interview-date"
+							value="#{data.candidateInformation.interviewDate}"
+							showIcon="true" pattern="dd/MM/yyyy"
+							converterMessage="#{ivy.cms.co('/Labels/WrongDateFormat')}"
+							mask="true">
+							<f:validator validatorId="commonValidator" />
+						</p:datePicker>
+						<p:message for="interview-date" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel
+							value="#{ivy.cms.co('/Labels/InterviewerPosition')}"
+							for="interviewer-job-position">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:selectOneMenu id="interviewer-job-position"
+							value="#{data.candidateInformation.interviewerPosition}">
+							<f:selectItem itemLabel="Select Job Position" itemValue="" />
+							<f:selectItems value="#{aIMailGeneratorBean.jobPositions}"
+								var="position" itemValue="#{position.getCmsName()}"
+								itemLabel="#{position.getCmsName()}" />
+							<f:validator validatorId="commonValidator" />
+						</p:selectOneMenu>
+						<p:message for="interviewer-job-position" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Company')}"
+							for="company">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:inputText id="company"
+							value="#{data.candidateInformation.company}">
+							<f:validator validatorId="commonValidator" />
+						</p:inputText>
+						<p:message for="company" />
+					</div>
+
+					<!-- Row -->
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Decision')}"
+							for="decision">
+							<span class="ui-outputlabel-rfi">*</span>
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-4">
+						<p:selectOneRadio id="decision"
+							value="#{data.candidateInformation.decision}">
+							<f:selectItems value="#{aIMailGeneratorBean.candidateStatuses}"
+								var="decision" itemValue="#{decision}"
+								itemLabel="#{decision.getCmsName()}" />
+							<f:validator validatorId="commonValidator" />
+						</p:selectOneRadio>
+						<p:message for="decision" />
+					</div>
+					<div class="p-field p-col-12"></div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Subject')}"
+							for="mail-subject">
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-10">
+						<p:inputText id="mail-subject" value="#{data.mail.subject}"
+							disabled="true"></p:inputText>
+					</div>
+
+					<div class="p-field p-col-12 p-md-2 p-text-left p-text-md-right">
+						<p:outputLabel value="#{ivy.cms.co('/Labels/Content')}"
+							for="mail-content">
+						</p:outputLabel>
+					</div>
+					<div class="p-field p-col-12 p-md-10">
+						<p:inputTextarea id="mail-content" value="#{data.mail.content}"
+							disabled="true" />
+					</div>
+
+				</div>
+				<div class="p-pb-4">
+					<h:panelGroup id="command-button" styleClass="p-text-right"
+						layout="block">
+						<p:commandButton id="proceed" actionListener="#{logic.generate}"
+							value="#{ivy.cms.co('/Labels/GenerateEmail')}"
+							process="content-form" update="content-form command-button"
+							icon="pi pi-check" styleClass="p-mr-2" />
+						<p:commandButton id="send-mail" actionListener="#{logic.sendMail}"
+							value="#{ivy.cms.co('/Labels/SendToCandidate')}"
+							disabled="#{data.mail.content == null || data.mail.subject == null}"
+							update="content-form" icon="pi pi-check" styleClass="p-mr-2" />
+					</h:panelGroup>
+				</div>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+
+</html>

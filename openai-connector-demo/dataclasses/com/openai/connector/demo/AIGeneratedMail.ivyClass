@@ -1,0 +1,4 @@
+AIGeneratedMail #class
+com.openai.connector.demo #namespace
+subject String #field
+content String #field

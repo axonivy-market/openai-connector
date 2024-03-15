@@ -1,0 +1,11 @@
+CandidateInformation #class
+com.openai.connector.demo #namespace
+name String #field
+jobPosition String #field
+interviewerName String #field
+interviewerPosition String #field
+company String #field
+mostImportantSkill String #field
+interviewDate java.time.LocalDate #field
+email String #field
+decision com.openai.connector.demo.enums.Decision #field

@@ -1,0 +1,22 @@
+{
+	"model": "gpt-3.5-turbo",
+	"messages": [
+		{
+			"role": "user",
+			"content": "The candidate Name is 'Jack',\nCandidate most important skill is 'Backend',\nInterviewers Name is 'Bob',\nJob Position is 'Software Developer',\nInterview date is '2023-12-19',\ncompany is 'Test'.\nPlease create a 'APPROVE' follow up email, written in the name of the interviewer.\nThe position of the Interviewer is 'Network Engineer'.\nReturn in json string with attributes subject, content\"\"\"\n",
+			"name": "Developer"
+		}
+	],
+	"temperature": 1,
+	"top_p": 1,
+	"n": 1,
+	"stream": false,
+	"stop": null,
+	"max_tokens": null,
+	"presence_penalty": 0,
+	"frequency_penalty": 0,
+	"logit_bias": {
+		"50256": -100
+	},
+	"user": "Developer"
+}

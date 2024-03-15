@@ -1,0 +1,8 @@
+MailGeneratorData #class
+com.openai.connector.demo.MailGenerator #namespace
+mail com.openai.connector.demo.AIGeneratedMail #field
+mail PERSISTENT #fieldModifier
+message String #field
+message PERSISTENT #fieldModifier
+candidateInformation com.openai.connector.demo.CandidateInformation #field
+candidateInformation PERSISTENT #fieldModifier

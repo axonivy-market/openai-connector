@@ -86,10 +86,26 @@ public class AiAssistanceTest {
       .contains("Inline styling should be avoided");
   }
 
+  @Test
+  void mailGenerator() {
+    JsonNode chat = json(load("mail-generator.json"));
+    JsonNode result = chatAssist(chat);
+    assertThat(result.toPrettyString())
+        .isNotEmpty();
+  }
+
   private static JsonNode assist(JsonNode quest) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = Entity.entity(quest, MediaType.APPLICATION_JSON);
     JsonNode result = client.path("completions").request()
+      .post(request).readEntity(JsonNode.class);
+    return result;
+  }
+
+  private static JsonNode chatAssist(JsonNode quest) {
+    WebTarget client = Ivy.rest().client(OPEN_AI);
+    Entity<JsonNode> request = Entity.entity(quest, MediaType.APPLICATION_JSON);
+    JsonNode result = client.path("chat/completions").request()
       .post(request).readEntity(JsonNode.class);
     return result;
   }

@@ -12,3 +12,5 @@ Variables:
     maxTokens: 1024
     # base uri to use for chatGPT calls
     platformUri: 'https://api.openai.com/v1'
+    # model to request
+    model: 'davinci-002'

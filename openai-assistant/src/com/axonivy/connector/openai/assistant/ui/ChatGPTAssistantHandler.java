@@ -37,5 +37,6 @@ public class ChatGPTAssistantHandler extends AbstractHandler {
     String EDIT = "edit";
     String CHAT = "chat";
     String KEY = "apiKey";
+    String MODEL = "model";
   }
 }

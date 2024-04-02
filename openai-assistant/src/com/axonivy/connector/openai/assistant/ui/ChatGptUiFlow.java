@@ -2,11 +2,13 @@ package com.axonivy.connector.openai.assistant.ui;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 import org.eclipse.compare.CompareUI;
 import org.eclipse.core.resources.IResource;
@@ -25,7 +27,11 @@ import com.axonivy.connector.openai.assistant.ChatGptClientFactory;
 import com.axonivy.connector.openai.assistant.ChatGptRequest;
 import com.axonivy.connector.openai.assistant.OpenAiConfig;
 import com.axonivy.connector.openai.assistant.OpenAiConfig.Key;
+import com.axonivy.connector.openai.assistant.models.Model;
+import com.axonivy.connector.openai.assistant.models.ResponseModel;
 import com.axonivy.connector.openai.assistant.ui.ChatGPTAssistantHandler.Quests;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import ch.ivyteam.swt.dialogs.SwtCommonDialogs;
 
@@ -83,6 +89,24 @@ public class ChatGptUiFlow {
         SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
       }
       return;
+    }
+    
+    if (quest.equalsIgnoreCase(Quests.MODEL)) {
+      String supportedModels = runWithProgress(() -> chatGpt.getModels());
+
+      ObjectMapper mapper = new ObjectMapper();
+      try {
+        List<Model> models = mapper.readValue(supportedModels, ResponseModel.class).getData();
+        String selectedModel = SwtCommonDialogs.openInputDialog(site.getShell(), "Model",
+            "Supported models: " + models.stream().map(Model::getId).collect(Collectors.toList()),
+            repo.getValue(Key.MODEL).orElse(""));
+        if (selectedModel != null) {
+          repo.storeSecret(Key.MODEL, selectedModel);
+        }
+        return;
+      } catch (JsonProcessingException e) {
+        return;
+      }
     }
 
     boolean assist = SwtCommonDialogs.openQuestionDialog(site.getShell(), "need assistance?", """

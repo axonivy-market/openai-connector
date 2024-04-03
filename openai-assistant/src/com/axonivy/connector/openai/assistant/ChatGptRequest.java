@@ -63,7 +63,7 @@ public class ChatGptRequest {
   private ObjectNode completion() {
     OpenAiConfig repo = new OpenAiConfig();
     ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", repo.getValue(Key.MODEL).orElse("gpt-4"));
+    request.put("model", repo.getValue(Key.MODEL).orElse("gpt-3.5-turbo"));
     request.put("max_tokens", maxTokens);
     request.put("temperature", 1);
     request.put("top_p", 1);

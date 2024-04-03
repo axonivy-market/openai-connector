@@ -97,9 +97,9 @@ public class ChatGptUiFlow {
       ObjectMapper mapper = new ObjectMapper();
       try {
         List<Model> models = mapper.readValue(supportedModels, ResponseModel.class).getData();
-        String selectedModel = SwtCommonDialogs.openInputDialog(site.getShell(), "Model",
-            "Supported models: " + models.stream().map(Model::getId).collect(Collectors.toList()),
-            repo.getValue(Key.MODEL).orElse(""));
+        String selectedModel = SelectModelDialog.open(site.getShell(), "OpenAI model",
+            "Please select model", repo.getValue(Key.MODEL).orElse(""),
+            models.stream().map(Model::getId).collect(Collectors.toList()));
         if (selectedModel != null) {
           repo.storeSecret(Key.MODEL, selectedModel);
         }

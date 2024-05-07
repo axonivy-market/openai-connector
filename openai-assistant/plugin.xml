@@ -46,6 +46,9 @@
           <command commandId="openai.commands.assist" label="Set apiKey" style="push">
             <parameter name="chatGpt.question" value="apiKey" />
           </command>
+          <command commandId="openai.commands.assist" label="Set Model" style="push">
+            <parameter name="chatGpt.question" value="model" />
+          </command>
         </menu>
       </menuContribution>
       <menuContribution locationURI="toolbar:org.eclipse.ui.main.toolbar">
@@ -72,6 +75,9 @@
           </command>
           <command commandId="openai.commands.assist" label="Set apiKey" style="push">
             <parameter name="chatGpt.question" value="apiKey" />
+          </command>
+          <command commandId="openai.commands.assist" label="Set Model" style="push">
+            <parameter name="chatGpt.question" value="model" />
           </command>
       </menuContribution>
    </extension>

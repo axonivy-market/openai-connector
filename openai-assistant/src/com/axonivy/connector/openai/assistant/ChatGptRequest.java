@@ -8,6 +8,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status.Family;
 
+import com.axonivy.connector.openai.assistant.OpenAiConfig.Key;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
@@ -26,11 +27,21 @@ public class ChatGptRequest {
     this.maxTokens = tokens;
     return this;
   }
+  
+  public String getModels() {
+    WebTarget chat = client.get().path("models");
+    Response resp = chat.request().get();
+    return read(resp);
+  }
 
   public String ask(String context, String question) {
-    WebTarget chat = client.get().path("completions");
-    ObjectNode request = completion()
-      .put("prompt", context + "\n\n"+question);
+    WebTarget chat = client.get().path("chat/completions");
+    ObjectNode message = JsonNodeFactory.instance.objectNode();
+    ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
+    message.put("role", "user");
+    message.put("content", context + "\n\n"+question);
+    arrayNode.add(message);
+    ObjectNode request = completion().set("messages", arrayNode);
     var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
     Response resp = chat.request().post(payload);
     return read(resp);
@@ -40,6 +51,9 @@ public class ChatGptRequest {
     JsonNode result = resp.readEntity(JsonNode.class);
     if (resp.getStatusInfo().getFamily() == Family.SUCCESSFUL) {
       if (result.get("choices") instanceof ArrayNode choices) {
+        if (choices.get(0).get("message") instanceof ObjectNode message) {
+          return message.get("content").asText();
+        }
         return choices.get(0).get("text").asText();
       }
     }
@@ -47,8 +61,9 @@ public class ChatGptRequest {
   }
 
   private ObjectNode completion() {
+    OpenAiConfig repo = new OpenAiConfig();
     ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", "text-davinci-003");
+    request.put("model", repo.getValue(Key.MODEL).orElse("gpt-3.5-turbo"));
     request.put("max_tokens", maxTokens);
     request.put("temperature", 1);
     request.put("top_p", 1);

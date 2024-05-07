@@ -17,6 +17,7 @@ public class OpenAiConfig {
     String CONNECT_TIMEOUT_SECONDS = OPENAI_PREFIX + "connectTimeoutSeconds";
     String MAX_TOKENS = OPENAI_PREFIX + "maxTokens";
     String PLATFORM_URI = OPENAI_PREFIX + "platformUri";
+    String MODEL = OPENAI_PREFIX + "model";
   }
 
   private final Config config;

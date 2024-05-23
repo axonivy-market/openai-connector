@@ -14,6 +14,10 @@ This demo showcases a simple prompt window to chat directly with ChatGPT. Enter 
 ![demo-dialog](images/demo1.png)
 ![demo-dialog](images/demo0.png)
 
+This is the demo showcase for generating the email subject and content base on the information which is entered by the user.
+
+![demo-dialog](images/demo2.png)
+
 ## Setup
 
 Chat GPT requests do not come for free. However, when you register a new account,

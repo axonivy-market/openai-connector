@@ -16,5 +16,5 @@ Require-Bundle: org.eclipse.core.runtime,
  ch.ivyteam.ivy.jersey.client,
  javax.ws.rs,
  ch.ivyteam.ivy.rest.client.exec;resolution:=optional
-Bundle-ClassPath: .
+Bundle-ClassPath: ., libs/commonmark-0.22.0.jar
 Bundle-ActivationPolicy: lazy

@@ -1,22 +1,31 @@
 package com.axonivy.connector.openai.assistant.ui;
 
+import org.commonmark.parser.Parser;
+import org.commonmark.renderer.html.HtmlRenderer;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.preference.JFacePreferences;
+import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.ProgressEvent;
+import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.dnd.Clipboard;
 import org.eclipse.swt.dnd.TextTransfer;
 import org.eclipse.swt.dnd.Transfer;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 
 public class CopyableInfoDialog extends Dialog {
 
   private String title;
   private String message;
-  private Text messageText;
+  private Browser browser;
 
   public CopyableInfoDialog(Shell parentShell, String title, String message) {
     super(parentShell);
@@ -28,6 +37,12 @@ public class CopyableInfoDialog extends Dialog {
   protected void configureShell(Shell newShell) {
     super.configureShell(newShell);
     newShell.setText(title);
+    newShell.setMinimumSize(600, 400);
+  }
+
+  @Override
+  protected boolean isResizable() {
+    return true;
   }
 
   @Override
@@ -35,9 +50,37 @@ public class CopyableInfoDialog extends Dialog {
     Composite container = (Composite) super.createDialogArea(parent);
     container.setLayout(new GridLayout(1, false));
 
-    messageText = new Text(container, SWT.BORDER | SWT.MULTI | SWT.READ_ONLY | SWT.WRAP | SWT.V_SCROLL);
-    messageText.setText(message);
-    messageText.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+    browser = new Browser(container, SWT.BORDER);
+    browser.setLayoutData(new GridData(GridData.FILL_BOTH));
+
+    Parser parser = Parser.builder().build();
+    HtmlRenderer renderer = HtmlRenderer.builder().build();
+    String htmlContent = renderer.render(parser.parse(this.message));
+
+    // Get Eclipse theme colors
+    Color bgColor = JFaceResources.getColorRegistry().get(JFacePreferences.CONTENT_ASSIST_BACKGROUND_COLOR);
+    Color fgColor = JFaceResources.getColorRegistry().get(JFacePreferences.CONTENT_ASSIST_FOREGROUND_COLOR);
+
+    // Create CSS with Eclipse colors
+    String css = String.format("body { background-color: %s; color: %s; font-family: '%s'; }", toHex(bgColor.getRGB()),
+        toHex(fgColor.getRGB()), JFaceResources.getTextFont().getFontData()[0].getName());
+
+    // Wrap HTML content with custom CSS
+    String htmlWithCss = String.format("<html><head><style>%s</style></head><body>%s</body></html>", css, htmlContent);
+
+    browser.setText(htmlWithCss);
+
+    browser.addProgressListener(new ProgressListener() {
+      @Override
+      public void completed(ProgressEvent event) {
+        getShell().getDisplay().asyncExec(() -> resizeDialog());
+      }
+
+      @Override
+      public void changed(ProgressEvent event) {
+        // Not needed for this implementation
+      }
+    });
 
     return container;
   }
@@ -62,5 +105,16 @@ public class CopyableInfoDialog extends Dialog {
     TextTransfer textTransfer = TextTransfer.getInstance();
     clipboard.setContents(new Object[] { message }, new Transfer[] { textTransfer });
     clipboard.dispose();
+  }
+
+  private String toHex(RGB rgb) {
+    return String.format("#%02x%02x%02x", rgb.red, rgb.green, rgb.blue);
+  }
+
+  private void resizeDialog() {
+    Shell shell = getShell();
+    Point preferredSize = shell.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+    shell.setSize(preferredSize);
+    shell.layout(true, true);
   }
 }

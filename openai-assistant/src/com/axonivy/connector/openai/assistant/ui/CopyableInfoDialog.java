@@ -15,6 +15,7 @@ import org.eclipse.swt.dnd.Transfer;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -37,7 +38,23 @@ public class CopyableInfoDialog extends Dialog {
   protected void configureShell(Shell newShell) {
     super.configureShell(newShell);
     newShell.setText(title);
-    newShell.setMinimumSize(600, 400);
+    newShell.setMinimumSize(750, 400);
+  }
+
+  @Override
+  protected Point getInitialSize() {
+    return new Point(750, 400);
+  }
+
+  @Override
+  protected Point getInitialLocation(Point initialSize) {
+    Rectangle screenSize = getShell().getDisplay().getPrimaryMonitor().getBounds();
+
+    // Calculate the center position
+    int x = (screenSize.width - initialSize.x) / 2;
+    int y = (screenSize.height - initialSize.y) / 2;
+
+    return new Point(x, y);
   }
 
   @Override

@@ -24,6 +24,8 @@ import org.eclipse.swt.widgets.Shell;
 
 public class CopyableInfoDialog extends Dialog {
 
+  private static final int COPY_TO_CLIPBOARD_ID = 1;
+  private static final String HEX_COLOR_FORMAT = "#%02x%02x%02x";
   private String title;
   private String message;
   private Browser browser;
@@ -104,13 +106,13 @@ public class CopyableInfoDialog extends Dialog {
 
   @Override
   protected void createButtonsForButtonBar(Composite parent) {
-    createButton(parent, 1, "Copy to Clipboard", false);
+    createButton(parent, COPY_TO_CLIPBOARD_ID, "Copy to Clipboard", false);
     createButton(parent, OK, "OK", true);
   }
 
   @Override
   protected void buttonPressed(int buttonId) {
-    if (buttonId == 1) {
+    if (buttonId == COPY_TO_CLIPBOARD_ID) {
       copyToClipboard();
     } else {
       super.buttonPressed(buttonId);
@@ -125,7 +127,7 @@ public class CopyableInfoDialog extends Dialog {
   }
 
   private String toHex(RGB rgb) {
-    return String.format("#%02x%02x%02x", rgb.red, rgb.green, rgb.blue);
+    return String.format(HEX_COLOR_FORMAT, rgb.red, rgb.green, rgb.blue);
   }
 
   private void resizeDialog() {

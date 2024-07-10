@@ -86,7 +86,7 @@ public class ChatGptUiFlow {
         "what can Chat GPT do for you?", "");
       if (instruction != null) {
         var response = runWithProgress(()->chatGpt.ask(what, instruction));
-        SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
+        new CopyableInfoDialog(site.getShell(), "Chat GPT says", response).open();
       }
       return;
     }
@@ -118,7 +118,7 @@ public class ChatGptUiFlow {
         response = diffResult(response);
         return;
       }
-      SwtCommonDialogs.openInformationDialog(site.getShell(), "Chat GPT says", abbrev(response));
+      new CopyableInfoDialog(site.getShell(), "Chat GPT says", response).open();
     }
   }
 

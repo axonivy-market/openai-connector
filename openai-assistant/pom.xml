@@ -19,8 +19,17 @@
       <url>https://p2.axonivy.com/p2/nightly/</url>
     </repository>
   </repositories>
+  
+	<dependencies>
+		<dependency>
+			<groupId>org.commonmark</groupId>
+			<artifactId>commonmark</artifactId>
+			<version>0.22.0</version>
+		</dependency>
+	</dependencies>
 
   <build>
+	<sourceDirectory>src</sourceDirectory>
     <testSourceDirectory>test</testSourceDirectory>
     <plugins>
       <plugin>
@@ -47,6 +56,22 @@
             <goals>
               <goal>test</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>copy-dependencies</id>
+            <phase>validate</phase>
+            <goals>
+              <goal>copy-dependencies</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${project.basedir}/lib</outputDirectory>
+           	<includeGroupIds>org.commonmark</includeGroupIds>
+            </configuration>
           </execution>
         </executions>
       </plugin>

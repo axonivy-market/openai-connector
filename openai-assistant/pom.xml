@@ -8,7 +8,7 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.compiler.compliance>21</java.compiler.compliance>
+    <java.compiler.compliance>17</java.compiler.compliance>
     <tycho.version>3.0.4</tycho.version>
   </properties>
 

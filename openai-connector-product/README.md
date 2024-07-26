@@ -1,11 +1,13 @@
 # OpenAI ChatGPT API
 
-Axon Ivy's OpenAI ChatGPT API connector is a powerful tool that can help accelerate any process automation project by integrating the most advanced conversational chatbot into your business processes. With the ability to understand natural language and provide personalized responses, ChatGPT can revolutionize how your business interacts with customers and employees. This connector:
+Axon Ivy's OpenAI ChatGPT API connector is a powerful tool that can help accelerate any process automation project by integrating the most advanced conversational chatbot into your business processes. With the ability to understand natural language and provide personalized responses, ChatGPT can revolutionize how your business interacts with customers and employees. 
 
-- Is based on the OpenAI API https://platform.openai.com/.
-- Provides a simple chat frontend to communicate with all available AI services.
-- Supports you with an easy-to-copy demo implementation to reduce your integration effort.
-- Enables low-code citizen developers to automate business processes with AI-led support.
+This connector:
+
+- is based on the OpenAI API https://platform.openai.com/.
+- provides a simple chat frontend to communicate with all available AI services.
+- supports you with an easy-to-copy demo implementation to reduce your integration effort.
+- enables low-code citizen developers to automate business processes with AI-led support.
 
 ## Demo
 

@@ -3,11 +3,11 @@
 Axon Ivy's ChatGPT Code Assistant is an integration of the OpenAI API into the Axon Ivy Designer. The assistant provides a context menu that allows you to use AI to explain, fix or add code.  
 
 This connector:
-- Based on the OpenAI API platform platform.openai.com.
-- Extends your existing Axon Ivy Designer IDE.
-- Requires an API key from the OpenAI API.
-- Supports you in the development of business processes by 
-    - Explaining code snippets, 
+- is based on the OpenAI API platform platform.openai.com.
+- extends your existing Axon Ivy Designer IDE.
+- requires an API key from the OpenAI API.
+- supports you in the development of business processes by 
+    - explaining code snippets, 
     - correcting erroneous code, 
     - inserting new instructions, 
     - answering questions about your code 

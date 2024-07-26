@@ -4,8 +4,8 @@ ChatGPT is an AI model developed by [OpenAI](https://openai.com/). It can commun
 
 This connector:
 
-- Based on the OpenAI API 'https://platform.openai.com/'
-- Provides a simple chat frontend for seamless integration into Axon Ivy applications
+- is based on the OpenAI API 'https://platform.openai.com/'
+- provides a simple chat frontend for seamless integration into Axon Ivy applications
 
 ## Demo
 

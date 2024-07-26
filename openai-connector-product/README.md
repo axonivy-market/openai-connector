@@ -6,7 +6,7 @@ This connector:
 
 - is based on the OpenAI API https://platform.openai.com/.
 - provides a simple chat frontend to communicate with all available AI services.
-- supports you with an easy-to-copy demo implementation to reduce your integration effort.
+- supports you with a demo implementation to reduce your integration effort.
 - enables low-code citizen developers to automate business processes with AI-led support.
 
 ## Demo

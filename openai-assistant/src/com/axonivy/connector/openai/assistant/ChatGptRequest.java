@@ -70,9 +70,8 @@ public class ChatGptRequest {
   }
 
   private ObjectNode completion() {
-    OpenAiConfig repo = new OpenAiConfig();
     ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", repo.getValue(Key.MODEL).orElse("gpt-3.5-turbo"));
+    request.put("model", model());
     request.put("max_tokens", maxTokens);
     request.put("temperature", 1);
     request.put("top_p", 1);
@@ -81,22 +80,9 @@ public class ChatGptRequest {
     return request;
   }
 
-  public String edit(String code, String instruction) {
-    WebTarget edits = client.get().path("edits");
-    ObjectNode request = edit()
-      .put("input", code)
-      .put("instruction", instruction);
-    var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
-    Response resp = edits.request().post(payload);
-    return read(resp);
-  }
-
-  private ObjectNode edit() {
-    ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", "code-davinci-edit-001");
-    request.put("temperature", 1);
-    request.put("top_p", 1);
-    return request;
+  private String model() {
+    OpenAiConfig repo = new OpenAiConfig();
+    return repo.getValue(Key.MODEL).orElse("gpt-3.5-turbo");
   }
 
 }

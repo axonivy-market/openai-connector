@@ -9,3 +9,6 @@ on:
 jobs:
   build:
     uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v4
+    with:
+      mvnArgs: -U
+      

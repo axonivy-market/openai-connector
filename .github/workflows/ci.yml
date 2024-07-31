@@ -12,3 +12,4 @@ jobs:
     uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v4
     with:
       javaVersion: 21
+      mvnArgs: -U

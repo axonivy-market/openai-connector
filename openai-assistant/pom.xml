@@ -19,7 +19,7 @@
       <!-- we build towards nightly to server /dev and /lts10 pipeline 
         dependencies only available on LE; are marked as optional requirement
       -->
-      <url>https://p2.axonivy.com/p2/nightly/</url> 
+      <url>https://p2.ivyteam.ch/p2/nightly/</url> 
     </repository>
   </repositories>
   

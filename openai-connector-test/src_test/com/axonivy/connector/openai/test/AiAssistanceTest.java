@@ -69,15 +69,6 @@ public class AiAssistanceTest {
   }
 
   @Test
-  void edit_codexBeta() {
-    JsonNode edit = json(load("assist-edit.json"));
-    JsonNode result = assist(edit);
-    assertThat(result.toPrettyString())
-      .as("writes a complex selectOne for the user")
-      .contains("<p:selectOneMenu");
-  }
-
-  @Test
   void chat() {
     JsonNode chat = json(load("assist-chat.json"));
     JsonNode result = assist(chat);

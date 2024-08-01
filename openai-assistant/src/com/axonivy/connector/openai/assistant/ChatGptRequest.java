@@ -17,6 +17,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class ChatGptRequest {
 
   private final Supplier<WebTarget> client;
+  private final String SYSTEM_PROMPT = """
+        You are an assistant that updates code based on user instructions. Your task is to modify the provided code snippet according to the user's requirements, ensuring that the new elements are correctly integrated into the existing structure. The result should be plain text, not in markdown format.
+        Instructions:
+        Understand the User's Code: Analyze the provided code to understand its structure and existing elements.
+        Apply the User's Request: Make the required changes to the code based on the user's request. Ensure that new components are integrated correctly into the existing layout.
+        Provide the Complete Updated Code: Return the entire code snippet, including the updated or newly added components. Ensure that the code is well-formatted and integrates seamlessly with the existing content.
+      """;
   private int maxTokens = 1024;
 
   public ChatGptRequest(Supplier<WebTarget> client) {
@@ -36,15 +43,17 @@ public class ChatGptRequest {
 
   public String ask(String context, String question) {
     WebTarget chat = client.get().path("chat/completions");
-    ObjectNode message = JsonNodeFactory.instance.objectNode();
     ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
-    message.put("role", "user");
-    message.put("content", context + "\n\n"+question);
-    arrayNode.add(message);
+    arrayNode.add(message("system", SYSTEM_PROMPT));
+    arrayNode.add(message("user", String.format("%s \n\n %s", context, question)));
     ObjectNode request = completion().set("messages", arrayNode);
     var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
     Response resp = chat.request().post(payload);
     return read(resp);
+  }
+
+  private ObjectNode message(String role, String content) {
+    return JsonNodeFactory.instance.objectNode().put("role", role).put("content", content);
   }
 
   private String read(Response resp) {
@@ -61,9 +70,8 @@ public class ChatGptRequest {
   }
 
   private ObjectNode completion() {
-    OpenAiConfig repo = new OpenAiConfig();
     ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", repo.getValue(Key.MODEL).orElse("gpt-3.5-turbo"));
+    request.put("model", model());
     request.put("max_tokens", maxTokens);
     request.put("temperature", 1);
     request.put("top_p", 1);
@@ -72,22 +80,9 @@ public class ChatGptRequest {
     return request;
   }
 
-  public String edit(String code, String instruction) {
-    WebTarget edits = client.get().path("edits");
-    ObjectNode request = edit()
-      .put("input", code)
-      .put("instruction", instruction);
-    var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
-    Response resp = edits.request().post(payload);
-    return read(resp);
-  }
-
-  private ObjectNode edit() {
-    ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", "code-davinci-edit-001");
-    request.put("temperature", 1);
-    request.put("top_p", 1);
-    return request;
+  private String model() {
+    OpenAiConfig repo = new OpenAiConfig();
+    return repo.getValue(Key.MODEL).orElse("gpt-3.5-turbo");
   }
 
 }

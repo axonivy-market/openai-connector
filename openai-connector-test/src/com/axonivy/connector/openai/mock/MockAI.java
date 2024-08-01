@@ -44,11 +44,7 @@ public class MockAI {
     "assist-insert", json(load("assist-insert.json")),
     "assist-insert-reponse", json(load("assist-insert-response.json")),
     "assist-chat", json(load("assist-chat.json")),
-    "assist-chat-reponse", json(load("assist-chat-response.json")),
-
-    // codex beta
-    "assist-edit", json(load("assist-edit.json")),
-    "assist-edit-reponse", json(load("assist-edit-response.json"))
+    "assist-chat-reponse", json(load("assist-chat-response.json"))
   );
 
   private final Map<String, JsonNode> openAIExamples = Map.of(

@@ -63,15 +63,6 @@ public class ChatGptUiFlow {
     var chatGpt = new ChatGptRequest(()->new ChatGptClientFactory().chatGptClient());
     repo.getIntValue(Key.MAX_TOKENS).ifPresent(chatGpt::maxTokens);
 
-    if (quest.equalsIgnoreCase(Quests.EDIT)) {
-      String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
-        "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
-      if (insert != null) {
-        var response = runWithProgress(()->chatGpt.edit(what, insert));
-        diffResult(response);
-      }
-      return;
-    }
     if (quest.equalsIgnoreCase(Quests.INSERT)) {
       String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
         "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");

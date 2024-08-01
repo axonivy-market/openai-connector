@@ -7,5 +7,4 @@ jobs:
     uses: axonivy-market/github-workflows/.github/workflows/release.yml@v4
     with:
       javaVersion: 21
-      mvnArgs: -U
 

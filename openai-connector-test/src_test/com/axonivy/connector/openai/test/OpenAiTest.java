@@ -19,8 +19,8 @@ import ch.ivyteam.ivy.rest.client.RestClient;
 import ch.ivyteam.ivy.rest.client.RestClients;
 import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
 
-@IvyProcessTest
-public class OpenAiTest{
+@IvyProcessTest(enableWebServer = true)
+public class OpenAiTest {
 
   private static final BpmProcess OPEN_AI = BpmProcess.path("openai");
 

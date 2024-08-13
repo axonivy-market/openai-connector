@@ -42,9 +42,19 @@ public class ChatGptRequest {
   }
 
   public String ask(String context, String question) {
+    return sendRequest(context, question, false);
+  }
+
+  public String insert(String context, String question) {
+    return sendRequest(context, question, true);
+  }
+
+  private String sendRequest(String context, String question, boolean includeSystemPrompt) {
     WebTarget chat = client.get().path("chat/completions");
     ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
-    arrayNode.add(message("system", SYSTEM_PROMPT));
+    if (includeSystemPrompt) {
+      arrayNode.add(message("system", SYSTEM_PROMPT));
+    }
     arrayNode.add(message("user", String.format("%s \n\n %s", context, question)));
     ObjectNode request = completion().set("messages", arrayNode);
     var payload = Entity.entity(request, MediaType.APPLICATION_JSON);

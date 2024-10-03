@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+<target name="ivy">
+	<locations>
+		<location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+			<repository location="https://p2.axonivy.com/p2/10.0/"/>
+			<unit id="ch.ivyteam.ivy.designer.product" version="10.0.17"/>
+		</location>
+	</locations>
+</target>

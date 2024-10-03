@@ -13,7 +13,7 @@ import ch.ivyteam.ivy.jersey.client.JerseyClientBuilder;
 public class ChatGptClientFactory {
 
   private interface Defaults {
-    String OPENAI_V1 = "https://api.openai.com/v1";
+    String OPENAI_V1 = "http://127.0.0.1:5000";
     int TIMEOUT = 30;
   }
 

@@ -1,5 +1,6 @@
 package com.axonivy.connector.openai.assistant;
 
+import java.util.Map;
 import java.util.function.Supplier;
 
 import javax.ws.rs.client.Entity;
@@ -41,16 +42,26 @@ public class ChatGptRequest {
     return read(resp);
   }
 
-  public String ask(String context, String question) {
-    WebTarget chat = client.get().path("chat/completions");
-    ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
-    arrayNode.add(message("system", SYSTEM_PROMPT));
-    arrayNode.add(message("user", String.format("%s \n\n %s", context, question)));
-    ObjectNode request = completion().set("messages", arrayNode);
-    var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
-    Response resp = chat.request().post(payload);
-    return read(resp);
-  }
+//  public String ask(String context, String question) {
+//    WebTarget chat = client.get().path("chat/completions");
+//    ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
+//    arrayNode.add(message("system", SYSTEM_PROMPT));
+//    arrayNode.add(message("user", String.format("%s \n\n %s", context, question)));
+//    ObjectNode request = completion().set("messages", arrayNode);
+//    var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
+//    Response resp = chat.request().post(payload);
+//    return read(resp);
+//  }
+  
+	public String ask(String context, String question) {
+		WebTarget chat = client.get().path("");
+		ObjectNode request = JsonNodeFactory.instance.objectNode();
+	    request.put("process_json", context);
+	    request.put("request", question);
+		var payload = Entity.entity(request, MediaType.APPLICATION_JSON);
+		Response resp = chat.request().post(payload);
+		return resp.readEntity(JsonNode.class).toPrettyString();
+	}
 
   private ObjectNode message(String role, String content) {
     return JsonNodeFactory.instance.objectNode().put("role", role).put("content", content);

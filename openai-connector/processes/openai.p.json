@@ -40,7 +40,7 @@
         "tags" : "connector"
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 64 },
+        "at" : { "x" : 168, "y" : 176 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
       },
       "connect" : { "id" : "f4", "to" : "f3" }
@@ -48,7 +48,7 @@
       "id" : "f1",
       "type" : "CallSubEnd",
       "visual" : {
-        "at" : { "x" : 352, "y" : 64 }
+        "at" : { "x" : 424, "y" : 176 }
       }
     }, {
       "id" : "f3",
@@ -74,9 +74,89 @@
         "bodyInputType" : "ENTITY"
       },
       "visual" : {
-        "at" : { "x" : 224, "y" : 64 },
+        "at" : { "x" : 296, "y" : 176 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
       "connect" : { "id" : "f2", "to" : "f1" }
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "chatGpt4oMini(String,Boolean,BigDecimal)",
+      "config" : {
+        "callSignature" : "chatGpt4oMini",
+        "input" : {
+          "params" : [
+            { "name" : "what", "type" : "String" },
+            { "name" : "sendUserInfo", "type" : "Boolean", "desc" : "Determine whether username of the login Ivy user should be send to OpenAI" },
+            { "name" : "temperature", "type" : "BigDecimal", "desc" : "The temperature is used to control the randomness of the output. When you set it higher, you'll get more random outputs. When you set it lower, towards 0, the values are more deterministic." }
+          ],
+          "map" : {
+            "out.message.content" : "param.what",
+            "out.message.role" : "com.openai.api.v1.client.ChatCompletionRequestMessage.RoleEnum.USER"
+          },
+          "code" : [
+            "import org.apache.commons.lang3.BooleanUtils;",
+            "",
+            "// If developer want to expose the username of an Ivy user to OpenAI, set the session user name to message",
+            "// Otherwise, set the alias String 'user' instead",
+            "out.message.name = BooleanUtils.isTrue(param.sendUserInfo) ? ivy.session.getSessionUserName() : \"user\";",
+            "",
+            "// If the input temperature is one of these invalid value:",
+            "// null, greater than 2, less than 0,",
+            "// set temperature = 0 by default",
+            "out.temperature = (param.temperature == null || param.temperature < 0 || param.temperature > 2) ? 0 : param.temperature;"
+          ]
+        },
+        "result" : {
+          "params" : [
+            { "name" : "answer", "type" : "String" }
+          ],
+          "map" : {
+            "result.answer" : "in.answer"
+          }
+        },
+        "tags" : "connector"
+      },
+      "visual" : {
+        "at" : { "x" : 168, "y" : 280 },
+        "labelOffset" : { "x" : 25, "y" : 49 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
+      },
+      "connect" : { "id" : "f7", "to" : "f6" }
+    }, {
+      "id" : "f6",
+      "type" : "RestClientCall",
+      "name" : "openai (OpenAI API)",
+      "config" : {
+        "path" : "/chat/completions",
+        "bodyObjectMapping" : {
+          "param.logitBias" : "in.logitBias",
+          "param.messages" : "[in.message]",
+          "param.model" : "com.axonivy.connector.openai.Model.GPT_4O_MINI.getValue()",
+          "param.temperature" : "in.temperature",
+          "param.user" : "in.message.name"
+        },
+        "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+        "clientErrorCode" : "ivy:error:rest:client",
+        "method" : "POST",
+        "statusErrorCode" : "ivy:error:rest:client",
+        "responseMapping" : {
+          "out.answer" : "result.choices.get(0).message.content"
+        },
+        "bodyObjectType" : "com.openai.api.v1.client.CreateChatCompletionRequest",
+        "resultType" : "com.openai.api.v1.client.CreateChatCompletionResponse",
+        "bodyInputType" : "ENTITY"
+      },
+      "visual" : {
+        "at" : { "x" : 296, "y" : 280 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
+      },
+      "connect" : { "id" : "f9", "to" : "f8" }
+    }, {
+      "id" : "f8",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 424, "y" : 280 }
+      }
     } ]
 }

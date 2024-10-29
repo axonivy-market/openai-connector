@@ -2,4 +2,7 @@ openaiData #class
 com.openai.connector #namespace
 message com.openai.api.v1.client.ChatCompletionRequestMessage #field
 logitBias com.fasterxml.jackson.databind.JsonNode #field
+logitBias 'Logit bias directly manipulates the logits. By adjusting the logit bias, one can promote or demote particular tokens' #fieldComment
 answer String #field
+temperature BigDecimal #field
+temperature 'The temperature is used to control the randomness of the output. When you set it higher, you''ll get more random outputs. When you set it lower, towards 0, the values are more deterministic.' #fieldComment

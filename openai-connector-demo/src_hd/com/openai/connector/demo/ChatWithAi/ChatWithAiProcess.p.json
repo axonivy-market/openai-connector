@@ -62,13 +62,17 @@
       "type" : "SubProcessCall",
       "name" : "openai",
       "config" : {
-        "processCall" : "openai:chatGpt(String)",
+        "processCall" : "openai:chatGpt4oMini(String,Boolean,BigDecimal)",
         "call" : {
           "params" : [
-            { "name" : "what", "type" : "String" }
+            { "name" : "what", "type" : "String" },
+            { "name" : "sendUserInfo", "type" : "Boolean" },
+            { "name" : "temperature", "type" : "BigDecimal" }
           ],
           "map" : {
-            "param.what" : "in.message"
+            "param.what" : "in.message",
+            "param.sendUserInfo" : "false",
+            "param.temperature" : "0"
           }
         },
         "output" : {

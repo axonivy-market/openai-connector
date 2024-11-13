@@ -3,7 +3,7 @@
   <groupId>com.axonivy.connector.openai</groupId><!-- your group id: e.g. com.axonivy.connector.<myconnector> or com.axonivy.utils.<myutil> -->
   <name>openai-connector</name><!-- fill your product name -->
   <artifactId>openai-connector-modules</artifactId><!-- fill your product name + a "-modules" postfix -->
-  <version>10.0.16</version><!-- identicate your minimal compliant ivy version with the first 2 digits -->
+  <version>10.0.17-SNAPSHOT</version><!-- identicate your minimal compliant ivy version with the first 2 digits -->
   <packaging>pom</packaging>
 
   <modules>
@@ -17,7 +17,7 @@
 
   <scm>
     <developerConnection>scm:git:https://github.com/axonivy-market/${project.name}.git</developerConnection>
-    <tag>v10.0.16</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>

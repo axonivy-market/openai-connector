@@ -56,3 +56,6 @@ The following keys are valid and interpreted:
 @variables.yaml@
 ```
 
+### Note
+Make sure to enable the `Show Only Source Page` option under `Window` -> `Preferences` -> `Axon Ivy` -> `Html Dialog Editor` -> `Show Only Source Page` to prevent unexpected behavior.
+

@@ -51,8 +51,11 @@ public class MockAI {
       "completions", json(load("completions.json")),
       "completions-response", json(load("completions-response.json")),
       "mail-generator", json(load("mail-generator.json")),
-      "mail-generator-response", json(load("mail-generator-response.json"))
-  );
+      "mail-generator-response", json(load("mail-generator-response.json")),
+      "assist-ask-without-system-promt", json(load("assist-ask-without-system-promt.json")),
+      "assist-ask-without-system-promt-response", json(load("assist-ask-without-system-promt-response.json")),
+      "assist-insert-with-system-promt", json(load("assist-insert-with-system-promt.json")),
+      "assist-insert-with-system-promt-response", json(load("assist-insert-with-system-promt-response.json")));
 
   @POST
   @Path("completions")
@@ -89,13 +92,15 @@ public class MockAI {
     return null;
   }
 
-   @POST
+  @POST
   @Path("chat/completions")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response chat(JsonNode request) {
+    Ivy.log().warn(request.toPrettyString());
     var in = input(request, openAIExamples);
     var node = openAIExamples.get(in+"-response");
+    Ivy.log().warn(request);
     return Response.ok()
       .entity(node)
       .build();

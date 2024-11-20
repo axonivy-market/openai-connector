@@ -72,16 +72,9 @@ public abstract class MarkdownDialog extends Dialog {
     HtmlRenderer renderer = HtmlRenderer.builder().build();
     String htmlContent = renderer.render(parser.parse(this.message));
 
-    // Get Eclipse theme colors
-    Color bgColor = JFaceResources.getColorRegistry().get(JFacePreferences.CONTENT_ASSIST_BACKGROUND_COLOR);
-    Color fgColor = JFaceResources.getColorRegistry().get(JFacePreferences.CONTENT_ASSIST_FOREGROUND_COLOR);
-
-    // Create CSS with Eclipse colors
-    String css = String.format("body { background-color: %s; color: %s; font-family: '%s'; }", toHex(bgColor.getRGB()),
-        toHex(fgColor.getRGB()), JFaceResources.getTextFont().getFontData()[0].getName());
-
     // Wrap HTML content with custom CSS
-    String htmlWithCss = String.format("<html><head><style>%s</style></head><body>%s</body></html>", css, htmlContent);
+    String htmlWithCss = String.format("<html><head><style>%s</style></head><body>%s</body></html>", getEclipseCss(),
+        htmlContent);
 
     browser.setText(htmlWithCss);
 
@@ -98,6 +91,14 @@ public abstract class MarkdownDialog extends Dialog {
     });
 
     return container;
+  }
+  
+  private String getEclipseCss() {
+    // Get Eclipse theme colors
+    Color fgColor = JFaceResources.getColorRegistry().get(JFacePreferences.CONTENT_ASSIST_FOREGROUND_COLOR);
+    Color bgColor = JFaceResources.getColorRegistry().get(JFacePreferences.CONTENT_ASSIST_BACKGROUND_COLOR);
+    return String.format("body { background-color: %s; color: %s; font-family: '%s'; }", toHex(bgColor.getRGB()),
+        toHex(fgColor.getRGB()), JFaceResources.getTextFont().getFontData()[0].getName());
   }
 
   private String toHex(RGB rgb) {

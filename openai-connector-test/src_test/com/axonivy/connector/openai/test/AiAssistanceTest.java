@@ -91,8 +91,17 @@ public class AiAssistanceTest {
   @Test
   void askWithOutSystemPromt() {
     JsonNode result = assistWithQuestion("insert a combobox to pick a brand out of: Mercedes, BMW or Tesla", false);
-    assertThat(result.toPrettyString())
-    .isNotEmpty();
+    assertThat(result.toPrettyString()).isNotEmpty();
+    assertThat(result.toPrettyString()).as("Provide combobox with generated message")
+        .contains("Sure, here is a combobox for you to pick a brand out of Mercedes, BMW, or Tesla");
+  }
+  
+  @Test
+  void insertWithSystemPromt() {
+    JsonNode result = assistWithQuestion("insert a combobox to pick a brand out of: Mercedes, BMW or Tesla", true);
+    assertThat(result.toPrettyString()).isNotEmpty();
+    assertThat(result.toPrettyString()).as("Provide combobox with system promt")
+        .contains("<select id=\\\"brand-select-without-system-promt\\\"");
   }
 
   private static JsonNode assist(JsonNode quest) {
@@ -114,7 +123,6 @@ public class AiAssistanceTest {
   private static JsonNode assistWithQuestion(String question, boolean includeSystemPrompt) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = buildPayloadFromQuestion(question, includeSystemPrompt);
-    Ivy.log().warn("here");
     JsonNode result = client.path("chat/completions").request()
         .post(request).readEntity(JsonNode.class);
     return result;

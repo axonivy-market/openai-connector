@@ -8,7 +8,7 @@
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "<select id=\"brand-select\">\n  <option value=\"mercedes\">Mercedes</option>\n  <option value=\"bmw\">BMW</option>\n  <option value=\"tesla\">Tesla</option>\n</select>",
+        "content": "<select id=\"brand-select-without-system-promt\">\n  <option value=\"mercedes\">Mercedes</option>\n  <option value=\"bmw\">BMW</option>\n  <option value=\"tesla\">Tesla</option>\n</select>",
         "refusal": null
       },
       "logprobs": null,

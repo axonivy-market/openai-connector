@@ -97,10 +97,8 @@ public class MockAI {
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
   public Response chat(JsonNode request) {
-    Ivy.log().warn(request.toPrettyString());
     var in = input(request, openAIExamples);
     var node = openAIExamples.get(in+"-response");
-    Ivy.log().warn(request);
     return Response.ok()
       .entity(node)
       .build();

@@ -67,7 +67,7 @@ public class ChatGptUiFlow {
       String insert = SwtCommonDialogs.openInputDialog(site.getShell(), "any wishes?", "what can Chat GPT do for you?",
         "insert a combobox to pick a brand out of: Mercedes, BMW or Tesla");
       if (insert != null) {
-        var response = runWithProgress(()->chatGpt.ask(what, insert));
+        var response = runWithProgress(() -> chatGpt.insert(what, insert));
         diffResult(response);
       }
       return;
@@ -99,11 +99,10 @@ public class ChatGptUiFlow {
         return;
       }
     }
-
-    boolean assist = SwtCommonDialogs.openQuestionDialog(site.getShell(), "need assistance?", """
-        ready for asking chat GPT on ?
-        """+quest+": \n"+abbrev(what));
-    if (assist) {
+    var message = String.format("```\n%s\n```", centerAbbrev(what));
+    var dialog = new QuestionDialog(site.getShell(), String.format("%s Code Snippet", capitalize(quest)), message);
+    dialog.open();
+    if (dialog.isAgreed()) {
       var response = runWithProgress(()->chatGpt.ask(what, quest));
       if (quest.equalsIgnoreCase(Quests.FIX)) {
         response = diffResult(response);
@@ -111,6 +110,10 @@ public class ChatGptUiFlow {
       }
       new CopyableInfoDialog(site.getShell(), "Chat GPT says", response).open();
     }
+  }
+
+  private String capitalize(String text) {
+    return text.substring(0, 1).toUpperCase() + text.substring(1);
   }
 
   private String runWithProgress(Supplier<String> gptAction) {
@@ -176,6 +179,15 @@ public class ChatGptUiFlow {
     int limit = 500;
     if (what.length() > limit) {
       return what.substring(0, limit)+"...";
+    }
+    return what;
+  }
+
+  private static String centerAbbrev(String what) {
+    int limit = 500;
+    if (what.length() > limit) {
+      int halfLimit = (limit - 3) / 2;
+      return what.substring(0, halfLimit) + "\n" + "..." + "\n" + what.substring(what.length() - halfLimit);
     }
     return what;
   }

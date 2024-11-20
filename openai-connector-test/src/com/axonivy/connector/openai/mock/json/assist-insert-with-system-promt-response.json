@@ -1,0 +1,34 @@
+{
+  "id": "chatcmpl-AVHNuLIeqrGBUWPhDez363Gs5akFe",
+  "object": "chat.completion",
+  "created": 1732018358,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "<select id=\"brand-select-without-system-promt\">\n  <option value=\"mercedes\">Mercedes</option>\n  <option value=\"bmw\">BMW</option>\n  <option value=\"tesla\">Tesla</option>\n</select>",
+        "refusal": null
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 179,
+    "completion_tokens": 46,
+    "total_tokens": 225,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "system_fingerprint": null
+}

@@ -14,10 +14,8 @@ import javax.ws.rs.core.MediaType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.axonivy.connector.openai.mock.utils.AiAssistanceUtils;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.JsonNodeFactory;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.AppFixture;
@@ -122,35 +120,10 @@ public class AiAssistanceTest {
   
   private static JsonNode assistWithQuestion(String question, boolean includeSystemPrompt) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
-    Entity<JsonNode> request = buildPayloadFromQuestion(question, includeSystemPrompt);
+    Entity<JsonNode> request = AiAssistanceUtils.buildPayloadFromQuestion(question, includeSystemPrompt);
     JsonNode result = client.path("chat/completions").request()
         .post(request).readEntity(JsonNode.class);
     return result;
-  }
-  
-  private static Entity<JsonNode> buildPayloadFromQuestion(String question, boolean includeSystemPrompt) {
-    ArrayNode arrayNode = JsonNodeFactory.instance.arrayNode();
-    if (includeSystemPrompt) {
-      arrayNode.add(message("system", "SYSTEM_PROMT"));
-    }
-    arrayNode.add(message("user", question));
-    ObjectNode request = completion().set("messages", arrayNode);
-    return Entity.entity(request, MediaType.APPLICATION_JSON);
-  }
-  
-  private static ObjectNode message(String role, String content) {
-    return JsonNodeFactory.instance.objectNode().put("role", role).put("content", content);
-  }
-  
-  private static ObjectNode completion() {
-    ObjectNode request = JsonNodeFactory.instance.objectNode();
-    request.put("model", "gpt-3.5-turbo");
-    request.put("temperature", 1);
-    request.put("top_p", 1);
-    request.put("frequency_penalty", 0);
-    request.put("presence_penalty", 0);
-    request.put("max_tokens", 1024);
-    return request;
-  }
+  }  
 
 }

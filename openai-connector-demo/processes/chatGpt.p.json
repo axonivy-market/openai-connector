@@ -1,5 +1,5 @@
 {
-  "format" : "10.0.0",
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
   "id" : "18799A8B7D9E41A3",
   "config" : {
     "data" : "com.openai.connector.demo.Data"
@@ -9,14 +9,17 @@
       "type" : "RequestStart",
       "name" : "chatCompletionDemo.ivp",
       "config" : {
-        "callSignature" : "chatCompletionDemo",
-        "outLink" : "chatCompletionDemo.ivp",
-        "tags" : "demo"
+        "signature" : "chatCompletionDemo"
       },
+      "tags" : [
+        "demo"
+      ],
       "visual" : {
         "at" : { "x" : 96, "y" : 64 }
       },
-      "connect" : { "id" : "f3", "to" : "f2" }
+      "connect" : [
+        { "id" : "f3", "to" : "f2" }
+      ]
     }, {
       "id" : "f1",
       "type" : "TaskEnd",
@@ -28,13 +31,14 @@
       "type" : "DialogCall",
       "name" : "ChatWithAi",
       "config" : {
-        "dialogId" : "com.openai.connector.demo.ChatWithAi",
-        "startMethod" : "start()"
+        "dialog" : "com.openai.connector.demo.ChatWithAi:start()"
       },
       "visual" : {
         "at" : { "x" : 248, "y" : 64 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
-      "connect" : { "id" : "f4", "to" : "f1" }
+      "connect" : [
+        { "id" : "f4", "to" : "f1" }
+      ]
     } ]
 }

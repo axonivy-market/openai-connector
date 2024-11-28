@@ -73,7 +73,8 @@
             </goals>
             <configuration>
               <outputDirectory>${project.basedir}/lib</outputDirectory>
-           	<includeGroupIds>org.commonmark</includeGroupIds>
+              <includeGroupIds>org.commonmark</includeGroupIds>
+              <stripVersion>true</stripVersion>
             </configuration>
           </execution>
         </executions>

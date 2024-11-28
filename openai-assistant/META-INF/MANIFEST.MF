@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Axon Ivy OpenAI assistant
 Bundle-SymbolicName: openai-assistant;singleton:=true
-Bundle-Version: 10.0.17.qualifier
+Bundle-Version: 12.0.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.core.commands,
  org.eclipse.core.resources,
@@ -16,5 +16,5 @@ Require-Bundle: org.eclipse.core.runtime,
  ch.ivyteam.ivy.jersey.client,
  javax.ws.rs,
  ch.ivyteam.ivy.rest.client.exec;resolution:=optional
-Bundle-ClassPath: lib/commonmark-0.22.0.jar, .
+Bundle-ClassPath: lib/commonmark.jar, .
 Bundle-ActivationPolicy: lazy

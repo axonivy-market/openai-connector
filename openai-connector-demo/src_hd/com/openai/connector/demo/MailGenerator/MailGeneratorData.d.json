@@ -1,0 +1,19 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "MailGeneratorData",
+  "namespace" : "com.openai.connector.demo.MailGenerator",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "mail",
+    "type" : "com.openai.connector.demo.AIGeneratedMail",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "message",
+    "type" : "String",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "candidateInformation",
+    "type" : "com.openai.connector.demo.CandidateInformation",
+    "modifiers" : [ "PERSISTENT" ]
+  } ]
+}

@@ -1,0 +1,34 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "CandidateInformation",
+  "namespace" : "com.openai.connector.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "name",
+    "type" : "String"
+  }, {
+    "name" : "jobPosition",
+    "type" : "String"
+  }, {
+    "name" : "interviewerName",
+    "type" : "String"
+  }, {
+    "name" : "interviewerPosition",
+    "type" : "String"
+  }, {
+    "name" : "company",
+    "type" : "String"
+  }, {
+    "name" : "mostImportantSkill",
+    "type" : "String"
+  }, {
+    "name" : "interviewDate",
+    "type" : "java.time.LocalDate"
+  }, {
+    "name" : "email",
+    "type" : "String"
+  }, {
+    "name" : "decision",
+    "type" : "com.openai.connector.demo.enums.Decision"
+  } ]
+}

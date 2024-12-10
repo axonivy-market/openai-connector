@@ -44,7 +44,7 @@ public class DesignerClient {
     try {
       RestClient config = RestClients.of(app).find(OPEN_AI);
       RestClient custom = configModifier.apply(config);
-      var rest = new ch.ivyteam.ivy.rest.client.internal.ExternalRestWebService(app, custom);
+      var rest = new ch.ivyteam.ivy.rest.client.internal.ExternalRestWebService(app, null, custom);
       WebTarget target = rest.createCall().getWebTarget();
       return target;
     } finally {

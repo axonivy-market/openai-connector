@@ -1,0 +1,13 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "AIGeneratedMail",
+  "namespace" : "com.openai.connector.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "subject",
+    "type" : "String"
+  }, {
+    "name" : "content",
+    "type" : "String"
+  } ]
+}

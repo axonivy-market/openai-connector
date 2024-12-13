@@ -1,0 +1,13 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "Message",
+  "namespace" : "com.openai.connector.demo",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "sender",
+    "type" : "String"
+  }, {
+    "name" : "text",
+    "type" : "String"
+  } ]
+}

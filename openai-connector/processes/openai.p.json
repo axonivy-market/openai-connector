@@ -1,5 +1,5 @@
 {
-  "format" : "10.0.0",
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
   "id" : "187997E4FAE2FBE9",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -10,10 +10,10 @@
       "type" : "CallSubStart",
       "name" : "chatGpt(String)",
       "config" : {
-        "callSignature" : "chatGpt",
+        "signature" : "chatGpt",
         "input" : {
           "params" : [
-            { "name" : "what", "type" : "String" }
+            { "name" : "what", "type" : "String", "desc" : "" }
           ],
           "map" : {
             "out.message.content" : "param.what",
@@ -31,19 +31,23 @@
         },
         "result" : {
           "params" : [
-            { "name" : "answer", "type" : "String" }
+            { "name" : "answer", "type" : "String", "desc" : "" }
           ],
           "map" : {
             "result.answer" : "in.answer"
           }
-        },
-        "tags" : "connector"
+        }
       },
+      "tags" : [
+        "connector"
+      ],
       "visual" : {
         "at" : { "x" : 96, "y" : 64 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
       },
-      "connect" : { "id" : "f4", "to" : "f3" }
+      "connect" : [
+        { "id" : "f4", "to" : "f3" }
+      ]
     }, {
       "id" : "f1",
       "type" : "CallSubEnd",
@@ -55,28 +59,37 @@
       "type" : "RestClientCall",
       "name" : "openai (OpenAI API)",
       "config" : {
-        "path" : "/chat/completions",
-        "bodyObjectMapping" : {
-          "param.logitBias" : "in.logitBias",
-          "param.messages" : "[in.message]",
-          "param.model" : "com.axonivy.connector.openai.Model.GPT_35.getValue()",
-          "param.user" : "ivy.session.getSessionUserName()"
-        },
-        "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
-        "clientErrorCode" : "ivy:error:rest:client",
         "method" : "POST",
-        "statusErrorCode" : "ivy:error:rest:client",
-        "responseMapping" : {
-          "out.answer" : "result.choices.get(0).message.content"
+        "target" : {
+          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+          "path" : "/chat/completions"
         },
-        "bodyObjectType" : "com.openai.api.v1.client.CreateChatCompletionRequest",
-        "resultType" : "com.openai.api.v1.client.CreateChatCompletionResponse",
-        "bodyInputType" : "ENTITY"
+        "body" : {
+          "entity" : {
+            "type" : "com.openai.api.v1.client.CreateChatCompletionRequest",
+            "map" : {
+              "param.logitBias" : "in.logitBias",
+              "param.messages" : "[in.message]",
+              "param.model" : "com.axonivy.connector.openai.Model.GPT_35.getValue()",
+              "param.user" : "ivy.session.getSessionUserName()"
+            }
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.openai.api.v1.client.CreateChatCompletionResponse",
+            "map" : {
+              "out.answer" : "result.choices.get(0).message.content"
+            }
+          }
+        }
       },
       "visual" : {
         "at" : { "x" : 224, "y" : 64 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
-      "connect" : { "id" : "f2", "to" : "f1" }
+      "connect" : [
+        { "id" : "f2", "to" : "f1" }
+      ]
     } ]
 }

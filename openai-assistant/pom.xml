@@ -3,13 +3,13 @@
 
   <groupId>com.axonivy.connector.openai</groupId>
   <artifactId>openai-assistant</artifactId>
-  <version>10.0.17-SNAPSHOT</version>
+  <version>12.0.0-SNAPSHOT</version>
   <packaging>eclipse-plugin</packaging>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.compiler.compliance>17</java.compiler.compliance>
-    <tycho.version>3.0.4</tycho.version>
+    <java.compiler.compliance>21</java.compiler.compliance>
+    <tycho.version>4.0.10</tycho.version>
   </properties>
 
   <repositories>
@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>org.commonmark</groupId>
 			<artifactId>commonmark</artifactId>
-			<version>0.22.0</version>
+			<version>0.24.0</version>
 		</dependency>
 	</dependencies>
 
@@ -73,7 +73,8 @@
             </goals>
             <configuration>
               <outputDirectory>${project.basedir}/lib</outputDirectory>
-           	<includeGroupIds>org.commonmark</includeGroupIds>
+              <includeGroupIds>org.commonmark</includeGroupIds>
+              <stripVersion>true</stripVersion>
             </configuration>
           </execution>
         </executions>

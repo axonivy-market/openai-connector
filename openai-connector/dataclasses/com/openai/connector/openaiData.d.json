@@ -1,0 +1,16 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "simpleName" : "openaiData",
+  "namespace" : "com.openai.connector",
+  "isBusinessCaseData" : false,
+  "fields" : [ {
+    "name" : "message",
+    "type" : "com.openai.api.v1.client.ChatCompletionRequestMessage"
+  }, {
+    "name" : "logitBias",
+    "type" : "com.fasterxml.jackson.databind.JsonNode"
+  }, {
+    "name" : "answer",
+    "type" : "String"
+  } ]
+}

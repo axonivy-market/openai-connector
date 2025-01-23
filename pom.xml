@@ -17,7 +17,7 @@
     <module>${project.name}-demo-app</module>
   </modules>
   <scm>
-    <developerConnection>scm:git:https://github.com/axonivy-market/${project.name}.git</developerConnection>
+    <developerConnection>scm:git:https://github.com/axonivy-market/openai-connector.git</developerConnection>
   </scm>
   <properties>
     <maven.scm.plugin>2.0.1</maven.scm.plugin>

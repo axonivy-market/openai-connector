@@ -8,7 +8,7 @@
     "type" : "com.openai.api.v1.client.ChatCompletionRequestMessage"
   }, {
     "name" : "logitBias",
-    "type" : "com.fasterxml.jackson.databind.JsonNode"
+    "type" : "java.util.Map"
   }, {
     "name" : "answer",
     "type" : "String"

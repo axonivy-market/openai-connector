@@ -10,5 +10,5 @@ jobs:
   build:
     uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v6
     with:
-      mvnArgs: -U
+      mvnArgs: -U -Divy.release=nightly
       

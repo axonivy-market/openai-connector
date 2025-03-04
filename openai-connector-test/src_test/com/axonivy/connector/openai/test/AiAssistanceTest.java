@@ -28,17 +28,25 @@ import ch.ivyteam.ivy.rest.client.security.CsrfHeaderFeature;
 @IvyTest(enableWebServer = true)
 public class AiAssistanceTest {
 
+  // use a valid JWT key; generated from https://www.javainuse.com/jwtgenerator
+ /**
+  * Dear Bug Hunter,
+  * This credential is intentionally included for educational purposes only and does not provide access to any production systems.
+  * Please do not submit it as part of our bug bounty program.
+  */
+  static final String FAKE_KEY = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJJc3N1ZXIiLCJVc2VybmFtZSI6IkphdmFJblVzZSIsImV4cCI6MTc0MTA3NTYyMSwiaWF0IjoxNzQxMDc1NjIxfQ.8C5qVVQdEArCJmHgeO9pr87rTaZqb5d9fcSa3shecAI";
+  
   private static final UUID OPEN_AI = UUID.fromString("6840e778-eb27-42a0-afdc-87588ffae871");
 
   @BeforeEach
   void setup(AppFixture fixture, IApplication app) {
     fixture.config("RestClients.openai.Url", URI);
-    fixture.var("openai.apiKey", "notMyKey");
+    fixture.var("openai.apiKey", FAKE_KEY);
     RestClients clients = RestClients.of(app);
     RestClient openAi = clients.find("openai");
     var testClient = openAi.toBuilder()
       .feature(CsrfHeaderFeature.class.getName())
-      .property("AUTH.openaiKey", "notMyKey")
+      .property("AUTH.openaiKey", FAKE_KEY)
       .toRestClient();
     clients.set(testClient);
   }

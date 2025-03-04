@@ -15,18 +15,17 @@
           "params" : [
             { "name" : "what", "type" : "String", "desc" : "" }
           ],
-          "map" : {
-            "out.message.content" : "param.what",
-            "out.message.name" : "ivy.session.getSessionUserName()",
-            "out.message.role" : "com.openai.api.v1.client.ChatCompletionRequestMessage.RoleEnum.USER"
-          },
+          "map" : { },
           "code" : [
-            "import com.fasterxml.jackson.databind.node.ObjectNode;",
-            "import com.fasterxml.jackson.databind.node.JsonNodeFactory;",
+            "import com.openai.api.v1.client.ChatCompletionRequestUserMessage;",
+            "out.logitBias = new java.util.HashMap();",
+            "out.logitBias.put(\"50256\", -100);",
             "",
-            "ObjectNode logit = JsonNodeFactory.instance.objectNode();",
-            "logit.put(\"50256\", -100);",
-            "out.logitBias = logit;"
+            "ChatCompletionRequestUserMessage message = new ChatCompletionRequestUserMessage();",
+            "message.content = param.what;",
+            "message.name = ivy.session.getSessionUserName();",
+            "message.role = com.openai.api.v1.client.ChatCompletionRequestUserMessage.RoleEnum.USER;",
+            "out.message = message;"
           ]
         },
         "result" : {
@@ -68,9 +67,11 @@
           "entity" : {
             "type" : "com.openai.api.v1.client.CreateChatCompletionRequest",
             "map" : {
+              "param.audio.format" : "com.openai.api.v1.client.CreateChatCompletionRequestAudio.FormatEnum.MP3",
+              "param.audio.voice" : "com.openai.api.v1.client.CreateChatCompletionRequestAudio.VoiceEnum.ECHO",
               "param.logitBias" : "in.logitBias",
               "param.messages" : "[in.message]",
-              "param.model" : "com.axonivy.connector.openai.Model.GPT_35.getValue()",
+              "param.model" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum.GPT_3_5_TURBO",
               "param.user" : "ivy.session.getSessionUserName()"
             }
           }

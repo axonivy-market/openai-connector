@@ -1,5 +1,6 @@
 package com.axonivy.connector.openai.test;
 
+import static com.axonivy.connector.openai.test.AiAssistanceTest.FAKE_KEY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -31,12 +32,12 @@ public class OpenAiTest {
   @BeforeEach
   void setup(AppFixture fixture, IApplication app) {
     fixture.config("RestClients.openai.Url", MockAI.URI);
-    fixture.var("openai.apiKey", "notMyKey");
+	fixture.var("openai.apiKey", FAKE_KEY);
     RestClients clients = RestClients.of(app);
     RestClient openAi = clients.find("openai");
     var testClient = openAi.toBuilder()
       .feature(CsrfHeaderFeature.class.getName())
-      .property("AUTH.openaiKey", "notMyKey")
+      .property("AUTH.openaiKey", FAKE_KEY)
       .toRestClient();
     clients.set(testClient);
   }

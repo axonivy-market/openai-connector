@@ -5,7 +5,7 @@
 	<name>openai-connector</name><!-- fill your product name -->
 	<artifactId>openai-connector-modules</artifactId><!-- fill your product name
 	+ a "-modules" postfix -->
-	<version>12.0.1-SNAPSHOT</version><!-- identicate your minimal compliant ivy
+	<version>12.0.1</version><!-- identicate your minimal compliant ivy
 	version with the first 2 digits -->
 	<packaging>pom</packaging>
 
@@ -22,7 +22,7 @@
 	<scm>
 		<developerConnection>
 			scm:git:https://github.com/axonivy-market/${project.name}.git</developerConnection>
-		<tag>HEAD</tag>
+		<tag>v12.0.1</tag>
 	</scm>
 
 	<properties>

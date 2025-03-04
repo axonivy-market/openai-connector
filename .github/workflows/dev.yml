@@ -8,7 +8,7 @@ on:
 
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v6
+    uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v5
     with:
       mvnArgs: -U -Divy.release=nightly
       

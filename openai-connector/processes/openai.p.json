@@ -92,5 +92,149 @@
       "connect" : [
         { "id" : "f2", "to" : "f1" }
       ]
+    }, {
+      "id" : "f5",
+      "type" : "RequestStart",
+      "name" : "start",
+      "config" : {
+        "signature" : "start"
+      },
+      "visual" : {
+        "at" : { "x" : 248, "y" : 312 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f6" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "RestClientCall",
+      "config" : {
+        "target" : {
+          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+          "path" : "/assistants",
+          "templateParams" : {
+            "assistant_id" : "\"asst_0INo6Gmcf1A4z2qDBL0Ppkpj\""
+          },
+          "queryParams" : {
+            "limit" : "",
+            "order" : "",
+            "after" : "",
+            "before" : ""
+          },
+          "headers" : {
+            "OpenAI-Beta" : "\"assistants=v2\""
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.openai.api.v1.client.ListAssistantsResponse",
+            "code" : "ivy.log.info(result);"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 392, "y" : 312 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f8",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 520, "y" : 312 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f10",
+      "type" : "RequestStart",
+      "name" : "start2",
+      "config" : {
+        "signature" : "start2"
+      },
+      "visual" : {
+        "at" : { "x" : 248, "y" : 464 }
+      },
+      "connect" : [
+        { "id" : "f12", "to" : "f11" }
+      ]
+    }, {
+      "id" : "f11",
+      "type" : "Script",
+      "config" : {
+        "output" : {
+          "code" : [
+            "import com.axonivy.connector.openai.JsonService;",
+            "JsonService j = new JsonService();",
+            "j.de();"
+          ]
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 440, "y" : 464 }
+      },
+      "connect" : [
+        { "id" : "f14", "to" : "f13" }
+      ]
+    }, {
+      "id" : "f13",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 632, "y" : 464 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f15",
+      "type" : "RequestStart",
+      "name" : "start3",
+      "config" : {
+        "signature" : "start3"
+      },
+      "visual" : {
+        "at" : { "x" : 376, "y" : 704 }
+      },
+      "connect" : [
+        { "id" : "f19", "to" : "f17" }
+      ]
+    }, {
+      "id" : "f16",
+      "type" : "TaskEnd",
+      "visual" : {
+        "at" : { "x" : 648, "y" : 704 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f17",
+      "type" : "RestClientCall",
+      "config" : {
+        "target" : {
+          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+          "path" : "/fine_tuning/jobs",
+          "templateParams" : {
+            "assistant_id" : "\"asst_0INo6Gmcf1A4z2qDBL0Ppkpj\""
+          },
+          "queryParams" : {
+            "limit" : "",
+            "order" : "",
+            "after" : "",
+            "before" : ""
+          },
+          "headers" : {
+            "OpenAI-Beta" : "\"assistants=v2\""
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.openai.api.v1.client.ListPaginatedFineTuningJobsResponse",
+            "code" : "ivy.log.info(result);"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 520, "y" : 704 }
+      },
+      "connect" : [
+        { "id" : "f18", "to" : "f16" }
+      ]
     } ]
 }

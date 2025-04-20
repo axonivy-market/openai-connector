@@ -12,13 +12,8 @@ import com.openai.api.v1.client.AssistantsNamedToolChoice;
 
 public class AssistantsNamedToolChoiceDeserializer extends JsonDeserializer<AssistantsNamedToolChoice> {
 
-  public AssistantsNamedToolChoiceDeserializer() {
-  }
-
   public enum ValueEnum {
-    AUTO("auto"),
-    NONE("none"),
-    REQUIRED("required");
+    AUTO("auto"), NONE("none"), REQUIRED("required");
 
     private String value;
 

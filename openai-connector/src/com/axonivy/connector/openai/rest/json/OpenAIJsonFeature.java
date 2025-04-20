@@ -4,6 +4,7 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.core.FeatureContext;
 import javax.ws.rs.core.MediaType;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
@@ -22,6 +23,7 @@ public class OpenAIJsonFeature extends JsonFeature {
     @Override
     public ObjectMapper locateMapper(Class<?> type, MediaType mediaType) {
       ObjectMapper mapper = super.locateMapper(type, mediaType);
+      mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
       mapper.registerModule(new OpenAIJsonConfig());
       return mapper;
     }

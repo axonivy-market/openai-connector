@@ -12,9 +12,6 @@ import com.openai.api.v1.client.AssistantsApiResponseFormatOption;
 
 public class AssistantsApiResponseFormatOptionDeserializer extends JsonDeserializer<AssistantsApiResponseFormatOption> {
 
-  public AssistantsApiResponseFormatOptionDeserializer() {
-  }
-
   public enum ValueEnum {
     AUTO("auto");
 

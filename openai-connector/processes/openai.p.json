@@ -18,11 +18,14 @@
           "map" : { },
           "code" : [
             "import com.openai.api.v1.client.ChatCompletionRequestUserMessage;",
+            "import com.openai.api.v1.client.ChatCompletionRequestMessageContentPartText;",
             "out.logitBias = new java.util.HashMap();",
             "out.logitBias.put(\"50256\", -100);",
             "",
             "ChatCompletionRequestUserMessage message = new ChatCompletionRequestUserMessage();",
-            "message.content = param.what;",
+            "ChatCompletionRequestMessageContentPartText content = new ChatCompletionRequestMessageContentPartText();",
+            "content.setText(param.what);",
+            "message.addContentItem(content);",
             "message.name = ivy.session.getSessionUserName();",
             "message.role = com.openai.api.v1.client.ChatCompletionRequestUserMessage.RoleEnum.USER;",
             "out.message = message;"
@@ -143,44 +146,6 @@
       "type" : "TaskEnd",
       "visual" : {
         "at" : { "x" : 520, "y" : 312 },
-        "labelOffset" : { "x" : 13, "y" : 33 }
-      }
-    }, {
-      "id" : "f10",
-      "type" : "RequestStart",
-      "name" : "start2",
-      "config" : {
-        "signature" : "start2"
-      },
-      "visual" : {
-        "at" : { "x" : 248, "y" : 464 }
-      },
-      "connect" : [
-        { "id" : "f12", "to" : "f11" }
-      ]
-    }, {
-      "id" : "f11",
-      "type" : "Script",
-      "config" : {
-        "output" : {
-          "code" : [
-            "import com.axonivy.connector.openai.JsonService;",
-            "JsonService j = new JsonService();",
-            "j.de();"
-          ]
-        }
-      },
-      "visual" : {
-        "at" : { "x" : 440, "y" : 464 }
-      },
-      "connect" : [
-        { "id" : "f14", "to" : "f13" }
-      ]
-    }, {
-      "id" : "f13",
-      "type" : "TaskEnd",
-      "visual" : {
-        "at" : { "x" : 632, "y" : 464 },
         "labelOffset" : { "x" : 13, "y" : 33 }
       }
     }, {

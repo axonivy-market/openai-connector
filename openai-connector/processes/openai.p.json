@@ -28,6 +28,7 @@
             "content.setType(\"text\");",
             "message.addContentItem(content);",
             "message.name = ivy.session.getSessionUserName();",
+            "message.role = \"user\";",
             "out.message = message;"
           ]
         },

@@ -10,12 +10,14 @@ import java.util.UUID;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.axonivy.connector.openai.mock.utils.AiAssistanceUtils;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.openai.api.v1.client.ListAssistantsResponse;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.AppFixture;
@@ -105,6 +107,14 @@ public class AiAssistanceTest {
         .contains("<select id=\\\"brand-select-without-system-promt\\\"");
   }
 
+  @Test
+  void mappingResponseOfAssistants() {
+    ListAssistantsResponse result = getAssistants(true);
+    assertThat(result).isNull();
+    result = getAssistants(false);
+    assertThat(result).isNotNull();
+  }
+
   private static JsonNode assist(JsonNode quest) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = Entity.entity(quest, MediaType.APPLICATION_JSON);
@@ -127,6 +137,16 @@ public class AiAssistanceTest {
     JsonNode result = client.path("chat/completions").request()
         .post(request).readEntity(JsonNode.class);
     return result;
-  }  
+  }
 
+  private static ListAssistantsResponse getAssistants(boolean failOnInvalidSubtype) {
+    WebTarget client = Ivy.rest().client(OPEN_AI);
+    Response response = client.path("assistants").queryParam("failOnInvalidSubtype", failOnInvalidSubtype).request()
+        .get();
+    if (response.getStatus() == 200) {
+      return response.readEntity(ListAssistantsResponse.class);
+    } else {
+      return null;
+    }
+  }
 }

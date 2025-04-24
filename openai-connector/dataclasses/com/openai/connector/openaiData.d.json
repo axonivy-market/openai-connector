@@ -12,5 +12,8 @@
   }, {
     "name" : "answer",
     "type" : "String"
+  }, {
+    "name" : "assistants",
+    "type" : "com.openai.api.v1.client.ListAssistantsResponse"
   } ]
 }

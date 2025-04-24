@@ -108,10 +108,14 @@ public class AiAssistanceTest {
   }
 
   @Test
-  void mappingResponseOfAssistants() {
-    ListAssistantsResponse result = getAssistants(true);
+  void mappingResponseOfAssistantsWithInvalidSubtype() {
+    ListAssistantsResponse result = getAssistantsWithInvalidSubtype();
     assertThat(result).isNull();
-    result = getAssistants(false);
+  }
+
+  @Test
+  void mappingResponseOfAssistants() {
+    ListAssistantsResponse result = getAssistantsWithValidSubtype();
     assertThat(result).isNotNull();
   }
 
@@ -139,10 +143,19 @@ public class AiAssistanceTest {
     return result;
   }
 
-  private static ListAssistantsResponse getAssistants(boolean failOnInvalidSubtype) {
+  private static ListAssistantsResponse getAssistantsWithInvalidSubtype() {
     WebTarget client = Ivy.rest().client(OPEN_AI);
-    Response response = client.path("assistants").queryParam("failOnInvalidSubtype", failOnInvalidSubtype).request()
-        .get();
+    return readListAssistantsResponse(
+        client.path("assistants").queryParam("failOnInvalidSubtype", false).request().get());
+  }
+
+  private static ListAssistantsResponse getAssistantsWithValidSubtype() {
+    WebTarget client = Ivy.rest().client(OPEN_AI);
+    return readListAssistantsResponse(
+        client.path("assistants").queryParam("failOnInvalidSubtype", true).request().get());
+  }
+
+  private static ListAssistantsResponse readListAssistantsResponse(Response response) {
     if (response.getStatus() == 200) {
       return response.readEntity(ListAssistantsResponse.class);
     } else {

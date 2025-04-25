@@ -20,15 +20,14 @@
         <p:column headerText="Model">
           <h:outputText value="#{assistant.model}" />
         </p:column>
-        <p:column headerText="Instructions">
-          <h:outputText value="#{assistant.instructions}" />
-        </p:column>
       </p:dataTable>
       <br />
-      <div class="command-btns">
-        <p:commandButton id="close" actionListener="#{logic.close}"
-          value="Close" />
-      </div>
+      <h:form>
+        <div class="command-btns">
+          <p:commandButton id="close" actionListener="#{logic.close}"
+            value="Close" />
+        </div>
+      </h:form>
     </ui:define>
   </ui:composition>
 </h:body>

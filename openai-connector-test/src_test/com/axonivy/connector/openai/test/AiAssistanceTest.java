@@ -134,7 +134,7 @@ public class AiAssistanceTest {
       .post(request).readEntity(JsonNode.class);
     return result;
   }
-  
+
   private static JsonNode assistWithQuestion(String question, boolean includeSystemPrompt) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = AiAssistanceUtils.buildPayloadFromQuestion(question, includeSystemPrompt);
@@ -146,13 +146,13 @@ public class AiAssistanceTest {
   private static ListAssistantsResponse getAssistantsWithInvalidSubtype() {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     return readListAssistantsResponse(
-        client.path("assistants").queryParam("failOnInvalidSubtype", false).request().get());
+        client.path("assistants").queryParam("failOnInvalidSubtype", true).request().get());
   }
 
   private static ListAssistantsResponse getAssistantsWithValidSubtype() {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     return readListAssistantsResponse(
-        client.path("assistants").queryParam("failOnInvalidSubtype", true).request().get());
+        client.path("assistants").queryParam("failOnInvalidSubtype", false).request().get());
   }
 
   private static ListAssistantsResponse readListAssistantsResponse(Response response) {

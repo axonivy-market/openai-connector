@@ -109,12 +109,14 @@ public class AiAssistanceTest {
 
   @Test
   void mappingResponseOfAssistants() {
-    // Use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = false to ignore of properties with UNKNOWN source type 
-    ListAssistantsResponse result = getAssistantsWithValidSubtype();
+    // Use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = false to ignore of properties with UNKNOWN source type
+    boolean failOnInvalidSubtype = false;
+    ListAssistantsResponse result = getAssistantsWithFailOnInvalidSubtypeConfiguration(false);
     assertThat(result).isNotNull();
 
     // If we use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = true, objectMapper cannot parse properties properties with UNKNOWN source type
-    result = getAssistantsWithInvalidSubtype();
+    failOnInvalidSubtype = true;
+    result = getAssistantsWithFailOnInvalidSubtypeConfiguration(failOnInvalidSubtype);
     assertThat(result).isNull();
   }
 
@@ -142,16 +144,10 @@ public class AiAssistanceTest {
     return result;
   }
 
-  private static ListAssistantsResponse getAssistantsWithInvalidSubtype() {
+  private static ListAssistantsResponse getAssistantsWithFailOnInvalidSubtypeConfiguration(boolean failOnInvalidSubtype) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     return readListAssistantsResponse(
-        client.path("assistants").queryParam("failOnInvalidSubtype", true).request().get());
-  }
-
-  private static ListAssistantsResponse getAssistantsWithValidSubtype() {
-    WebTarget client = Ivy.rest().client(OPEN_AI);
-    return readListAssistantsResponse(
-        client.path("assistants").queryParam("failOnInvalidSubtype", false).request().get());
+        client.path("assistants").queryParam("failOnInvalidSubtype", failOnInvalidSubtype).request().get());
   }
 
   private static ListAssistantsResponse readListAssistantsResponse(Response response) {

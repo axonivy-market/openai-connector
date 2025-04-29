@@ -108,15 +108,14 @@ public class AiAssistanceTest {
   }
 
   @Test
-  void mappingResponseOfAssistantsWithInvalidSubtype() {
-    ListAssistantsResponse result = getAssistantsWithInvalidSubtype();
-    assertThat(result).isNull();
-  }
-
-  @Test
   void mappingResponseOfAssistants() {
+    // Use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = false to ignore of properties with UNKNOWN source type 
     ListAssistantsResponse result = getAssistantsWithValidSubtype();
     assertThat(result).isNotNull();
+
+    // If we use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = true, objectMapper cannot parse properties properties with UNKNOWN source type
+    result = getAssistantsWithInvalidSubtype();
+    assertThat(result).isNull();
   }
 
   private static JsonNode assist(JsonNode quest) {

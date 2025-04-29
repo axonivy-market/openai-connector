@@ -62,7 +62,7 @@
           "entity" : {
             "type" : "com.openai.api.v1.client.ListAssistantsResponse",
             "map" : {
-              "out.assistants" : "result"
+              "out.assistants" : "result.data"
             }
           }
         }

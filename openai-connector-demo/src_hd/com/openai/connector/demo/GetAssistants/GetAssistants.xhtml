@@ -10,7 +10,7 @@
     <ui:define name="title">GetAssistants</ui:define>
     <ui:define name="content">
       <h3>Get list of Assistants</h3>
-      <p:dataTable value="#{data.assistants.data}" var="assistant">
+      <p:dataTable value="#{data.assistants}" var="assistant">
         <p:column headerText="ID" >
           <h:outputText value="#{assistant.id}" />
         </p:column>

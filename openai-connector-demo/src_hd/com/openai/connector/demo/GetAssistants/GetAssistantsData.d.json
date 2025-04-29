@@ -5,6 +5,6 @@
   "isBusinessCaseData" : false,
   "fields" : [ {
     "name" : "assistants",
-    "type" : "com.openai.api.v1.client.ListAssistantsResponse"
+    "type" : "List<com.openai.api.v1.client.AssistantObject>"
   } ]
 }

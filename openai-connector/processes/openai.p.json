@@ -112,7 +112,8 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 96, "y" : 192 }
+        "at" : { "x" : 96, "y" : 192 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
       },
       "connect" : [
         { "id" : "f7", "to" : "f8" }

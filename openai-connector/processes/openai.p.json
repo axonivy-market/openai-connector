@@ -96,5 +96,60 @@
       "connect" : [
         { "id" : "f2", "to" : "f1" }
       ]
+    }, {
+      "id" : "f5",
+      "type" : "CallSubStart",
+      "name" : "getAssistants()",
+      "config" : {
+        "signature" : "getAssistants",
+        "result" : {
+          "params" : [
+            { "name" : "assistants", "type" : "List<com.openai.api.v1.client.AssistantObject>", "desc" : "" }
+          ],
+          "map" : {
+            "result.assistants" : "in.assistants"
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 96, "y" : 192 }
+      },
+      "connect" : [
+        { "id" : "f7", "to" : "f8" }
+      ]
+    }, {
+      "id" : "f6",
+      "type" : "CallSubEnd",
+      "visual" : {
+        "at" : { "x" : 352, "y" : 192 },
+        "labelOffset" : { "x" : 13, "y" : 33 }
+      }
+    }, {
+      "id" : "f8",
+      "type" : "RestClientCall",
+      "name" : "Get Assistants",
+      "config" : {
+        "target" : {
+          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+          "path" : "/assistants",
+          "headers" : {
+            "OpenAI-Beta" : "\"assistants=v2\""
+          }
+        },
+        "response" : {
+          "entity" : {
+            "type" : "com.openai.api.v1.client.ListAssistantsResponse",
+            "map" : {
+              "out.assistants" : "result.data"
+            }
+          }
+        }
+      },
+      "visual" : {
+        "at" : { "x" : 224, "y" : 192 }
+      },
+      "connect" : [
+        { "id" : "f9", "to" : "f6", "color" : "default" }
+      ]
     } ]
 }

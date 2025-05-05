@@ -17,7 +17,7 @@
         "at" : { "x" : 96, "y" : 64 }
       },
       "connect" : [
-        { "id" : "f2", "to" : "f6" }
+        { "id" : "f2", "to" : "f8" }
       ]
     }, {
       "id" : "f1",
@@ -47,31 +47,24 @@
         "labelOffset" : { "x" : 10, "y" : 30 }
       }
     }, {
-      "id" : "f6",
-      "type" : "RestClientCall",
+      "id" : "f8",
+      "type" : "SubProcessCall",
       "name" : "Get Assistants",
       "config" : {
-        "target" : {
-          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
-          "path" : "/assistants",
-          "headers" : {
-            "OpenAI-Beta" : "\"assistants=v2\""
-          }
-        },
-        "response" : {
-          "entity" : {
-            "type" : "com.openai.api.v1.client.ListAssistantsResponse",
-            "map" : {
-              "out.assistants" : "result.data"
-            }
+        "processCall" : "openai:getAssistants()",
+        "output" : {
+          "map" : {
+            "out" : "in",
+            "out.assistants" : "result.assistants"
           }
         }
       },
       "visual" : {
-        "at" : { "x" : 232, "y" : 64 }
+        "at" : { "x" : 224, "y" : 64 },
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
       "connect" : [
-        { "id" : "f7", "to" : "f1", "color" : "default" }
+        { "id" : "f9", "to" : "f1", "color" : "default" }
       ]
     } ]
 }

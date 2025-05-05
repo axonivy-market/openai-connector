@@ -10,12 +10,14 @@ import java.util.UUID;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.axonivy.connector.openai.mock.utils.AiAssistanceUtils;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.openai.api.v1.client.ListAssistantsResponse;
 
 import ch.ivyteam.ivy.application.IApplication;
 import ch.ivyteam.ivy.environment.AppFixture;
@@ -105,6 +107,19 @@ public class AiAssistanceTest {
         .contains("<select id=\\\"brand-select-without-system-promt\\\"");
   }
 
+  @Test
+  void mappingResponseOfAssistants() {
+    // Use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = false to ignore of properties with UNKNOWN source type
+    boolean failOnInvalidSubtype = false;
+    ListAssistantsResponse result = getAssistantsWithFailOnInvalidSubtypeConfiguration(false);
+    assertThat(result).isNotNull();
+
+    // If we use DeserializationFeature.FAIL_ON_INVALID_SUBTYPE = true, objectMapper cannot parse properties properties with UNKNOWN source type
+    failOnInvalidSubtype = true;
+    result = getAssistantsWithFailOnInvalidSubtypeConfiguration(failOnInvalidSubtype);
+    assertThat(result).isNull();
+  }
+
   private static JsonNode assist(JsonNode quest) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = Entity.entity(quest, MediaType.APPLICATION_JSON);
@@ -120,13 +135,26 @@ public class AiAssistanceTest {
       .post(request).readEntity(JsonNode.class);
     return result;
   }
-  
+
   private static JsonNode assistWithQuestion(String question, boolean includeSystemPrompt) {
     WebTarget client = Ivy.rest().client(OPEN_AI);
     Entity<JsonNode> request = AiAssistanceUtils.buildPayloadFromQuestion(question, includeSystemPrompt);
     JsonNode result = client.path("chat/completions").request()
         .post(request).readEntity(JsonNode.class);
     return result;
-  }  
+  }
 
+  private static ListAssistantsResponse getAssistantsWithFailOnInvalidSubtypeConfiguration(boolean failOnInvalidSubtype) {
+    WebTarget client = Ivy.rest().client(OPEN_AI);
+    return readListAssistantsResponse(
+        client.path("assistants").queryParam("failOnInvalidSubtype", failOnInvalidSubtype).request().get());
+  }
+
+  private static ListAssistantsResponse readListAssistantsResponse(Response response) {
+    if (response.getStatus() == 200) {
+      return response.readEntity(ListAssistantsResponse.class);
+    } else {
+      return null;
+    }
+  }
 }

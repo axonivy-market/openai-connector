@@ -1,0 +1,328 @@
+{
+	"object": "list",
+	"data": [
+		{
+			"id": "asst_0INo6Gmcf1A4z2qDBL0Ppkpj",
+			"object": "assistant",
+			"created_at": 1726499916,
+			"name": "Axon Ivy RFI Helper",
+			"description": null,
+			"model": "gpt-4o-mini",
+			"instructions": "You are here to help Presales Answer RFI & RFP Questions. The answers should be on point, positive and optimistic.",
+			"tools": [
+				{
+					"type": "file_search",
+					"file_search": {
+						"ranking_options": {
+							"ranker": "default_2024_08_21",
+							"score_threshold": 0.0
+						}
+					}
+				}
+			],
+			"top_p": 1.0,
+			"temperature": 0.25,
+			"reasoning_effort": null,
+			"tool_resources": {
+				"file_search": {
+					"vector_store_ids": [
+						"vs_61qZI2yo2cAhR0WBaorRZA0Y"
+					]
+				}
+			},
+			"metadata": {
+			},
+			"response_format": "auto"
+		},
+		{
+			"id": "asst_O6ZpgKNoWZZqTwK4b13wN6pq",
+			"object": "assistant",
+			"created_at": 1725524248,
+			"name": "BPMN Modeling Generator",
+			"description": null,
+			"model": "gpt-4o-2024-08-06",
+			"instructions": "### Objective:\nAnalyze and update BPMN processes based on user requirements by invoking the necessary functions.\n\n### Note:\n- You must deep analyze original process, focus on the id, name, description and connections between them\n- Every id, connect_id must be unique and follow the pattern: `'^[A-F0-9]{16,}$'`. \n  Example IDs: `f0`, `f1`, `f2`, `f3`, `f4`, ...\n- A process must start with a 'RequestStart' element and end with a 'TaskEnd' element.\n- The id and the connect_id is same pool. You have to be careful when generating a id or a connect_id to avoid duplicates. \n- A connect can only connect to a element\n- A element must connect from a element and connect to another one except 'RequestStart' and 'TaskEnd'\n- 'connect_to' must connect to a element, cannot connect to not exist element\n\n### Instructions:\n\n1. **Analyze the Original Process:**  \n   Review the current BPMN process to fully understand the existing steps and structure.\n\n2. **Analyze User Requirements:**  \n   Break down the user's requirements step by step to identify specific changes needed.\n\n3. **Compare Original Process and User Requirements:**  \n   Compare the original BPMN process with the user’s requirements to determine which steps should be added, updated, or removed and the connector between elements.\n\n4. **For Each Step:**  \n   For each step identified for modification, call the defined functions to add element to the process\n\n5. **Complete**  \n   Show short summary what you did without any additional information.",
+			"tools": [
+				{
+					"type": "function",
+					"function": {
+						"name": "chatgpt_add_user_task",
+						"description": "Add a user task to the process",
+						"parameters": {
+							"type": "object",
+							"properties": {
+								"element_id": {
+									"type": "string",
+									"description": "The id of the new element"
+								},
+								"element_name": {
+									"type": "string",
+									"description": "The name of new element"
+								},
+								"element_description": {
+									"type": "string",
+									"description": "The description of element"
+								},
+								"task_name": {
+									"type": "string",
+									"description": "The name of user task"
+								},
+								"task_description": {
+									"type": "string",
+									"description": "The description of user task"
+								},
+								"dialog_name": {
+									"type": "string",
+									"description": "The name of dialog use PascalCase"
+								},
+								"connect_id": {
+									"type": "string",
+									"description": "The id of connection"
+								},
+								"connect_to": {
+									"type": "string",
+									"description": "The id of the next step element"
+								},
+								"connect_from": {
+									"type": "string",
+									"description": "The id of the previous step element"
+								},
+								"connect_from_connect_id": {
+									"type": "string",
+									"description": "The id of the connection of the previous step element"
+								}
+							},
+							"additionalProperties": false,
+							"required": [
+								"element_id",
+								"element_name",
+								"element_description",
+								"task_name",
+								"task_description",
+								"dialog_name",
+								"connect_id",
+								"connect_to",
+								"connect_from",
+								"connect_from_connect_id"
+							]
+						},
+						"strict": false
+					}
+				},
+				{
+					"type": "function",
+					"function": {
+						"name": "chatgpt_add_alternative",
+						"description": "Add a alternative(Gateway) to the process",
+						"parameters": {
+							"type": "object",
+							"properties": {
+								"element_id": {
+									"type": "string",
+									"description": "The id of the new element"
+								},
+								"element_name": {
+									"type": "string",
+									"description": "The name of new element"
+								},
+								"element_description": {
+									"type": "string",
+									"description": "The description of element"
+								},
+								"connect_from": {
+									"type": "string",
+									"description": "The id of the previous step element"
+								},
+								"connect_from_connect_id": {
+									"type": "string",
+									"description": "The id of the connection of the previous step element"
+								},
+								"conditions": {
+									"type": "array",
+									"description": "The list of connect with conditions which gateway will connect to",
+									"items": {
+										"type": "object",
+										"properties": {
+											"connect_id": {
+												"type": "string",
+												"description": "The id of connection"
+											},
+											"connect_to": {
+												"type": "string",
+												"description": "The id of the next step element"
+											},
+											"condition": {
+												"type": "string",
+												"description": "The condition of out connect. e.g: age < 18"
+											}
+										}
+									}
+								}
+							},
+							"additionalProperties": false,
+							"required": [
+								"element_id",
+								"element_name",
+								"element_description",
+								"connect_from",
+								"connect_from_connect_id",
+								"conditions"
+							]
+						},
+						"strict": false
+					}
+				},
+				{
+					"type": "function",
+					"function": {
+						"name": "chatgpt_add_rest_client_call",
+						"description": "Add a rest client call (REST_API) to the process",
+						"parameters": {
+							"type": "object",
+							"properties": {
+								"element_id": {
+									"type": "string",
+									"description": "The id of the new element"
+								},
+								"element_name": {
+									"type": "string",
+									"description": "The name of new element"
+								},
+								"element_description": {
+									"type": "string",
+									"description": "The description of element"
+								},
+								"connect_id": {
+									"type": "string",
+									"description": "The id of connection"
+								},
+								"connect_to": {
+									"type": "string",
+									"description": "The id of the next step element"
+								},
+								"connect_from": {
+									"type": "string",
+									"description": "The id of the previous step element"
+								},
+								"connect_from_connect_id": {
+									"type": "string",
+									"description": "The id of the connection of the previous step element"
+								}
+							},
+							"additionalProperties": false,
+							"required": [
+								"element_id",
+								"element_name",
+								"element_description",
+								"connect_id",
+								"connect_to",
+								"connect_from",
+								"connect_from_connect_id"
+							]
+						},
+						"strict": false
+					}
+				},
+				{
+					"type": "function",
+					"function": {
+						"name": "chatgpt_add_email",
+						"description": "Add a email to send email to the process",
+						"parameters": {
+							"type": "object",
+							"properties": {
+								"element_id": {
+									"type": "string",
+									"description": "The id of the new element"
+								},
+								"element_name": {
+									"type": "string",
+									"description": "The name of new element"
+								},
+								"element_description": {
+									"type": "string",
+									"description": "The description of element"
+								},
+								"connect_id": {
+									"type": "string",
+									"description": "The id of connection"
+								},
+								"connect_to": {
+									"type": "string",
+									"description": "The id of the next step element"
+								},
+								"connect_from": {
+									"type": "string",
+									"description": "The id of the previous step element"
+								},
+								"connect_from_connect_id": {
+									"type": "string",
+									"description": "The id of the connection of the previous step element"
+								},
+								"subject": {
+									"type": "string",
+									"description": "The subject of email"
+								},
+								"message": {
+									"type": "string",
+									"description": "The message of email"
+								},
+								"to": {
+									"type": "string",
+									"description": "The recipient of email"
+								},
+								"email_from": {
+									"type": "string",
+									"description": "the sender's email address"
+								},
+								"reply_to": {
+									"type": "string",
+									"description": "the email address where replies should be sent"
+								},
+								"cc": {
+									"type": "string",
+									"description": "The carbon copy of email"
+								},
+								"bcc": {
+									"type": "string",
+									"description": "The blind carbon copy of email"
+								},
+								"attachments": {
+									"type": "string",
+									"description": "The list of email attachments, with items concatenated by ';'"
+								}
+							},
+							"additionalProperties": false,
+							"required": [
+								"element_id",
+								"element_name",
+								"element_description",
+								"connect_id",
+								"connect_to",
+								"connect_from",
+								"connect_from_connect_id",
+								"subject",
+								"message",
+								"to"
+							]
+						},
+						"strict": false
+					}
+				}
+			],
+			"top_p": 0.1,
+			"temperature": 0.71,
+			"reasoning_effort": null,
+			"tool_resources": {
+			},
+			"metadata": {
+			},
+			"response_format": {
+				"type": "text"
+			}
+		}
+	],
+	"first_id": "asst_0INo6Gmcf1A4z2qDBL0Ppkpj",
+	"last_id": "asst_O6ZpgKNoWZZqTwK4b13wN6pq",
+	"has_more": false
+}

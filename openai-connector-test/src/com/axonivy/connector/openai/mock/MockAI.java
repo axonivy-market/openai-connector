@@ -7,17 +7,23 @@ import java.util.Objects;
 
 import javax.annotation.security.PermitAll;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.commons.io.IOUtils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.openai.api.v1.client.AssistantObject;
+import com.openai.api.v1.client.ListAssistantsResponse;
 
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.rest.client.config.IvyDefaultJaxRsTemplates;
@@ -55,7 +61,8 @@ public class MockAI {
       "assist-ask-without-system-promt", json(load("assist-ask-without-system-promt.json")),
       "assist-ask-without-system-promt-response", json(load("assist-ask-without-system-promt-response.json")),
       "assist-insert-with-system-promt", json(load("assist-insert-with-system-promt.json")),
-      "assist-insert-with-system-promt-response", json(load("assist-insert-with-system-promt-response.json")));
+      "assist-insert-with-system-promt-response", json(load("assist-insert-with-system-promt-response.json")),
+      "get-assistants-response", json(load("get-assistants-response.json")));
 
   @POST
   @Path("completions")
@@ -102,6 +109,24 @@ public class MockAI {
     return Response.ok()
       .entity(node)
       .build();
+  }
+
+  @GET
+  @Path("assistants")
+  @Consumes(MediaType.APPLICATION_JSON)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response getAssistants(@QueryParam("failOnInvalidSubtype") @DefaultValue("true") boolean failOnInvalidSubtype) {
+    var node = openAIExamples.get("get-assistants-response");
+    ListAssistantsResponse responseObj;
+    try {
+      ObjectMapper mapper = new ObjectMapper();
+      mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+      mapper.configure(DeserializationFeature.FAIL_ON_INVALID_SUBTYPE, failOnInvalidSubtype);
+      responseObj = mapper.treeToValue(node, ListAssistantsResponse.class);
+      return Response.ok(responseObj).build();
+    } catch (JsonProcessingException e) {
+      return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Failed to parse response").build();
+    }
   }
 
   public static String load(String json) {

@@ -1,2 +1,11 @@
 # yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.1.0/rest-clients.json
 RestClients:
+  langchain-service:
+    UUID: 5b953a55-05ca-4026-8eb5-371d0ba75673
+    Url: '{ivy.app.baseurl}/api/ai'
+    Features:
+    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
+    - ch.ivyteam.ivy.rest.client.authentication.HttpBasicAuthenticationFeature
+    Properties:
+      username: demoUserA
+      password: ${decrypt:atDeKWtv6TKz48X0YI+k+w==}

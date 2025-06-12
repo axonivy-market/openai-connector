@@ -5,6 +5,7 @@ import static dev.langchain4j.model.openai.OpenAiChatModelName.GPT_4_1_MINI;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import com.axonivy.connector.langchain.assistant.ChatAssistant;
@@ -20,7 +21,8 @@ public class AiBrain {
 
   @GET
   @Produces(MediaType.TEXT_PLAIN)
-  public String chat(String prompt) {
+  @Path("chat")
+  public String chat(@QueryParam("prompt") String prompt) {
     ChatModel model = OpenAiChatModel.builder()
         .apiKey(System.getenv("OPENAI_API_KEY"))
         .modelName(GPT_4_1_MINI)

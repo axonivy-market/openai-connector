@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.axonivy.connector.langchain.assistant.ChatAssistant;
 
+import ch.ivyteam.ivy.environment.Ivy;
 import dev.langchain4j.model.chat.ChatModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.service.AiServices;
@@ -24,7 +25,7 @@ public class AiBrain {
   @Path("chat")
   public String chat(@QueryParam("prompt") String prompt) {
     ChatModel model = OpenAiChatModel.builder()
-        .apiKey(System.getenv("OPENAI_API_KEY"))
+        .apiKey(Ivy.var().get("llm.openai.apiKey"))
         .modelName(GPT_4_1_MINI)
         .build();
     var chatGpt = AiServices.create(ChatAssistant.class, model);

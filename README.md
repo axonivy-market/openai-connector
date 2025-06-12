@@ -1,7 +1,9 @@
-# MY-PRODUCT-NAME
+# LangChain 4J
 
 [![CI Build](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/REPO-NAME/actions/workflows/ci.yml)
 
-"YOUR SHORT DESCRIPTION GOES HERE"
+Evaluate the power of many LLM's served via a simple REST endpoint. In Java of course :wink:
+[lang-chain docs](https://docs.langchain4j.dev/intro)
 
-Read our [documentation](MY-PRODUCT-NAME-product/README.md).
+
+Read our [documentation](langchain-ai-product/README.md).

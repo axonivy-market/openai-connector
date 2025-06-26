@@ -12,7 +12,7 @@
         {
             "message": {
                 "role": "assistant",
-                "content": "As an AI language model, I cannot have a personal experience and thoughts, but the meaning of life is a philosophical and existential question that has puzzled humans since the beginning of time. It refers to the purpose, significance, or reason for existence, and it's a question that has generated many different answers and perspectives from different cultures, religions, and belief systems. While some people believe that the meaning of life is to fulfill a divine or spiritual purpose, others see it as a pursuit of happiness or personal fulfillment. Ultimately, the meaning of life is a deeply personal and subjective matter that each individual must find for themselves."
+                "content": "2"
             },
             "finish_reason": "stop",
             "index": 0

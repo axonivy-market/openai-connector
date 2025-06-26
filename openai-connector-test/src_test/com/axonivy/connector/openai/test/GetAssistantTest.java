@@ -24,7 +24,7 @@ import utils.OpenAiUtils;
 
 @IvyProcessTest(enableWebServer = true)
 @ExtendWith(MultiEnvironmentContextProvider.class)
-public class OpenAiTest {
+public class GetAssistantTest {
 
   @BeforeEach
   void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
@@ -41,19 +41,12 @@ public class OpenAiTest {
   }
 
   @TestTemplate
-  public void chatCompletions(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement CHAT = BpmProcess.path(OpenAiCommonConstants.OPEN_AI).elementName("chatGpt(String)");
-    boolean useEverybody =
-        context.getStore(ExtensionContext.Namespace.GLOBAL).getOrDefault("useEverybody", Boolean.class, false);
+  public void getAssisstants(BpmClient bpmClient, ExtensionContext context) {
+    BpmElement ASSISTANT = BpmProcess.path(OpenAiCommonConstants.OPEN_AI).elementName("getAssistants()");
 
-    var start = bpmClient.start().subProcess(CHAT).withParam("what", "1 + 1 = ?");
-
-    if (useEverybody) {
-      start = start.as().everybody();
-    }
-
+    var start = bpmClient.start().subProcess(ASSISTANT);
     ExecutionResult result = start.execute();
     openaiData data = result.data().last();
-    assertTrue(data.getAnswer().contains("2"));
+    assertTrue(data.getAssistants().size() >= 2);
   }
 }

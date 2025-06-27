@@ -29,18 +29,16 @@ public class GetAssistantTest {
   @BeforeEach
   void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
     OpenAiUtils.setUpConfigForContext(context.getDisplayName(), fixture, app);
-    boolean useEverybody = context.getDisplayName().equals(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME);
-    context.getStore(ExtensionContext.Namespace.GLOBAL).put("useEverybody", useEverybody);
   }
 
   @AfterEach
-  void afterEach(AppFixture fixture, IApplication app) {
+  void afterEach(IApplication app) {
     RestClients clients = RestClients.of(app);
     clients.remove(OpenAiCommonConstants.OPEN_AI);
   }
 
   @TestTemplate
-  public void getAssisstants(BpmClient bpmClient, ExtensionContext context) {
+  public void getAssisstants(BpmClient bpmClient) {
     BpmElement ASSISTANT = BpmProcess.path(OpenAiCommonConstants.OPEN_AI).elementName("getAssistants()");
 
     var start = bpmClient.start().subProcess(ASSISTANT);

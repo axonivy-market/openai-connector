@@ -29,7 +29,6 @@ public class GetAssistantTest {
   @BeforeEach
   void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
     OpenAiUtils.setUpConfigForContext(context.getDisplayName(), fixture, app);
-    // Example: for tests with "everybody" in name, set a flag in the context store
     boolean useEverybody = context.getDisplayName().equals(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME);
     context.getStore(ExtensionContext.Namespace.GLOBAL).put("useEverybody", useEverybody);
   }

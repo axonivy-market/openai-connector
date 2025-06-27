@@ -12,9 +12,6 @@ public class MultiEnvironmentContextProvider implements TestTemplateInvocationCo
 
   @Override
   public Stream<TestTemplateInvocationContext> provideTestTemplateInvocationContexts(ExtensionContext context) {
-//    return Stream.of(new TestEnironmentInvocationContext(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME),
-//        new TestEnironmentInvocationContext(OpenAiCommonConstants.MOCK_SERVER_CONTEXT_DISPLAY_NAME));
-    
     return Stream.of(new TestEnironmentInvocationContext(OpenAiCommonConstants.MOCK_SERVER_CONTEXT_DISPLAY_NAME),
         new TestEnironmentInvocationContext(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME));
   }
@@ -23,5 +20,4 @@ public class MultiEnvironmentContextProvider implements TestTemplateInvocationCo
   public boolean supportsTestTemplate(ExtensionContext context) {
     return true;
   }
-
 }

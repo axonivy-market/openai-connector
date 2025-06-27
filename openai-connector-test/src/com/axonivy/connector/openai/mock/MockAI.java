@@ -117,7 +117,6 @@ public class MockAI {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getAssistants(@QueryParam("failOnInvalidSubtype") @DefaultValue("false") boolean failOnInvalidSubtype) {
     var node = openAIExamples.get("get-assistants-response");
-    Ivy.log().warn("asdasdasdasdasdasdasdasdasd" + failOnInvalidSubtype);
     ListAssistantsResponse responseObj;
     try {
       ObjectMapper mapper = new ObjectMapper();

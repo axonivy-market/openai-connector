@@ -14,7 +14,32 @@
   <artifactId>langchain-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>iar</packaging>
+  
+  
+  <properties>
+    <langgraph4j.version>1.6.0-beta5</langgraph4j.version> <!-- Check for the actual latest version -->
+</properties>
+
+<!-- Optional: Add the Bill of Materials (BOM) to manage langgraph4j module versions -->
+<dependencyManagement>
   <dependencies>
+    <dependency>
+      <groupId>org.bsc.langgraph4j</groupId>
+      <artifactId>langgraph4j-bom</artifactId>
+      <version>${langgraph4j.version}</version>
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+<dependencies>
+    <dependency>
+        <groupId>org.bsc.langgraph4j</groupId>
+        <artifactId>langgraph4j-core</artifactId>
+    </dependency>
+    <!-- Add other langgraph4j modules if needed, e.g., langgraph4j-langchain4j -->
+  
     <dependency>
       <groupId>com.axonivy.ivy.api</groupId>
       <artifactId>ivy-api</artifactId>

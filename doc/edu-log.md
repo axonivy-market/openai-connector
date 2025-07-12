@@ -26,9 +26,22 @@ assistants:
 
 ![assist](images/assistant-mail-element.png)
 
->
-## Open Questions
 
-- do other vendors or models support remote schema fetching? or comply better with our defaults?
+# Schema restrictions
 
+Do the remote fetch restrictions and other weaknesses also apply to other vendors?
+
+Check new pop-up models and some easy to get models [langChan4j-models](https://docs.langchain4j.dev/integrations/language-models/)
+
+## Grok
+
+* looks promissing with [structured-outputs](https://docs.x.ai/docs/release-notes#structured-outputs)
+* at least the chant front-end claims to be able and willing to fetch from remote ![fetch](images/grok-acts-asifItLikeRemoteSchemas.png)
+
+
+# Gemini
+[schema-output](https://docs.langchain4j.dev/integrations/language-models/google-ai-gemini#response-format--response-schema)
+
+# Mistral
+[structured-output](https://docs.langchain4j.dev/integrations/language-models/mistral-ai/#structured-outputs)
 

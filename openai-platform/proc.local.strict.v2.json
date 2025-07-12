@@ -31,10 +31,7 @@
     "required": [
       "$schema",
       "id",
-      "description",
-      "kind",
-      "config",
-      "docs"
+      "config"
     ],
     "$defs": {
       "ProcessKind": {
@@ -78,6 +75,7 @@
             "type" : "string"
           }
         },
+        "required" : [ "data" ],
         "additionalProperties" : false
       },
       "RootView" : {

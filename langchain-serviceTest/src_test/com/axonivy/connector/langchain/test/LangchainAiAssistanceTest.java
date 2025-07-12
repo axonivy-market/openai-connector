@@ -7,6 +7,8 @@ import javax.ws.rs.core.Response;
 
 import org.junit.jupiter.api.Test;
 
+import com.fasterxml.jackson.databind.JsonNode;
+
 import ch.ivyteam.ivy.environment.Ivy;
 import ch.ivyteam.ivy.environment.IvyTest;
 
@@ -20,8 +22,20 @@ public class LangchainAiAssistanceTest {
         .queryParam("prompt", "Is Java fit to interact with major LLM's?")
         .request()
         .get();
-    String answer = response.readEntity(String.class);
+    var answer = response.readEntity(String.class);
     assertThat(answer)
+        .containsIgnoringCase("yes");
+  }
+
+  @Test
+  void jsonChat() {
+    WebTarget client = Ivy.rest().client("langchain-service");
+    Response response = client.path("jsonChat")
+        .queryParam("prompt", "Is Java fit to interact with major LLM's?")
+        .request()
+        .get();
+    JsonNode answer = response.readEntity(JsonNode.class);
+    assertThat(answer.toPrettyString())
         .containsIgnoringCase("yes");
   }
 

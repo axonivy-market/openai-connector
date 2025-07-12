@@ -313,68 +313,6 @@
         "properties" : {
           "at" : {
             "$ref" : "#/$defs/VisualPoint"
-          },"VisualConnectorLabel" : {
-        "type" : "object",
-        "properties" : {
-          "name" : {
-            "type" : "string"
-          },
-          "offset" : {
-            "$ref" : "#/$defs/VisualPoint"
-          },
-          "segment" : {
-            "type" : "number"
-          }
-        },
-        "additionalProperties" : false
-      },
-      "VisualLane" : {
-        "type" : "object",
-        "properties" : {
-          "color" : {
-            "type" : "string"
-          },
-          "description" : {
-            "type" : "string"
-          },
-          "lanes" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/$defs/VisualLane"
-            }
-          },
-          "name" : {
-            "type" : "string"
-          },
-          "offset" : {
-            "type" : "integer"
-          },
-          "size" : {
-            "type" : "integer"
-          }
-        },
-        "additionalProperties" : false
-      },
-      "VisualLayout" : {
-        "type" : "object",
-        "properties" : {
-          "colors" : {
-            "$ref" : "#/$defs/Map(String,String)"
-          },
-          "lanes" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/$defs/VisualLane"
-            }
-          }
-        },
-        "additionalProperties" : false
-      },
-      "VisualNodeShape" : {
-        "type" : "object",
-        "properties" : {
-          "at" : {
-            "$ref" : "#/$defs/VisualPoint"
           },
           "color" : {
             "type" : "string"
@@ -392,6 +330,7 @@
             "$ref" : "#/$defs/VisualSize"
           }
         },
+        "required": ["at"],
         "additionalProperties" : false
       },
       "VisualPoint" : {
@@ -404,6 +343,10 @@
             "type" : "integer"
           }
         },
+        "required" : [
+          "x",
+          "y"
+        ],
         "additionalProperties" : false
       },
       "VisualSize" : {
@@ -418,48 +361,6 @@
         },
         "additionalProperties" : false
       },
-        "color" : {
-          "type" : "string"
-        },
-        "description" : {
-          "type" : "string"
-        },
-        "icon" : {
-          "type" : "string"
-        },
-        "labelOffset" : {
-          "$ref" : "#/$defs/VisualPoint"
-        },
-        "size" : {
-          "$ref" : "#/$defs/VisualSize"
-        }
-      },
-      "additionalProperties" : false
-    },
-    "VisualPoint" : {
-      "type" : "object",
-      "properties" : {
-        "x" : {
-          "type" : "integer"
-        },
-        "y" : {
-          "type" : "integer"
-        }
-      },
-      "additionalProperties" : false
-    },
-    "VisualSize" : {
-      "type" : "object",
-      "properties" : {
-        "height" : {
-          "type" : "integer"
-        },
-        "width" : {
-          "type" : "integer"
-        }
-      },
-      "additionalProperties" : false
-    },
       "WsAuth" : {
         "type" : "string",
         "enum" : [ "NONE", "WS_SECURITY", "HTTP_BASIC" ]

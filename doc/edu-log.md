@@ -8,7 +8,7 @@ Schemas + OpenAI
 - openAI: remote response-format schema fetching is disabled and answered with an explicit rejection.
 - strict mode = false -> otherwise each and every property in the process-tree is set.
 - gpt4.1mini doesn't comply with the pattern definition for process ID's. Although it's officially supported.
-- system role; helps to enforce: fieldId generation, graph coordinates writing, ...
+- system role; helps to enforce: fieldId generation, graph coordinates writing, ... [system-hints](openai-platform/system.json)
 
 ![no-remote](images/remote-schema-fails.png)
 

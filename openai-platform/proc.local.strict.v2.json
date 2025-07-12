@@ -4,14 +4,14 @@
   "schema": {
     "type": "object",
     "properties": {
-      "$schema" : {
+      "$schema": {
         "type": "string",
         "const": "https://json-schema.axonivy.com/process/12.0.0/process.json"
       },
       "id": {
         "type": "string",
         "pattern": "^[A-F0-9]{16,}$",
-        "minLength": 16,  
+        "minLength": 16,
         "maxLength": 16
       },
       "description": {
@@ -19,6 +19,9 @@
       },
       "kind": {
         "$ref": "#/$defs/ProcessKind"
+      },
+      "docs": {
+        "$ref": "#/$defs/Map(String,String)"
       }
     },
     "additionalProperties": false,
@@ -26,7 +29,8 @@
       "$schema",
       "id",
       "description",
-      "kind"
+      "kind",
+      "docs"
     ],
     "$defs": {
       "ProcessKind": {
@@ -37,6 +41,13 @@
           "CALLABLE_SUB",
           "HTML_DIALOG"
         ]
+      },
+      "Map(String,String)": {
+        "type": "object",
+        "properties": {},
+        "additionalProperties": {
+          "type": "string"
+        }
       }
     }
   }

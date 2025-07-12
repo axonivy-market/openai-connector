@@ -1,0 +1,26 @@
+{
+  "name": "proc3",
+  "strict": false,
+  "schema": {
+    "type": "object",
+    "schema": {
+      "$ref": "https://json-schema.axonivy.com/process/12.0.0/process.json"
+    },
+    "required": [
+      "id"
+    ],
+    "$defs": {
+      "ProcessKind": {
+        "type": "string",
+        "enum": [
+          "NORMAL",
+          "WEB_SERVICE",
+          "CALLABLE_SUB",
+          "HTML_DIALOG"
+        ]
+      }
+    },
+    "additionalProperties": false,
+    "properties": {}
+  }
+}

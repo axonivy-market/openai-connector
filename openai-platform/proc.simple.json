@@ -1,0 +1,38 @@
+{
+  "name": "proc2",
+  "strict": false,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "pattern": ".*/process/[0-9]+[\\.0-9]+/process\\.json$"
+      },
+      "id": {
+        "type": "string",
+        "pattern": "^[A-F0-9]{16,}$"
+      },
+      "description": {
+        "type": "string"
+      },
+      "kind": {
+        "$ref": "#/$defs/ProcessKind"
+      }
+    },
+    "required": [
+      "id"
+    ],
+    "$defs": {
+      "ProcessKind": {
+        "type": "string",
+        "enum": [
+          "NORMAL",
+          "WEB_SERVICE",
+          "CALLABLE_SUB",
+          "HTML_DIALOG"
+        ]
+      }
+    },
+    "additionalProperties": false
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "name": "proc3",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "$schema": {
+        "type": "string",
+        "pattern": ".*/process/[0-9]+[\\.0-9]+/process\\.json$"
+      },
+      "id": {
+        "type": "string",
+        "pattern": "^[A-F0-9]{16,}$"
+      },
+      "description": {
+        "type": "string"
+      },
+      "kind": {
+        "$ref": "https://json-schema.axonivy.com/process/12.0.0/process.json#/$defs/ProcessKind"
+      },
+      "elements": {
+        "type": "array",
+        "items": {
+          "$ref": "https://json-schema.axonivy.com/process/12.0.0/process.json#/$defs/ElementNode"
+        }
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "$schema",
+      "id",
+      "description",
+      "kind",
+      "elements"
+    ]
+  }
+}

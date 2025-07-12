@@ -1,0 +1,43 @@
+{
+  "name": "proc3",
+  "strict": true,
+  "schema": {
+    "type": "object",
+    "properties": {
+      "$schema" : {
+        "type": "string",
+        "const": "https://json-schema.axonivy.com/process/12.0.0/process.json"
+      },
+      "id": {
+        "type": "string",
+        "pattern": "^[A-F0-9]{16,}$",
+        "minLength": 16,  
+        "maxLength": 16
+      },
+      "description": {
+        "type": "string"
+      },
+      "kind": {
+        "$ref": "#/$defs/ProcessKind"
+      }
+    },
+    "additionalProperties": false,
+    "required": [
+      "$schema",
+      "id",
+      "description",
+      "kind"
+    ],
+    "$defs": {
+      "ProcessKind": {
+        "type": "string",
+        "enum": [
+          "NORMAL",
+          "WEB_SERVICE",
+          "CALLABLE_SUB",
+          "HTML_DIALOG"
+        ]
+      }
+    }
+  }
+}

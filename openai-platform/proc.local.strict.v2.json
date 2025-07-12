@@ -1,6 +1,6 @@
 {
   "name": "proc3",
-  "strict": true,
+  "strict": false,
   "schema": {
     "type": "object",
     "properties": {
@@ -20,6 +20,9 @@
       "kind": {
         "$ref": "#/$defs/ProcessKind"
       },
+      "config" : {
+        "$ref" : "#/$defs/RootProcessConfig"
+      },
       "docs": {
         "$ref": "#/$defs/Map(String,String)"
       }
@@ -30,6 +33,7 @@
       "id",
       "description",
       "kind",
+      "config",
       "docs"
     ],
     "$defs": {
@@ -48,6 +52,46 @@
         "additionalProperties": {
           "type": "string"
         }
+      },
+      "RootPermissions" : {
+        "type" : "object",
+        "properties" : {
+          "view" : {
+            "$ref" : "#/$defs/RootView"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "RootProcessConfig" : {
+        "type" : "object",
+        "properties" : {
+          "data" : {
+            "type" : "string"
+          },
+          "permissions" : {
+            "$ref" : "#/$defs/RootPermissions"
+          },
+          "wsAuth" : {
+            "$ref" : "#/$defs/WsAuth"
+          },
+          "wsTypeName" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "RootView" : {
+        "type" : "object",
+        "properties" : {
+          "allowed" : {
+            "type" : "boolean"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "WsAuth" : {
+        "type" : "string",
+        "enum" : [ "NONE", "WS_SECURITY", "HTTP_BASIC" ]
       }
     }
   }

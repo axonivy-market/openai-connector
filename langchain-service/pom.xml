@@ -1,45 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd"
-  xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>com.axonivy.ivy.api</groupId>
     <artifactId>ivy-project-parent</artifactId>
-    <version>13.1.0</version>
+    <version>13.2.0-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
   <groupId>com.axonivy.connector.ai</groupId>
   <artifactId>langchain-service</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>iar</packaging>
-  
-  
   <properties>
-    <langgraph4j.version>1.6.0-beta5</langgraph4j.version> <!-- Check for the actual latest version -->
-</properties>
-
-<!-- Optional: Add the Bill of Materials (BOM) to manage langgraph4j module versions -->
-<dependencyManagement>
+    <langgraph4j.version>1.6.0-beta5</langgraph4j.version>
+  </properties>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.bsc.langgraph4j</groupId>
+        <artifactId>langgraph4j-bom</artifactId>
+        <version>${langgraph4j.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
   <dependencies>
     <dependency>
       <groupId>org.bsc.langgraph4j</groupId>
-      <artifactId>langgraph4j-bom</artifactId>
-      <version>${langgraph4j.version}</version>
-      <type>pom</type>
-      <scope>import</scope>
+      <artifactId>langgraph4j-core</artifactId>
     </dependency>
-  </dependencies>
-</dependencyManagement>
-
-<dependencies>
-    <dependency>
-        <groupId>org.bsc.langgraph4j</groupId>
-        <artifactId>langgraph4j-core</artifactId>
-    </dependency>
-    <!-- Add other langgraph4j modules if needed, e.g., langgraph4j-langchain4j -->
-  
     <dependency>
       <groupId>com.axonivy.ivy.api</groupId>
       <artifactId>ivy-api</artifactId>

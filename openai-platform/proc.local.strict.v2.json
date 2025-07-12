@@ -66,77 +66,6 @@
             "type" : "string",
             "additionalProperties" : false
           },
-          "config" : {
-            "anyOf" : [ {
-              "$ref" : "#/$defs/ElementTaskEndPage"
-            }, {
-              "$ref" : "#/$defs/ElementTaskSwitchGateway"
-            }, {
-              "$ref" : "#/$defs/ElementSubProcessCall"
-            }, {
-              "$ref" : "#/$defs/ElementDatabase"
-            }, {
-              "$ref" : "#/$defs/ElementCallSubStart"
-            }, {
-              "$ref" : "#/$defs/ElementScript"
-            }, {
-              "$ref" : "#/$defs/ElementAlternative"
-            }, {
-              "$ref" : "#/$defs/ElementProgramInterface"
-            }, {
-              "$ref" : "#/$defs/ElementHtmlDialogStart"
-            }, {
-              "$ref" : "#/$defs/ElementSplit"
-            }, {
-              "$ref" : "#/$defs/ElementErrorEnd"
-            }, {
-              "$ref" : "#/$defs/ElementErrorBoundaryEvent"
-            }, {
-              "$ref" : "#/$defs/ElementHtmlDialogEventStart"
-            }, {
-              "$ref" : "#/$defs/ElementProgramStart"
-            }, {
-              "$ref" : "#/$defs/ElementWebServiceCall"
-            }, {
-              "$ref" : "#/$defs/ElementDialogCall"
-            }, {
-              "$ref" : "#/$defs/ElementTriggerCall"
-            }, {
-              "$ref" : "#/$defs/ElementErrorStartEvent"
-            }, {
-              "$ref" : "#/$defs/ElementRequestStart"
-            }, {
-              "$ref" : "#/$defs/ElementWebserviceStart"
-            }, {
-              "$ref" : "#/$defs/ElementThirdPartyWaitEvent"
-            }, {
-              "$ref" : "#/$defs/ElementUserTask"
-            }, {
-              "$ref" : "#/$defs/ElementJoin"
-            }, {
-              "$ref" : "#/$defs/ElementSignalBoundaryEvent"
-            }, {
-              "$ref" : "#/$defs/ElementEMail"
-            }, {
-              "$ref" : "#/$defs/ElementTaskSwitchEvent"
-            }, {
-              "$ref" : "#/$defs/ElementHtmlDialogMethodStart"
-            }, {
-              "$ref" : "#/$defs/ElementThirdPartyProgramInterface"
-            }, {
-              "$ref" : "#/$defs/ElementWaitEvent"
-            }, {
-              "$ref" : "#/$defs/ElementRestClientCall"
-            }, {
-              "$ref" : "#/$defs/ElementThirdPartyProgramStart"
-            }, {
-              "$ref" : "#/$defs/ElementSignalStartEvent"
-            }, {
-              "$ref" : "#/$defs/ProcessConfig"
-            }, {
-              "$ref" : "#/$defs/WebserviceProcessConfig"
-            } ]
-          },
           "elements" : {
             "type" : "array",
             "items" : {
@@ -217,6 +146,66 @@
       "ElementTypes" : {
         "type" : "string",
         "enum" : [ "Alternative", "CallSubEnd", "CallSubStart", "CallableSubProcess", "Database", "DialogCall", "EMail", "EmbeddedEnd", "EmbeddedProcessElement", "EmbeddedStart", "ErrorBoundaryEvent", "ErrorEnd", "ErrorStartEvent", "GenericActivity", "GenericBpmnElement", "HtmlDialogEnd", "HtmlDialogEventStart", "HtmlDialogExit", "HtmlDialogMethodStart", "HtmlDialogProcess", "HtmlDialogStart", "Join", "ManualBpmnElement", "Process", "ProcessAnnotation", "ProgramInterface", "ProgramStart", "ReceiveBpmnElement", "RequestStart", "RestClientCall", "RuleBpmnElement", "Script", "ScriptBpmnElement", "SendBpmnElement", "ServiceBpmnElement", "SignalBoundaryEvent", "SignalStartEvent", "Split", "SubProcessCall", "TaskEnd", "TaskEndPage", "TaskSwitchEvent", "TaskSwitchGateway", "ThirdPartyProgramInterface", "ThirdPartyProgramStart", "ThirdPartyWaitEvent", "TriggerCall", "UserBpmnElement", "UserTask", "WaitEvent", "WebServiceCall", "WebserviceEnd", "WebserviceProcess", "WebserviceStart" ]
+      },
+      "ElementEMail" : {
+        "type" : "object",
+        "properties" : {
+          "headers" : {
+            "$ref" : "#/$defs/MailHeaders"
+          },
+          "failIfMissingAttachments" : {
+            "type" : "boolean"
+          },
+          "attachments" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "message" : {
+            "$ref" : "#/$defs/MailMessage"
+          },
+          "exceptionHandler" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "MailHeaders" : {
+        "type" : "object",
+        "properties" : {
+          "bcc" : {
+            "type" : "string"
+          },
+          "cc" : {
+            "type" : "string"
+          },
+          "from" : {
+            "type" : "string"
+          },
+          "replyTo" : {
+            "type" : "string"
+          },
+          "subject" : {
+            "type" : "string"
+          },
+          "to" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
+      },
+      "MailMessage" : {
+        "type" : "object",
+        "properties" : {
+          "body" : {
+            "type" : "string"
+          },
+          "contentType" : {
+            "type" : "string"
+          }
+        },
+        "additionalProperties" : false
       },
       "Map(String,String)": {
         "type": "object",

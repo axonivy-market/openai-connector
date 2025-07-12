@@ -1,0 +1,3 @@
+omit as many defaults as possible, but at any rate produce the required values.
+Generate the 'data' as java qualified name.
+For element ID's create unique instances, starting from f1.

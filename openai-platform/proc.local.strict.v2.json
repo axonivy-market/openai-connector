@@ -23,6 +23,12 @@
       "config" : {
         "$ref" : "#/$defs/RootProcessConfig"
       },
+      "elements" : {
+        "type" : "array",
+        "items" : {
+          "$ref" : "#/$defs/ElementNode"
+        }
+      },
       "docs": {
         "$ref": "#/$defs/Map(String,String)"
       }
@@ -42,6 +48,175 @@
           "CALLABLE_SUB",
           "HTML_DIALOG"
         ]
+      },
+      "ElementNode" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string"
+          },
+          "type" : {
+            "additionalProperties" : false,
+            "$ref" : "#/$defs/ElementTypes"
+          },
+          "impl" : {
+            "type" : "string"
+          },
+          "name" : {
+            "anyOf" : [ "string", {
+              "type" : "array",
+              "items" : {
+                "type" : "string"
+              }
+            } ],
+            "additionalProperties" : false
+          },
+          "config" : {
+            "anyOf" : [ {
+              "$ref" : "#/$defs/ElementTaskEndPage"
+            }, {
+              "$ref" : "#/$defs/ElementTaskSwitchGateway"
+            }, {
+              "$ref" : "#/$defs/ElementSubProcessCall"
+            }, {
+              "$ref" : "#/$defs/ElementDatabase"
+            }, {
+              "$ref" : "#/$defs/ElementCallSubStart"
+            }, {
+              "$ref" : "#/$defs/ElementScript"
+            }, {
+              "$ref" : "#/$defs/ElementAlternative"
+            }, {
+              "$ref" : "#/$defs/ElementProgramInterface"
+            }, {
+              "$ref" : "#/$defs/ElementHtmlDialogStart"
+            }, {
+              "$ref" : "#/$defs/ElementSplit"
+            }, {
+              "$ref" : "#/$defs/ElementErrorEnd"
+            }, {
+              "$ref" : "#/$defs/ElementErrorBoundaryEvent"
+            }, {
+              "$ref" : "#/$defs/ElementHtmlDialogEventStart"
+            }, {
+              "$ref" : "#/$defs/ElementProgramStart"
+            }, {
+              "$ref" : "#/$defs/ElementWebServiceCall"
+            }, {
+              "$ref" : "#/$defs/ElementDialogCall"
+            }, {
+              "$ref" : "#/$defs/ElementTriggerCall"
+            }, {
+              "$ref" : "#/$defs/ElementErrorStartEvent"
+            }, {
+              "$ref" : "#/$defs/ElementRequestStart"
+            }, {
+              "$ref" : "#/$defs/ElementWebserviceStart"
+            }, {
+              "$ref" : "#/$defs/ElementThirdPartyWaitEvent"
+            }, {
+              "$ref" : "#/$defs/ElementUserTask"
+            }, {
+              "$ref" : "#/$defs/ElementJoin"
+            }, {
+              "$ref" : "#/$defs/ElementSignalBoundaryEvent"
+            }, {
+              "$ref" : "#/$defs/ElementEMail"
+            }, {
+              "$ref" : "#/$defs/ElementTaskSwitchEvent"
+            }, {
+              "$ref" : "#/$defs/ElementHtmlDialogMethodStart"
+            }, {
+              "$ref" : "#/$defs/ElementThirdPartyProgramInterface"
+            }, {
+              "$ref" : "#/$defs/ElementWaitEvent"
+            }, {
+              "$ref" : "#/$defs/ElementRestClientCall"
+            }, {
+              "$ref" : "#/$defs/ElementThirdPartyProgramStart"
+            }, {
+              "$ref" : "#/$defs/ElementSignalStartEvent"
+            }, {
+              "$ref" : "#/$defs/ProcessConfig"
+            }, {
+              "$ref" : "#/$defs/WebserviceProcessConfig"
+            } ]
+          },
+          "elements" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/$defs/ElementNode"
+            }
+          },
+          "boundaries" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/$defs/ElementNode"
+            }
+          },
+          "docs" : {
+            "$ref" : "#/$defs/Map(String,String)"
+          },
+          "tags" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string"
+            }
+          },
+          "visual" : {
+            "$ref" : "#/$defs/VisualNodeShape"
+          },
+          "layout" : {
+            "$ref" : "#/$defs/VisualLayout"
+          },
+          "parentConnector" : {
+            "type" : "string"
+          },
+          "connect" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/$defs/Connector"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "Connector" : {
+        "type" : "object",
+        "properties" : {
+          "color" : {
+            "type" : "string"
+          },
+          "condition" : {
+            "type" : "string"
+          },
+          "id" : {
+            "type" : "string"
+          },
+          "label" : {
+            "$ref" : "#/$defs/VisualConnectorLabel"
+          },
+          "outVar" : {
+            "type" : "string"
+          },
+          "to" : {
+            "type" : "string"
+          },
+          "var" : {
+            "type" : "string"
+          },
+          "via" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/$defs/VisualPoint"
+            }
+          }
+        },
+        "additionalProperties" : false
+      },
+      "ElementTypes" : {
+        "type" : "string",
+        "enum" : [ "Alternative", "CallSubEnd", "CallSubStart", "CallableSubProcess", "Database", "DialogCall", "EMail", "EmbeddedEnd", "EmbeddedProcessElement", "EmbeddedStart", "ErrorBoundaryEvent", "ErrorEnd", "ErrorStartEvent", "GenericActivity", "GenericBpmnElement", "HtmlDialogEnd", "HtmlDialogEventStart", "HtmlDialogExit", "HtmlDialogMethodStart", "HtmlDialogProcess", "HtmlDialogStart", "Join", "ManualBpmnElement", "Process", "ProcessAnnotation", "ProgramInterface", "ProgramStart", "ReceiveBpmnElement", "RequestStart", "RestClientCall", "RuleBpmnElement", "Script", "ScriptBpmnElement", "SendBpmnElement", "ServiceBpmnElement", "SignalBoundaryEvent", "SignalStartEvent", "Split", "SubProcessCall", "TaskEnd", "TaskEndPage", "TaskSwitchEvent", "TaskSwitchGateway", "ThirdPartyProgramInterface", "ThirdPartyProgramStart", "ThirdPartyWaitEvent", "TriggerCall", "UserBpmnElement", "UserTask", "WaitEvent", "WebServiceCall", "WebserviceEnd", "WebserviceProcess", "WebserviceStart" ]
       },
       "Map(String,String)": {
         "type": "object",

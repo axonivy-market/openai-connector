@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import com.axonivy.connector.langchain.AiBrain;
+import com.axonivy.connector.langchain.schema.OpenAiSchemaModel;
 import com.axonivy.connector.langchain.schema.SchemaLoader;
 
 import ch.ivyteam.ivy.environment.IvyTest;

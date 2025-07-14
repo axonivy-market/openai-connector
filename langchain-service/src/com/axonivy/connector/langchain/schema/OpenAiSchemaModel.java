@@ -1,4 +1,4 @@
-package com.axonivy.connector.langchain.test;
+package com.axonivy.connector.langchain.schema;
 
 import static dev.langchain4j.model.openai.internal.OpenAiUtils.aiMessageFrom;
 import static dev.langchain4j.model.openai.internal.OpenAiUtils.finishReasonFrom;

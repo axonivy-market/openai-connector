@@ -2,6 +2,7 @@ package com.axonivy.connector.langchain.test;
 
 import static dev.langchain4j.model.chat.Capability.RESPONSE_FORMAT_JSON_SCHEMA;
 
+import java.time.Duration;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
@@ -42,6 +43,25 @@ public class ProcessSchemaGenTest {
         .build();
 
     var lc4jSchema = processSchema("simple.json");
+    var writeMailProcess = processGeneration();
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
+  void askElon_grok4remote() {
+    var model = new AiBrain().grokModel()
+        .modelName("grok-4-0709")
+        .timeout(Duration.ofMinutes(4)) // be patient!
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-remote.json");
     var writeMailProcess = processGeneration();
     var ai = new OpenAiSchemaModel(model);
     var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);

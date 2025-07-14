@@ -1,0 +1,17 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "1234567890ABCDEF",
+  "config" : {
+    "data" : "ch.ivy.addon.portaltutorial.proc3.Data"
+  },
+  "elements" : [ {
+    "id" : "f1",
+    "type" : "EMail",
+    "visual" : {
+      "at" : {
+        "x" : 100,
+        "y" : 100
+      }
+    }
+  } ]
+}

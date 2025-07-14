@@ -5,9 +5,11 @@ import static dev.langchain4j.model.chat.Capability.RESPONSE_FORMAT_JSON_SCHEMA;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.axonivy.connector.langchain.AiBrain;
@@ -39,12 +41,12 @@ public class ProcessSchemaGenTest {
         .logResponses(true)
         .build();
 
-    var lc4jSchema = processSchema();
+    var lc4jSchema = processSchema("simple.json");
     var writeMailProcess = processGeneration();
     var ai = new OpenAiSchemaModel(model);
     var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
 
-    System.out.println(generatedProcess);
+    System.out.println(generatedProcess.toPrettyString());
   }
 
   @Test
@@ -57,12 +59,31 @@ public class ProcessSchemaGenTest {
         .logResponses(true)
         .build();
 
-    var lc4jSchema = processSchema();
+    var lc4jSchema = processSchema("simple.json");
     var writeMailProcess = processGeneration();
     var ai = new OpenAiSchemaModel(model);
     var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
 
-    System.out.println(generatedProcess);
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
+  @Disabled("explicitly rejected by gpt4.1mini")
+  void askOpenAi_remoteRefs() {
+    var model = new AiBrain().buildModel()
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .modelName(OpenAiChatModelName.GPT_4_1_MINI)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-remote.json");
+    var writeMailProcess = processGeneration();
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
   }
 
   private ChatRequest processGeneration() {
@@ -76,12 +97,12 @@ public class ProcessSchemaGenTest {
         .build();
   }
 
-  private JsonSchema processSchema() {
-    var jsonSchema = SchemaLoader.readSchema("simple.json");// SchemaLoader.readSchema("process.json");
+  private JsonSchema processSchema(String resource) {
+    var jsonSchema = SchemaLoader.readSchema(resource);// SchemaLoader.readSchema("process.json");
     var maap = jsonSchema.properties().stream()
         .collect(Collectors.toMap(Entry::getKey, et -> (Object) et.getValue()));
     return dev.langchain4j.model.openai.internal.chat.JsonSchema.builder()
-        .name("Process23")
+        .name(StringUtils.substringBefore(resource, "."))
         .strict(false)
         .schema(maap)
         .build();

@@ -2,16 +2,16 @@ package com.axonivy.connector.langchain.schema;
 
 import java.io.IOException;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SchemaLoader {
 
   private static final ObjectMapper MAPPER = new ObjectMapper();
 
-  public static JsonNode readSchema(String resource) {
+  public static ObjectNode readSchema(String resource) {
     try (var in = SchemaLoader.class.getResourceAsStream(resource)) {
-      return MAPPER.readTree(in);
+      return (ObjectNode) MAPPER.readTree(in);
     } catch (IOException ex) {
       throw new RuntimeException("Failed to load schema " + resource, ex);
     }

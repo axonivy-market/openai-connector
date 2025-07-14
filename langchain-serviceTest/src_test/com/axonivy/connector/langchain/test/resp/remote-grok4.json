@@ -1,0 +1,57 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "17E563E007A8320C",
+  "description" : "Notify Rolf about new lead",
+  "kind" : "CALLABLE",
+  "elements" : [ {
+    "id" : "f1",
+    "type" : "RequestStart",
+    "visual" : {
+      "at" : {
+        "x" : 96,
+        "y" : 64
+      }
+    },
+    "connectors" : {
+      "out" : {
+        "edges" : [ {
+          "target" : "f2"
+        } ]
+      }
+    }
+  }, {
+    "id" : "f2",
+    "type" : "Email",
+    "config" : {
+      "headers" : {
+        "to" : "rolf@axonivy.com"
+      },
+      "subject" : "We got a new lead!",
+      "message" : {
+        "body" : "We got the lead!"
+      }
+    },
+    "visual" : {
+      "at" : {
+        "x" : 240,
+        "y" : 64
+      }
+    },
+    "connectors" : {
+      "out" : {
+        "edges" : [ {
+          "target" : "f3"
+        } ]
+      }
+    }
+  }, {
+    "id" : "f3",
+    "type" : "ProcessEnd",
+    "visual" : {
+      "at" : {
+        "x" : 384,
+        "y" : 64
+      }
+    }
+  } ]
+}

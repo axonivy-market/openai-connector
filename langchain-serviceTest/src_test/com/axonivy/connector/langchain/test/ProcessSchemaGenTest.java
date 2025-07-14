@@ -51,6 +51,23 @@ public class ProcessSchemaGenTest {
   }
 
   @Test
+  void askElon_grok3inlineLite() {
+    var model = new AiBrain().grokModel()
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-inline-lite.json");
+    var writeMailProcess = processGeneration();
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
   void askElon_grok4remote() {
     var model = new AiBrain().grokModel()
         .modelName("grok-4-0709")
@@ -99,6 +116,24 @@ public class ProcessSchemaGenTest {
         .build();
 
     var lc4jSchema = processSchema("simple.json");
+    var writeMailProcess = processGeneration();
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
+  void askOpenAi_gpt41mini_inlineLite() {
+    var model = new AiBrain().buildModel()
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .modelName(OpenAiChatModelName.GPT_4_1_MINI)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-inline-lite.json");
     var writeMailProcess = processGeneration();
     var ai = new OpenAiSchemaModel(model);
     var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);

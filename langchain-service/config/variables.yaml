@@ -5,3 +5,7 @@ Variables:
       # your openAI key/bearer token
       #[password]
       apiKey: ${decrypt:}
+    grok:
+      # Your X/Grok ApiKey
+      #[password]
+      apiKey: ${decrypt:}

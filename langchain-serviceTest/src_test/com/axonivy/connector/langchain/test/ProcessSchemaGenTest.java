@@ -30,6 +30,23 @@ public class ProcessSchemaGenTest {
   }
 
   @Test
+  void askElon() {
+    var model = new AiBrain().grokModel()
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema();
+    var writeMailProcess = processGeneration();
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess);
+  }
+
+  @Test
   void askOpenAi() {
     var model = new AiBrain().buildModel()
         .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
@@ -40,8 +57,7 @@ public class ProcessSchemaGenTest {
         .build();
 
     var lc4jSchema = processSchema();
-
-    ChatRequest writeMailProcess = processGeneration();
+    var writeMailProcess = processGeneration();
     var ai = new OpenAiSchemaModel(model);
     var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
 

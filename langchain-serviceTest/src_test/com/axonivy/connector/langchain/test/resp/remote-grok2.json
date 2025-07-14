@@ -1,0 +1,22 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "1234567890ABCDEF",
+  "description" : "Process to notify about a new lead",
+  "kind" : "BPMN",
+  "data" : "com.example.LeadNotificationData",
+  "elements" : [ {
+    "id" : "f1",
+    "type" : "EMAIL",
+    "laneId" : "defaultLane",
+    "name" : "Notify Rolf",
+    "position" : {
+      "x" : 100,
+      "y" : 100
+    },
+    "config" : {
+      "to" : "rolf@axonivy.com",
+      "subject" : "New Lead Notification",
+      "body" : "We have received a new lead!"
+    }
+  } ]
+}

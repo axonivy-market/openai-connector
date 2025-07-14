@@ -42,7 +42,7 @@ public class AiBrain {
 
     var chatGpt = chatAssistant();
 
-    dev.langchain4j.model.output.Response response = chatGpt.jsonChat(prompt);
+    dev.langchain4j.model.output.Response<?> response = chatGpt.jsonChat(prompt);
     return Response
         .ok(response.content())
         .build();
@@ -61,6 +61,13 @@ public class AiBrain {
   public OpenAiChatModelBuilder buildModel() {
     return OpenAiChatModel.builder()
         .apiKey(Ivy.var().get("llm.openai.apiKey"));
+  }
+
+  public OpenAiChatModelBuilder grokModel() {
+    return OpenAiChatModel.builder()
+        .apiKey(Ivy.var().get("llm.grok.apiKey"))
+        .baseUrl("https://api.x.ai/v1/") // grok!
+        .modelName("grok-3-mini");
   }
 
 }

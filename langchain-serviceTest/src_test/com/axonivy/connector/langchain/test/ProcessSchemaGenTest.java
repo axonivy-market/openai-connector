@@ -106,6 +106,25 @@ public class ProcessSchemaGenTest {
   }
 
   @Test
+  @Disabled("runs into timeout")
+  void askElon_grok3mini_inlineFull() {
+    var model = new AiBrain().grokModel()
+        .timeout(Duration.ofMinutes(4)) // be patient!
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-inline-full.json");
+    var writeMailProcess = processGeneration("write a soap process, that returns product names of our ERP database");
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
   void askOpenAi() {
     var model = new AiBrain().buildModel()
         .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
@@ -142,6 +161,24 @@ public class ProcessSchemaGenTest {
   }
 
   @Test
+  void askOpenAi_gpt41mini_inlineFull() {
+    var model = new AiBrain().buildModel()
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .modelName(OpenAiChatModelName.GPT_4_1_MINI)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-inline-full.json");
+    var writeMailProcess = processGeneration("write a soap process, that returns product names of our ERP database");
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
   @Disabled("explicitly rejected by gpt4.1mini")
   void askOpenAi_remoteRefs() {
     var model = new AiBrain().buildModel()
@@ -161,13 +198,17 @@ public class ProcessSchemaGenTest {
   }
 
   private ChatRequest processGeneration() {
+    return processGeneration("add an email element, telling rolf@axonivy.com that we got the lead!");
+  }
+
+  private ChatRequest processGeneration(String msg) {
     var processHints = new SystemMessage("""
       omit as many defaults as possible, but at any rate produce the required values.
       Generate the 'data' as java qualified name.
       For element ID's create unique instances, starting from f1.
       Draw elements as graph.""");
     return ChatRequest.builder()
-        .messages(processHints, new UserMessage("add an email element, telling rolf@axonivy.com that we got the lead!"))
+        .messages(processHints, new UserMessage(msg))
         .build();
   }
 

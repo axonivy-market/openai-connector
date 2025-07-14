@@ -1,0 +1,87 @@
+{
+  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "id" : "f1",
+  "description" : "SOAP process returning product names from ERP database",
+  "kind" : "WEB_SERVICE",
+  "config" : {
+    "data" : "com.example.erp.ProductNamesProcess"
+  },
+  "elements" : [ {
+    "id" : "f2",
+    "type" : "WebserviceStart",
+    "name" : "Start",
+    "impl" : "com.example.erp.ProductNamesProcess",
+    "config" : {
+      "signature" : "getProductNames",
+      "input" : { },
+      "result" : { }
+    },
+    "visual" : {
+      "at" : {
+        "x" : 100,
+        "y" : 100
+      },
+      "size" : {
+        "width" : 120,
+        "height" : 60
+      },
+      "color" : "#00CCFF",
+      "icon" : "webservice"
+    },
+    "connect" : [ {
+      "id" : "f3",
+      "to" : "f4"
+    } ]
+  }, {
+    "id" : "f4",
+    "type" : "Database",
+    "name" : "Query Product Names",
+    "impl" : "com.example.erp.ProductNamesProcess",
+    "config" : {
+      "query" : {
+        "dbName" : "ERP_DB",
+        "table" : "products",
+        "select" : [ "name" ],
+        "stmt" : "SELECT name FROM products"
+      },
+      "output" : { },
+      "cache" : {
+        "mode" : "DO_NOT_CACHE",
+        "scope" : "SESSION"
+      }
+    },
+    "visual" : {
+      "at" : {
+        "x" : 300,
+        "y" : 100
+      },
+      "size" : {
+        "width" : 160,
+        "height" : 60
+      },
+      "color" : "#FFD700",
+      "icon" : "database"
+    },
+    "connect" : [ {
+      "id" : "f5",
+      "to" : "f6"
+    } ]
+  }, {
+    "id" : "f6",
+    "type" : "TaskEnd",
+    "name" : "End",
+    "impl" : "com.example.erp.ProductNamesProcess",
+    "visual" : {
+      "at" : {
+        "x" : 500,
+        "y" : 100
+      },
+      "size" : {
+        "width" : 80,
+        "height" : 40
+      },
+      "color" : "#32CD32",
+      "icon" : "end"
+    }
+  } ]
+}

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.axonivy.connector.openai.constants.OpenAiCommonConstants;
 import com.axonivy.connector.openai.context.MultiEnvironmentContextProvider;
+import com.axonivy.connector.openai.utils.OpenAiUtils;
 import com.openai.connector.openaiData;
 
 import ch.ivyteam.ivy.application.IApplication;
@@ -20,7 +21,6 @@ import ch.ivyteam.ivy.bpm.engine.client.element.BpmProcess;
 import ch.ivyteam.ivy.bpm.exec.client.IvyProcessTest;
 import ch.ivyteam.ivy.environment.AppFixture;
 import ch.ivyteam.ivy.rest.client.RestClients;
-import utils.OpenAiUtils;
 
 @IvyProcessTest(enableWebServer = true)
 @ExtendWith(MultiEnvironmentContextProvider.class)
@@ -29,9 +29,6 @@ public class OpenAiTest {
   @BeforeEach
   void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
     OpenAiUtils.setUpConfigForContext(context.getDisplayName(), fixture, app);
-    // Example: for tests with "everybody" in name, set a flag in the context store
-    boolean useEverybody = context.getDisplayName().equals(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME);
-    context.getStore(ExtensionContext.Namespace.GLOBAL).put("useEverybody", useEverybody);
   }
 
   @AfterEach
@@ -43,12 +40,10 @@ public class OpenAiTest {
   @TestTemplate
   public void chatCompletions(BpmClient bpmClient, ExtensionContext context) {
     BpmElement CHAT = BpmProcess.path(OpenAiCommonConstants.OPEN_AI).elementName("chatGpt(String)");
-    boolean useEverybody =
-        context.getStore(ExtensionContext.Namespace.GLOBAL).getOrDefault("useEverybody", Boolean.class, false);
 
     var start = bpmClient.start().subProcess(CHAT).withParam("what", "1 + 1 = ?");
 
-    if (useEverybody) {
+    if (context.getDisplayName().equals(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME)) {
       start = start.as().everybody();
     }
 

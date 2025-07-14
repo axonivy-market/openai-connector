@@ -1,4 +1,4 @@
-package utils;
+package com.axonivy.connector.openai.utils;
 
 import static com.axonivy.connector.openai.mock.MockAI.URI;
 

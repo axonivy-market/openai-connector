@@ -70,6 +70,25 @@ public class ProcessSchemaGenTest {
   }
 
   @Test
+  void askElon_grok2remote() {
+    var model = new AiBrain().grokModel()
+        .modelName("grok-2-vision-1212")
+        .timeout(Duration.ofMinutes(4)) // be patient!
+        .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)
+        .strictJsonSchema(true)
+        .logRequests(true)
+        .logResponses(true)
+        .build();
+
+    var lc4jSchema = processSchema("proc-remote.json");
+    var writeMailProcess = processGeneration();
+    var ai = new OpenAiSchemaModel(model);
+    var generatedProcess = ai.chat(writeMailProcess, lc4jSchema);
+
+    System.out.println(generatedProcess.toPrettyString());
+  }
+
+  @Test
   void askOpenAi() {
     var model = new AiBrain().buildModel()
         .supportedCapabilities(RESPONSE_FORMAT_JSON_SCHEMA)

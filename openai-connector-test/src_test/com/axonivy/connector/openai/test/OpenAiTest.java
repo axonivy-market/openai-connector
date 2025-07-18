@@ -8,9 +8,9 @@ import org.junit.jupiter.api.TestTemplate;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import com.axonivy.connector.openai.constants.OpenAiCommonConstants;
+import com.axonivy.connector.openai.constants.OpenAiTestConstants;
 import com.axonivy.connector.openai.context.MultiEnvironmentContextProvider;
-import com.axonivy.connector.openai.utils.OpenAiUtils;
+import com.axonivy.connector.openai.utils.OpenAiTestUtils;
 import com.openai.connector.openaiData;
 
 import ch.ivyteam.ivy.application.IApplication;
@@ -28,22 +28,22 @@ public class OpenAiTest {
 
   @BeforeEach
   void beforeEach(ExtensionContext context, AppFixture fixture, IApplication app) {
-    OpenAiUtils.setUpConfigForContext(context.getDisplayName(), fixture, app);
+    OpenAiTestUtils.setUpConfigForContext(context.getDisplayName(), fixture, app);
   }
 
   @AfterEach
   void afterEach(AppFixture fixture, IApplication app) {
     RestClients clients = RestClients.of(app);
-    clients.remove(OpenAiCommonConstants.OPEN_AI);
+    clients.remove(OpenAiTestConstants.OPEN_AI);
   }
 
   @TestTemplate
   public void chatCompletions(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement CHAT = BpmProcess.path(OpenAiCommonConstants.OPEN_AI).elementName("chatGpt(String)");
+    BpmElement CHAT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("chatGpt(String)");
 
     var start = bpmClient.start().subProcess(CHAT).withParam("what", "1 + 1 = ?");
 
-    if (context.getDisplayName().equals(OpenAiCommonConstants.REAL_CALL_CONTEXT_DISPLAY_NAME)) {
+    if (context.getDisplayName().equals(OpenAiTestConstants.REAL_CALL_CONTEXT_DISPLAY_NAME)) {
       start = start.as().everybody();
     }
 

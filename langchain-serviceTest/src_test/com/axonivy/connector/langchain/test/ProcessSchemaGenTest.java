@@ -20,6 +20,7 @@ import com.axonivy.connector.langchain.schema.SchemaLoader;
 import ch.ivyteam.ivy.environment.IvyTest;
 import dev.langchain4j.data.message.SystemMessage;
 import dev.langchain4j.data.message.UserMessage;
+import dev.langchain4j.http.client.log.LoggingHttpClient;
 import dev.langchain4j.model.chat.request.ChatRequest;
 import dev.langchain4j.model.openai.OpenAiChatModelName;
 import dev.langchain4j.model.openai.internal.chat.JsonSchema;
@@ -134,6 +135,9 @@ public class ProcessSchemaGenTest {
         .logResponses(true)
         .build();
 
+    Logger.getLogger(LoggingHttpClient.class).debug("direct?");
+    Logger.getLogger(LoggingHttpClient.class).error("direct error?");
+    
     var lc4jSchema = processSchema("simple.json");
     var writeMailProcess = processGeneration();
     var ai = new OpenAiSchemaModel(model);

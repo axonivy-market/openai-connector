@@ -115,7 +115,7 @@ public class MockAI {
   @Path("assistants")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response getAssistants(@QueryParam("failOnInvalidSubtype") @DefaultValue("true") boolean failOnInvalidSubtype) {
+  public Response getAssistants(@QueryParam("failOnInvalidSubtype") @DefaultValue("false") boolean failOnInvalidSubtype) {
     var node = openAIExamples.get("get-assistants-response");
     ListAssistantsResponse responseObj;
     try {

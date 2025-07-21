@@ -11,4 +11,5 @@ jobs:
     uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v5
     with:
       mvnArgs: -U -Divy.release=nightly
-      
+    secrets:
+      mvnArgs: -Dopenai.key=${{secrets.OPENAI_KEY}}

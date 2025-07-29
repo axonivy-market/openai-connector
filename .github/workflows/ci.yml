@@ -7,11 +7,13 @@ on:
     - cron:  '21 21 * * *'
   workflow_dispatch:
 
+permissions:
+    contents: read
+    checks: write
+    pull-requests: write
+
 jobs:
   build:
-    permissions:
-      contents: read
-      pull-requests: write
     uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
     with:
       mvnArgs: -U

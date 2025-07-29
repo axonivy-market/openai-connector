@@ -9,8 +9,6 @@ on:
 
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v5
+    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
     with:
       mvnArgs: -U
-    secrets:
-      mvnArgs: -Dopenai.key=${{secrets.OPENAI_KEY}}

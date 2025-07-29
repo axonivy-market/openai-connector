@@ -53,12 +53,12 @@
 				<version>${project.build.plugin.version}</version>
 				<extensions>true</extensions>
 			</plugin>
-
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<systemPropertyVariables>
 						<openaiKey>${openai.key}</openaiKey>
+						<testEnvironment>${testEnvironment}</testEnvironment>
 					</systemPropertyVariables>
 					<statelessTestsetReporter
 						implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">

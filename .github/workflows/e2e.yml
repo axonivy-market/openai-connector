@@ -1,0 +1,17 @@
+name: E2E-Build
+
+on:
+  schedule:
+    - cron:  '0 1 * * 1'
+  workflow_dispatch:
+
+jobs:
+  build:
+    permissions:
+      contents: read
+      checks: write
+    uses: axonivy-market/github-workflows/.github/workflows/ci.yml@v6
+    with:
+      mvnArgs: -U
+    secrets:
+      mvnArgs: -Dopenai.key=${{secrets.OPENAI_KEY}} "-DtestEnvironment=${{ secrets.END_2_END_TESTING_ENV }}"

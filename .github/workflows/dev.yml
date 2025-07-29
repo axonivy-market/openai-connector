@@ -8,6 +8,8 @@ on:
 
 jobs:
   build:
+    permissions:
+      contents: read
     uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v6
     with:
       mvnArgs: -U -Divy.release=nightly

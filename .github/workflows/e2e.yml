@@ -15,4 +15,4 @@ jobs:
     with:
       mvnArgs: -U
     secrets:
-      mvnArgs: -Dopenai.key=${{secrets.OPENAI_KEY}} "-DtestEnvironment=${{ secrets.END_2_END_TESTING_ENV }}"
+      mvnArgs: -Dopenai.key=${{secrets.OPENAI_KEY}} -DtestEnvironment=E2E

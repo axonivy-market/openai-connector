@@ -6,9 +6,12 @@ on:
     - cron:  '21 21 * * *'
   workflow_dispatch:
 
+permissions:
+  contents: read
+  checks: write
+
 jobs:
   build:
-    uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v5
+    uses: axonivy-market/github-workflows/.github/workflows/dev.yml@v6
     with:
       mvnArgs: -U -Divy.release=nightly
-      

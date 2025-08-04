@@ -3,13 +3,12 @@ name: Dev-Build
 on:
   push:
   schedule:
-    - cron:  '21 21 * * *'
+    - cron: '21 21 * * *'
   workflow_dispatch:
 
 permissions:
   contents: read
   checks: write
-  pull-requests: write
 
 jobs:
   build:

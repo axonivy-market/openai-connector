@@ -14,8 +14,6 @@ public class ChatWithAiBean {
 
 	private static List<ModelEnum> models;
 
-	private ModelEnum selectedModel;
-
 	@PostConstruct
 	public void init() {
 		models = List.of(
@@ -40,14 +38,10 @@ public class ChatWithAiBean {
 		        ModelEnum.GPT_3_5_TURBO_1106,
 		        ModelEnum.GPT_3_5_TURBO_0125
 		    );
-		selectedModel = ModelEnum.GPT_3_5_TURBO;
 	}
 
 	public List<ModelEnum> getModels() {
 		return models;
 	}
 
-	public ModelEnum getSelectedModel() {
-		return selectedModel;
-	}
 }

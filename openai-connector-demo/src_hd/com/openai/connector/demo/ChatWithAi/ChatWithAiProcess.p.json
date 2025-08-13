@@ -72,8 +72,8 @@
         "call" : {
           "map" : {
             "param.what" : "in.message",
-            "param.model" : "in.model",
-            "param.temperature" : "in.temperature"
+            "param.model" : "in.#model  is initialized ? in.#model : com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum.GPT_3_5_TURBO",
+            "param.temperature" : "in.#temperature  is initialized ? in.#temperature : 0"
           }
         },
         "output" : {

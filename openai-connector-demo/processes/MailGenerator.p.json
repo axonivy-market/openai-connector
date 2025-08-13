@@ -36,5 +36,17 @@
       "connect" : [
         { "id" : "f2", "to" : "f1" }
       ]
+    }, {
+      "id" : "f5",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "This example demonstrates how to use the EmailGenerator API to create personalized emails from predefined templates. ",
+        "",
+        "When you run the sample, it generates tailored emails based on your input data, making them ready for preview or immediate sending."
+      ],
+      "visual" : {
+        "at" : { "x" : 672, "y" : 64 },
+        "size" : { "width" : 526, "height" : 104 }
+      }
     } ]
 }

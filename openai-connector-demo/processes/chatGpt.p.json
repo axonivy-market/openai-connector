@@ -40,5 +40,17 @@
       "connect" : [
         { "id" : "f4", "to" : "f1" }
       ]
+    }, {
+      "id" : "f5",
+      "type" : "ProcessAnnotation",
+      "name" : [
+        "This example showcases the integration with the ChatGPT API to deliver intelligent, natural language responses. It uses conversation templates and configurable parameters to adapt to your specific needs. ",
+        "",
+        "By executing the sample, you can interact with ChatGPT directly within the Axon Ivy UI and review your conversation history seamlessly."
+      ],
+      "visual" : {
+        "at" : { "x" : 688, "y" : 56 },
+        "size" : { "width" : 526, "height" : 104 }
+      }
     } ]
 }

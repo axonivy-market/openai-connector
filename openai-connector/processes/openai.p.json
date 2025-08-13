@@ -8,14 +8,14 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "chatGpt(String,ModelEnum,Integer)",
+      "name" : "chatGpt(String,ModelEnum,BigDecimal)",
       "config" : {
         "signature" : "chatGpt",
         "input" : {
           "params" : [
             { "name" : "what", "type" : "String", "desc" : "" },
             { "name" : "model", "type" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum", "desc" : "" },
-            { "name" : "temperature", "type" : "Integer", "desc" : "" }
+            { "name" : "temperature", "type" : "BigDecimal", "desc" : "" }
           ],
           "map" : {
             "out.model" : "param.model",
@@ -50,7 +50,7 @@
         "connector"
       ],
       "visual" : {
-        "at" : { "x" : 720, "y" : 64 },
+        "at" : { "x" : 656, "y" : 64 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
       },
       "connect" : [
@@ -171,8 +171,8 @@
       "type" : "ProcessAnnotation",
       "name" : "This callable accepts parameters from external sources, such as message, model, temperature, and more",
       "visual" : {
-        "at" : { "x" : 320, "y" : 88 },
-        "size" : { "width" : 512 }
+        "at" : { "x" : 296, "y" : 87 },
+        "size" : { "width" : 464, "height" : 62 }
       }
     }, {
       "id" : "f13",

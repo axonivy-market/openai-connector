@@ -15,5 +15,13 @@
   }, {
     "name" : "assistants",
     "type" : "List<com.openai.api.v1.client.AssistantObject>"
+  }, {
+    "name" : "model",
+    "type" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "temperature",
+    "type" : "java.math.BigDecimal",
+    "modifiers" : [ "PERSISTENT" ]
   } ]
 }

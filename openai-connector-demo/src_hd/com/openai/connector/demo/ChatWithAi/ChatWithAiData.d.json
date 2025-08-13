@@ -11,5 +11,13 @@
     "name" : "conversation",
     "type" : "java.util.List<com.openai.connector.demo.Message>",
     "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "model",
+    "type" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum",
+    "modifiers" : [ "PERSISTENT" ]
+  }, {
+    "name" : "temperature",
+    "type" : "java.math.BigDecimal",
+    "modifiers" : [ "PERSISTENT" ]
   } ]
 }

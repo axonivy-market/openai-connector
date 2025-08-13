@@ -8,14 +8,19 @@
   "elements" : [ {
       "id" : "f0",
       "type" : "CallSubStart",
-      "name" : "chatGpt(String)",
+      "name" : "chatGpt(String,ModelEnum,Integer)",
       "config" : {
         "signature" : "chatGpt",
         "input" : {
           "params" : [
-            { "name" : "what", "type" : "String", "desc" : "" }
+            { "name" : "what", "type" : "String", "desc" : "" },
+            { "name" : "model", "type" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum", "desc" : "" },
+            { "name" : "temperature", "type" : "Integer", "desc" : "" }
           ],
-          "map" : { },
+          "map" : {
+            "out.model" : "param.model",
+            "out.temperature" : "param.temperature"
+          },
           "code" : [
             "import com.openai.api.v1.client.ChatCompletionRequestUserMessage;",
             "import com.openai.api.v1.client.ChatCompletionRequestMessageContentPartText;",
@@ -75,7 +80,8 @@
               "param.audio.voice" : "com.openai.api.v1.client.CreateChatCompletionRequestAudio.VoiceEnum.ECHO",
               "param.logitBias" : "in.logitBias",
               "param.messages" : "[in.message]",
-              "param.model" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum.GPT_3_5_TURBO",
+              "param.model" : "in.#model  is initialized ? in.#model : com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum.GPT_3_5_TURBO",
+              "param.temperature" : "in.#temperature  is initialized ? in.#temperature : null",
               "param.user" : "ivy.session.getSessionUserName()"
             }
           }
@@ -152,5 +158,11 @@
       "connect" : [
         { "id" : "f9", "to" : "f6", "color" : "default" }
       ]
+    }, {
+      "id" : "f10",
+      "type" : "ProcessAnnotation",
+      "visual" : {
+        "at" : { "x" : 520, "y" : 64 }
+      }
     } ]
 }

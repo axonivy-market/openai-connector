@@ -61,17 +61,19 @@
       "id" : "f7",
       "type" : "HtmlDialogEnd",
       "visual" : {
-        "at" : { "x" : 376, "y" : 224 }
+        "at" : { "x" : 536, "y" : 224 }
       }
     }, {
       "id" : "f9",
       "type" : "SubProcessCall",
       "name" : "openai",
       "config" : {
-        "processCall" : "openai:chatGpt(String)",
+        "processCall" : "openai:chatGpt(String,com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum,Integer)",
         "call" : {
           "map" : {
-            "param.what" : "in.message"
+            "param.what" : "in.message",
+            "param.model" : "in.model",
+            "param.temperature" : "in.temperature"
           }
         },
         "output" : {
@@ -93,9 +95,20 @@
         }
       },
       "visual" : {
-        "at" : { "x" : 240, "y" : 224 },
+        "at" : { "x" : 312, "y" : 224 },
         "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
+      "boundaries" : [ {
+          "id" : "f11",
+          "type" : "ErrorBoundaryEvent",
+          "visual" : {
+            "at" : { "x" : 344, "y" : 264 },
+            "labelOffset" : { "x" : 13, "y" : 33 }
+          },
+          "connect" : [
+            { "id" : "f12", "to" : "f7" }
+          ]
+        } ],
       "connect" : [
         { "id" : "f8", "to" : "f7" }
       ]

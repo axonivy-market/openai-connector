@@ -2,6 +2,8 @@ package com.axonivy.connector.openai.test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.TestTemplate;
@@ -11,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import com.axonivy.connector.openai.constants.OpenAiTestConstants;
 import com.axonivy.connector.openai.context.MultiEnvironmentContextProvider;
 import com.axonivy.connector.openai.utils.OpenAiTestUtils;
+import com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum;
 import com.openai.connector.openaiData;
 
 import ch.ivyteam.ivy.application.IApplication;
@@ -39,9 +42,9 @@ public class OpenAiTest {
 
   @TestTemplate
   public void chatCompletions(BpmClient bpmClient, ExtensionContext context) {
-    BpmElement CHAT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("chatGpt(String)");
+    BpmElement CHAT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("chatGpt(String,ModelEnum,BigDecimal)");
 
-    var start = bpmClient.start().subProcess(CHAT).withParam("what", "1 + 1 = ?");
+    var start = bpmClient.start().subProcess(CHAT).withParam("what", "1 + 1 = ?").withParam("model", ModelEnum.GPT_3_5_TURBO).withParam("temperature", BigDecimal.ONE);
 
     if (context.getDisplayName().equals(OpenAiTestConstants.REAL_CALL_CONTEXT_DISPLAY_NAME)) {
       start = start.as().everybody();

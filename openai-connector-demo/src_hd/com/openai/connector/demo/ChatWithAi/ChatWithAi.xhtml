@@ -11,56 +11,60 @@
         AI Chat
       </h3>
 
-      <h:form id="form">
-        <p:messages />
-        <p:panelGrid columns="1" layout="grid" styleClass="ui-panelgrid-blank ui-fluid" >
+        <h:form id="form">
+            <p:messages />
 
-          <ui:repeat var="msg" value="#{data.conversation}">
-            <p:outputLabel value="#{msg.sender}" style="font-weight:bold;"/>
-            <p:outputLabel value="#{msg.text}" style="display:block; margin-bottom:20px;"/>
-          </ui:repeat>
-          <p:outputLabel value="How can I help you today?"/>
-          <p:inputTextarea value="#{data.message}"/>
+            <p:panelGrid columns="1" layout="grid"
+                         styleClass="ui-panelgrid-blank ui-fluid">
 
-        </p:panelGrid>
-        <br />
-        <div class="command-btns">
-          <p:commandButton icon="pi pi-cog" value="Config" onclick="PF('configDialog').show(); return false;" />
+                <ui:repeat var="msg" value="#{data.conversation}">
+                    <p:outputLabel value="#{msg.sender}" style="font-weight:bold;" />
+                    <p:outputLabel value="#{msg.text}"
+                                   style="display:block; margin-bottom:20px;" />
+                </ui:repeat>
 
-          <p:commandButton id="proceed" actionListener="#{logic.send}" value="send" update="form" icon="pi pi-check" />
-        </div>
+                <p:outputLabel value="How can I help you today?" />
+                <p:inputTextarea value="#{data.message}" />
+            </p:panelGrid>
 
-        <p:dialog header="AI Model Configuration"
-                  widgetVar="configDialog" modal="true"
-                  closable="true" draggable="false"
-                  resizable="false" width="400">
+            <br />
 
-          <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid">
+            <div class="command-btns">
+                <p:commandButton icon="pi pi-cog" value="Config" onclick="PF('configDialog').show(); return false;" />
 
-            <p:outputLabel value="Model: " />
-            <p:selectOneMenu id="selectedModel"  value="#{data.model}" style="width:100%">
-              <f:selectItem noSelectionOption="true" />
-              <f:selectItems value="#{chatWithAiBean.models}" var="m" itemLabel="#{m}" itemValue="#{m}" />
-            </p:selectOneMenu>
+                <p:commandButton id="proceed" actionListener="#{logic.send}" value="Send" update="form" icon="pi pi-check" />
+            </div>
 
-            <p:outputLabel value="Temperature: " />
-            <p:spinner id="temperature" value="#{data.temperature}"  min="0"
-                       max="2" stepFactor="0.1" style="width:100%" />
+            <p:dialog header="AI Model Configuration" widgetVar="configDialog" modal="true" closable="true"
+                      draggable="false" resizable="false" width="500">
 
-            <p:outputLabel />
-            <h:panelGroup layout="block" style="text-align: right;">
-              <p:commandButton value="Close" icon="pi pi-times"
-                               update="form" onclick="PF('configDialog').hide(); return false;"
-                               styleClass="ui-button-secondary"
-                               style="width:100px;" />
-            </h:panelGroup>
+                <p:panelGrid columns="2" styleClass="ui-panelgrid-blank ui-fluid">
 
-          </p:panelGrid>
+                    <p:outputLabel value="Model: " />
+                    <p:selectOneMenu id="selectedModel" value="#{data.model}" style="width:100%">
+                        <f:selectItem noSelectionOption="true" itemValue="#{chatWithAiBean.defaultModel}"
+                                      itemLabel="#{chatWithAiBean.defaultModel.value}" />
+                        <f:selectItems value="#{chatWithAiBean.models}" var="m" itemLabel="#{m}" itemValue="#{m}" />
+                    </p:selectOneMenu>
 
-        </p:dialog>
+                    <p:outputLabel value="Temperature: " />
+                    <p:spinner id="temperature" value="#{data.temperature}" stepFactor="0.1" style="width:100%">
+                        <f:validateDoubleRange minimum="0" maximum="2" />
+                        <p:ajax event="change" listener="#{data.temperature}" update="temperature temperatureMsg" />
+                    </p:spinner>
+                </p:panelGrid>
 
-      </h:form>
-      
+                <p:message id="temperatureMsg" for="temperature" />
+
+                <h:panelGroup layout="block" style="text-align: right;">
+                    <p:commandButton value="Close" icon="pi pi-times" update="form"
+                                     onclick="PF('configDialog').hide(); return false;"
+                                     styleClass="ui-button-secondary" style="width:100px;" />
+                </h:panelGroup>
+
+            </p:dialog>
+        </h:form>
+
     </ui:define>
   </ui:composition>
 </h:body>

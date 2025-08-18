@@ -13,10 +13,14 @@ import com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum;
 public class ChatWithAiBean {
 
 	private static List<ModelEnum> models;
+	private ModelEnum defaultModel;
 
 	@PostConstruct
 	public void init() {
 		models = List.of(
+		        ModelEnum.GPT_3_5_TURBO_16K,
+		        ModelEnum.GPT_3_5_TURBO_1106,
+		        ModelEnum.GPT_3_5_TURBO_0125,
 		        ModelEnum.GPT_4O,
 		        ModelEnum.GPT_4O_2024_11_20,
 		        ModelEnum.GPT_4O_2024_08_06,
@@ -29,19 +33,16 @@ public class ChatWithAiBean {
 		        ModelEnum.GPT_4_0125_PREVIEW,
 		        ModelEnum.GPT_4_TURBO_PREVIEW,
 		        ModelEnum.GPT_4_1106_PREVIEW,
-		        ModelEnum.GPT_4_VISION_PREVIEW,
-		        ModelEnum.GPT_4,
-		        ModelEnum.GPT_4_32K_0314,
-		        ModelEnum.GPT_4_32K_0613,
-		        ModelEnum.GPT_3_5_TURBO,
-		        ModelEnum.GPT_3_5_TURBO_16K,
-		        ModelEnum.GPT_3_5_TURBO_1106,
-		        ModelEnum.GPT_3_5_TURBO_0125
+		        ModelEnum.GPT_4
 		    );
+		defaultModel =  ModelEnum.GPT_3_5_TURBO;
 	}
 
 	public List<ModelEnum> getModels() {
 		return models;
 	}
 
+	public ModelEnum getDefaultModel() {
+		return defaultModel;
+	}
 }

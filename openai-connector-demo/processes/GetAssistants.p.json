@@ -43,7 +43,7 @@
     }, {
       "id" : "f5",
       "type" : "ProcessAnnotation",
-      "name" : "This example  retrieve and display a list of AssistantObject items from the OpenAI API (GET /v1/assistants. The results are presented in a table showing key details like ID, name, and model, allowing you to quickly identify and select the right Assistant for your application.",
+      "name" : "This example retrieve and display a list of AssistantObject items from the OpenAI API (GET /v1/assistants. The results are presented in a table showing key details like ID, name, and model, allowing you to quickly identify and select the right Assistant for your application.",
       "visual" : {
         "at" : { "x" : 687, "y" : 72 },
         "size" : { "width" : 535, "height" : 76 }

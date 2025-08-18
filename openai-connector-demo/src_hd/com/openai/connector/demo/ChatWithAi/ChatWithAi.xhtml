@@ -48,13 +48,10 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Temperature: " />
-                    <p:spinner id="temperature" value="#{data.temperature}" stepFactor="0.1" style="width:100%" placeholder="0.0">
-                        <f:validateDoubleRange minimum="0" maximum="2" />
-                        <p:ajax event="change" update="temperature temperatureMsg" />
+                    <p:spinner id="temperature" value="#{data.temperature}" stepFactor="0.1" style="width:100%" min = "0.0" max ="2.0" placeholder="0.0">
+                        <f:passThroughAttribute name="onkeydown" value="return false;" />
                     </p:spinner>
                 </p:panelGrid>
-
-                <p:message id="temperatureMsg" for="temperature" />
 
                 <h:panelGroup layout="block" style="text-align: right;">
                     <p:commandButton value="Close" icon="pi pi-times" update="form"

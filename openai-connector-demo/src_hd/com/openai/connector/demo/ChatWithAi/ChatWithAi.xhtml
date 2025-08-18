@@ -48,9 +48,9 @@
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Temperature: " />
-                    <p:spinner id="temperature" value="#{data.temperature}" stepFactor="0.1" style="width:100%">
+                    <p:spinner id="temperature" value="#{data.temperature}" stepFactor="0.1" style="width:100%" placeholder="0.0">
                         <f:validateDoubleRange minimum="0" maximum="2" />
-                        <p:ajax event="change" listener="#{data.temperature}" update="temperature temperatureMsg" />
+                        <p:ajax event="change" update="temperature temperatureMsg" />
                     </p:spinner>
                 </p:panelGrid>
 

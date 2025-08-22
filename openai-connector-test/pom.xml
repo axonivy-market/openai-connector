@@ -27,6 +27,10 @@
 				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
+		<repository>
+			<id>maven.axonivy.com</id>
+			<url>https://maven.axonivy.com</url>
+		</repository>
 	</repositories>
 	<dependencies>
 		<dependency>
@@ -34,6 +38,11 @@
 			<artifactId>openai-connector</artifactId>
 			<version>${project.version}</version>
 			<type>iar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.axonivy.utils.e2etest</groupId>
+			<artifactId>e2e-test-utils</artifactId>
+			<version>[1.0.0,)</version>
 		</dependency>
 		<dependency>
 			<groupId>com.axonivy.ivy.test</groupId>
@@ -58,7 +67,8 @@
 						<openaiKey>${openai.key}</openaiKey>
 						<testEnvironment>${testEnvironment}</testEnvironment>
 					</systemPropertyVariables>
-					<statelessTestsetReporter implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
+					<statelessTestsetReporter
+						implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5Xml30StatelessReporter">
 						<disable>false</disable>
 						<usePhrasedFileName>false</usePhrasedFileName>
 						<usePhrasedTestSuiteClassName>true</usePhrasedTestSuiteClassName>

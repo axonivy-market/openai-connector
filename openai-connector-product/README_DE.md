@@ -1,108 +1,110 @@
 # OpenAI ChatGPT API
 
-ChatGPT Ist ein AI Model entfaltet mal [OpenAI](https://openai.com/). Es kann
-kommunizieren mit du in natural Sprache und unterstützen dir in verschiedener
-Sprache-basisbezogene Tasks, wie antworten Fragen, schreibend Texte oder
-#entwickelnd neue Ideen. Mit das OpenAI ChatGPT API Anschluss, du kannst
-integrieren ChatGPT hinein euren #Axon Efeu dienstliche Anträge.
+ChatGPT ist ein von [OpenAI](https://openai.com/) entwickeltes KI-Modell. Es
+kann mit Ihnen in natürlicher Sprache kommunizieren und Sie bei verschiedenen
+sprachbasierten Aufgaben unterstützen, z. B. beim Beantworten von Fragen, beim
+Verfassen von Texten oder beim Entwickeln neuer Ideen. Mit dem OpenAI ChatGPT
+API-Konnektor können Sie ChatGPT in Ihre Axon Ivy-Geschäftsanwendungen
+integrieren.
 
-Dieser Anschluss:
+Dieser Konnektor:
 
-- Ist gegründet weiter das OpenAI API shttps://Bahnsteig.openai.com/s
-- Versieht einen simplen Schwatz frontend für nahtlos Integration hinein #Axon
-  Efeu Anträge
+- basiert auf der OpenAI-API „https://platform.openai.com/”
+- bietet eine einfache Chat-Oberfläche für die nahtlose Integration in Axon
+  Ivy-Anwendungen.
 
 ## Demo
 
-### ChatGPT Demo
-Erfahr intelligente Unterhaltungen mit ChatGPT #bruchlos mit dieser Demo. Frag
-irgendwelche Frage in irgendwelcher Sprache und auf Anhieb empfangen #präzise,
-natural, und insightful Antworten—rechts innerhalb #Axon Efeu. Genieß ein
-sauberes, intuitive Schnittstelle, Augenblick Feedback, und volle Flexibilität
-für irgendwelche Situation.
+### ChatGPT-Demo
+Erleben Sie mit dieser Demo nahtlos intelligente Unterhaltungen mit ChatGPT.
+Stellen Sie Fragen in jeder beliebigen Sprache und erhalten Sie sofort präzise,
+natürliche und aufschlussreiche Antworten – direkt in Axon Ivy. Genießen Sie
+eine übersichtliche, intuitive Benutzeroberfläche, sofortiges Feedback und volle
+Flexibilität für jede Situation.
 
-Du können #voranbringen personalisieren eure AI Erfahrung auswählen mal
-verschiedene Models und konfigurierend den Temperatur Parameter—#aufstellen von
-0.0 zu 2.0—zu regulieren die Bilanz zwischen Genauigkeit und Kreativität.
+Sie können Ihre KI-Erfahrung weiter personalisieren, indem Sie verschiedene
+Modelle auswählen und den Temperaturparameter – von 0,0 bis 2,0 – konfigurieren,
+um das Gleichgewicht zwischen Genauigkeit und Kreativität zu steuern.
 
-- #Nieder Werte (#z.B., 0.0–0.3) → #Plangesteuert, präzis, und
-  Tatsache-#gerichtet Antworten.
+- Niedrigere Werte (z. B. 0,0–0,3) → Deterministische, präzise und
+  faktenorientierte Antworten.
 
-- Durchschnittliche Werte (#z.B., 0.4–0.7) → #Ausgewogen Antworten mit einer
-  Mischung von Genauigkeit und Auswahl.
+- Mittlere Werte (z. B. 0,4–0,7) → Ausgewogene Antworten mit einer Mischung aus
+  Genauigkeit und Vielfalt.
 
-- #Hoch Werte (#z.B., 0.8–1.5) → More kreativ, divers, und informative
-  Antworten, aber mit etwas #kleine #Vorhersehbarkeit.
+- Höhere Werte (z. B. 0,8–1,5) → Kreativere, vielfältigere und explorativere
+  Antworten, jedoch mit etwas geringerer Vorhersagbarkeit.
 
-- Sehr hohe Werte (>1.5) → Hoch kreativ, experimentelle Ausgaben, oft passend
-  für Gedankenaustausch anstatt sachliche Genauigkeit.
+- Sehr hohe Werte (>1,5) → Sehr kreative, experimentelle Ergebnisse, oft eher
+  für Brainstorming als für sachliche Genauigkeit geeignet.
 
-![Demo-Zwiegespräch](images/demo1.png)
+![demo-dialog](images/demo1.png)
 
-![Demo-Zwiegespräch](images/demo3.png)
+![demo-dialog](images/demo3.png)
 
-Dies ist ein Arbeitsgang von ChatGPT Demo
+Dies ist ein Prozess der ChatGPT-Demo.
 
-![Demo-Zwiegespräch](images/demo0.png)
+![demo-dialog](images/demo0.png)
 
-## EmailGenerator Demo
+## E-Mail-Generator Demo
 
-Erfahr die Kraft von AI in automatisieren eure Anwerbung #Email verarbeitet
-direkt innerhalb diese Demo. Einfach #betreten den KandidatenDetails, Beruf
-Stelle, wesentliche Geschicklichkeiten, Interview Resultate, und Befrager
-Auskunft — das System will automatisch generieren personalisierte #Email mit
-professionell, natural, und Kontext-#angemessenen Inhalt (für entweder Akzeptanz
-oder #Abweisung).
+Erleben Sie die Leistungsfähigkeit der KI bei der Automatisierung Ihres
+E-Mail-Prozesses für die Personalbeschaffung direkt in dieser Demo. Geben Sie
+einfach die Daten des Bewerbers, die Stelle, die Schlüsselqualifikationen, die
+Ergebnisse des Vorstellungsgesprächs und die Informationen zum Interviewer ein –
+das System generiert automatisch personalisierte E-Mails mit professionellen,
+natürlichen und kontextbezogenen Inhalten (entweder zur Annahme oder Ablehnung).
 
-Fasten – #Präzise – Angemessen:
+Schnell – Genau – Bequem:
 
-- Intuitive Schnittstelle: #Betreten alle Auskunft bedürft herein gerade einige
-  Stufen.
+- Intuitive Benutzeroberfläche: Geben Sie alle erforderlichen Informationen in
+  nur wenigen Schritten ein.
 
-- #Smart personalization: #Email Inhalt ist geschneidert basisbezogen auf #der
-  #Daten versiehst du.
+- Intelligente Personalisierung: Der Inhalt der E-Mail wird auf Grundlage der
+  von Ihnen bereitgestellten Daten individuell angepasst.
 
-- Nahtlose Integration: Sende die #Email zu dem Kandidaten rechts #nachdem
-  Erzeugung, ohne schalten Anträge.
+- Nahtlose Integration: Senden Sie die E-Mail direkt nach der Erstellung an den
+  Kandidaten, ohne zwischen Anwendungen wechseln zu müssen.
 
-Mit OpenAI Stellvertretende Unterstützung, jede Anwerbung #Email sendest willst
-du speichern Zeit Weile #aufrechterhalten Professionalität und zeigend echte
-Sorgfalt für den Kandidaten.
+Mit der Unterstützung von OpenAI Assistant sparen Sie bei jeder E-Mail, die Sie
+im Rahmen der Personalbeschaffung versenden, Zeit, ohne dabei an
+Professionalität einzubüßen, und zeigen gleichzeitig echtes Interesse an den
+Bewerbern.
 
-![Demo-Zwiegespräch](images/demo2.png)
+![demo-dialog](images/demo2.png)
 
-### GetAssistant Demo
-Diese Demo erlaubt du zu schnell listen und identifizieren verfügbare
-Assistenten, machend ihm leichter zu #ausgewählt das rechtes #man für
-Unterhaltungen, #einverstanden Erzeugung, oder spezialisierte Tasks (wie RFI
-Hilfe oder BPMN Kreation).
+### GetAssistant-Demo
+Mit dieser Demo können Sie schnell verfügbare Assistenten auflisten und
+identifizieren, wodurch es einfacher wird, den richtigen für Gespräche, die
+Erstellung von Inhalten oder spezielle Aufgaben (wie RFI-Unterstützung oder
+BPMN-Erstellung) auszuwählen.
 
-Zeigt eine Liste Assistenten geschafft herein eure OpenAI Konto. Jeder Assistent
-ist ein konfigurierbares AI Agent mit sein eigenes:
+Zeigt eine Liste der in Ihrem OpenAI-Konto erstellten Assistenten an. Jeder
+Assistent ist ein konfigurierbarer KI-Agent mit folgenden Eigenschaften:
 
-- ID – Eine einmalige Bezeichnung für rufen oder #regelnd den Assistenten.
+- ID – eine eindeutige Kennung zum Aufrufen oder Verwalten des Assistenten.
 
-- Heiß – ein #beschreibend Etikett #hindeuten seine Aufgabe oder Rolle (#z.B.,
-  #Axon Efeu RFI Helfer, BPMN #Modellieren Erzeuger).
+- Name – eine beschreibende Bezeichnung, die die Funktion oder Rolle angibt (z.
+  B. Axon Ivy RFI Helper, BPMN Modeling Generator).
 
-- Modellier – das AI Model Version benutzt es (#z.B., gpt-4o-mini,
+- Modell – die verwendete KI-Modellversion (z. B. gpt-4o-mini,
   gpt-4o-2024-08-06).
 
-![Demo-Zwiegespräch](images/demo4.png)
+![demo-dialog](images/demo4.png)
 
 ## Einrichtung
 
-Plauder GPT Bitten kommen nicht #kostenlos. Indes, als meldest an du ein neues
-Konto, 5$ ist automatisch zugefügt zu ihm. Dies ist perfekt zu entfalten euren
-Schwatz GPT Integration gratis.
+Chat-GPT-Anfragen sind nicht kostenlos. Wenn Sie jedoch ein neues Konto
+registrieren, werden diesem automatisch 5 $ gutgeschrieben. Dies ist ideal, um
+Ihre Chat-GPT-Integration kostenlos zu entwickeln.
 
-1. Melde an weiter ein Konto
-   [Bahnsteig.openai.com](https://platform.openai.com/overview).
-2. Einmal #loggen herein, Klick auf eure Nutzer Ikone auf dem #höhere #Rechter
-   Ecke.
-3. In der Speisekarte, benutz den "Ausblick API Schlüssel" Option.
-4. Generier ein neues API #eintasten und lagern ihm in euren Variablen.yaml
-   Unter `Variablen.openai-Anschluss.apiKey`
+1. Registrieren Sie ein Konto auf
+   [platform.openai.com](https://platform.openai.com/overview).
+2. Sobald Sie angemeldet sind, klicken Sie auf Ihr Benutzersymbol in der oberen
+   rechten Ecke.
+3. Verwenden Sie im Menü die Option „API-Schlüssel anzeigen”.
+4. Generieren Sie einen neuen API-Schlüssel und speichern Sie ihn in Ihrer
+   variables.yaml unter `Variables.openai-connector.apiKey`
 
 ```
 @variables.yaml@

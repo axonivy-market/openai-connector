@@ -92,7 +92,7 @@ Assistent ist ein konfigurierbarer KI-Agent mit folgenden Eigenschaften:
 
 ![demo-dialog](images/demo4.png)
 
-## Einrichtung
+## Setup
 
 Chat-GPT-Anfragen sind nicht kostenlos. Wenn Sie jedoch ein neues Konto
 registrieren, werden diesem automatisch 5 $ gutgeschrieben. Dies ist ideal, um

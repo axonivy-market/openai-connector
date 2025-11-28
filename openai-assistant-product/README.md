@@ -16,8 +16,8 @@ This connector:
 
 ## Demo
 
-The assistant context menu, popping up in all code-editors:
-![context](docs/chat-gpt-context.png)
+The assistant context menu:
+![context](docs/ChatGPTassistantmenu.png)
 
 Supports you in reviews, by explaining existing code:
 ![explain](docs/chat-gpt-explain.png)
@@ -27,6 +27,13 @@ Accepts insert or change code change requests in natural language:
 
 Allows you to select and apply the changes you were asking for:
 ![explain](docs/chat-gpt-insert-review.png)
+
+The OpenAI API offers the option of using various models. Note, however, that some of them are not suitable for text output (e.g. 'dall-e' -> images or 'whisper' -> audio). 
+Usable for this ChatGPT code assistant are all models, starting with gpt*, but quality and pricing is very different: https://platform.openai.com/docs/models
+
+![setmodel](docs/chatGPT-model1.png)
+
+![setmodel](docs/chatGPT-model2.png)
 
 ## Setup
 

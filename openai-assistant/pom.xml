@@ -10,7 +10,7 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <java.compiler.compliance>21</java.compiler.compliance>
     <tycho.version>4.0.10</tycho.version>
-    <ivy.release>12.0</ivy.release>
+    <ivy.release>13.2</ivy.release>
   </properties>
 
   <repositories>

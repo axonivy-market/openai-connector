@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.axonivy.connector.openai</groupId>
   <artifactId>openai-connector-test</artifactId>
-  <version>12.0.4-SNAPSHOT</version>
+  <version>13.2.0-SNAPSHOT</version>
   <packaging>iar</packaging>
   <properties>
     <tester.version>12.0.0</tester.version>
@@ -26,7 +26,7 @@
     <dependency>
       <groupId>com.axonivy.utils.e2etest</groupId>
       <artifactId>e2e-test-utils</artifactId>
-      <version>[1.0.0,)</version>
+      <version>1.0.1</version>
     </dependency>
     <dependency>
       <groupId>com.axonivy.ivy.api.test</groupId>

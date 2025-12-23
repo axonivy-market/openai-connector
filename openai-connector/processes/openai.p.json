@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/12.0.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
   "id" : "187997E4FAE2FBE9",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -51,7 +51,7 @@
       ],
       "visual" : {
         "at" : { "x" : 656, "y" : 64 },
-        "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
       "connect" : [
         { "id" : "f4", "to" : "f3" }
@@ -119,7 +119,7 @@
       },
       "visual" : {
         "at" : { "x" : 720, "y" : 192 },
-        "icon" : "res:/webContent/logo/OpenAI_Logo.png?small"
+        "icon" : "res:/webContent/logo/OpenAI_Logo.png"
       },
       "connect" : [
         { "id" : "f7", "to" : "f8" }

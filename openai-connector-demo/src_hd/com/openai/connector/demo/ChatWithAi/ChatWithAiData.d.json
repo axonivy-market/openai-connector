@@ -1,23 +1,17 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/data-class/12.0.0/data-class.json",
+  "$schema" : "https://json-schema.axonivy.com/data-class/13.2.0/data-class.json",
   "simpleName" : "ChatWithAiData",
   "namespace" : "com.openai.connector.demo.ChatWithAi",
-  "isBusinessCaseData" : false,
   "fields" : [ {
-    "name" : "message",
-    "type" : "String",
-    "modifiers" : [ "PERSISTENT" ]
+    "name" : "message"
   }, {
     "name" : "conversation",
-    "type" : "java.util.List<com.openai.connector.demo.Message>",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "java.util.List<com.openai.connector.demo.Message>"
   }, {
     "name" : "model",
-    "type" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum"
   }, {
     "name" : "temperature",
-    "type" : "java.math.BigDecimal",
-    "modifiers" : [ "PERSISTENT" ]
+    "type" : "java.math.BigDecimal"
   } ]
 }

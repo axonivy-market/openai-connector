@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=https://json-schema.axonivy.com/app/12.0.0/rest-clients.json
+# yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.2.1/rest-clients.json
 RestClients:
   #APIs for sampling from and fine-tuning language models
   openai:

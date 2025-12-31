@@ -5,7 +5,7 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
-		<classpathentry kind="src" path="src_wsproc">
+	<classpathentry kind="src" path="src_wsproc">
 		<attributes>
 			<attribute name="optional" value="true"/>
 		</attributes>
@@ -15,12 +15,22 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="src" path="src_generated">
+		<attributes>
+			<attribute name="ignore_optional_problems" value="true"/>
+			<attribute name="optional" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry exported="true" kind="con" path="IVY_CONTAINER"/>
 	<classpathentry kind="con" path="WEBAPP_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>

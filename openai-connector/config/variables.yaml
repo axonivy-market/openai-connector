@@ -7,7 +7,7 @@
 # '<project>/Config/_<environment>/variables.yaml
 #
 Variables:
-  openai-connector:
+  openaiConnector:
     # your openai key
     # [password]
     apiKey: ''

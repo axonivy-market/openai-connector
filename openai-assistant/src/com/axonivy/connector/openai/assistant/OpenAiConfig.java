@@ -10,7 +10,7 @@ import ch.ivyteam.ivy.application.config.Property;
 public class OpenAiConfig {
 
   public interface Key {
-    String OPENAI_PREFIX = "Variables.openai-assistant.";
+    String OPENAI_PREFIX = "Variables.openaiAssistant.";
 
     String API_KEY = OPENAI_PREFIX + "apiKey";
     String READ_TIMEOUT_SECONDS = OPENAI_PREFIX + "readTimeoutSeconds";

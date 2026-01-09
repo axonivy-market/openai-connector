@@ -9,14 +9,14 @@
   <modules>
     <module>openai-assistant</module><!-- do not use dynamic project.version: for tycho release update!-->
     <module>openai-assistant-product</module>
-    <module>${project.name}</module>
-    <module>${project.name}-demo</module>
-    <module>${project.name}-test</module>
-    <module>${project.name}-product</module>
+    <module>openai-connector</module>
+    <module>openai-connector-demo</module>
+    <module>openai-connector-test</module>
+    <module>openai-connector-product</module>
   </modules>
 
   <scm>
-    <developerConnection>scm:git:https://github.com/axonivy-market/${project.name}.git</developerConnection>
+    <developerConnection>scm:git:https://github.com/axonivy-market/openai-connector.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 

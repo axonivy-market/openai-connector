@@ -26,7 +26,6 @@ import com.openai.api.v1.client.AssistantObject;
 import com.openai.api.v1.client.ListAssistantsResponse;
 
 import ch.ivyteam.ivy.environment.Ivy;
-import ch.ivyteam.ivy.rest.client.config.IvyDefaultJaxRsTemplates;
 import io.swagger.v3.oas.annotations.Hidden;
 
 @Path(MockAI.PATH_SUFFIX)

@@ -40,7 +40,7 @@ public class MockAI {
   static final String PATH_SUFFIX = "aiMock";
 
   // URI where this mock can be reached: to be referenced in tests that use it!
-  public static final String URI = "{"+IvyDefaultJaxRsTemplates.APP_URL+"}/api/"+PATH_SUFFIX;
+  public static final String URI = "{ivy.app.baseurl}/api/"+PATH_SUFFIX;
 
   private final Map<String, JsonNode> examples = Map.of(
     "assist-selection-explain", json(load("assist-selection-explain.json")),

@@ -1,6 +1,6 @@
 Variables:
   # parameters for your openai:chatGPT Designer assistant
-  openai-assistant:
+  openaiAssistant:
     # your personal openai platform api key
     # [password]
     apiKey: ''

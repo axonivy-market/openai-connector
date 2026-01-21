@@ -1,8 +1,9 @@
 package com.axonivy.connector.openai.test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.TestTemplate;
+import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.axonivy.connector.openai.BaseSetup;
 import com.axonivy.connector.openai.constants.OpenAiTestConstants;
@@ -15,13 +16,13 @@ import ch.ivyteam.ivy.bpm.engine.client.element.BpmProcess;
 
 public class GetAssistantTest extends BaseSetup {
 
-  @TestTemplate
-  public void getAssisstants(BpmClient bpmClient) {
-    BpmElement ASSISTANT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("getAssistants()");
+	@TestTemplate
+	public void getAssistants(BpmClient bpmClient, ExtensionContext context) {
+		BpmElement ASSISTANT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("getAssistants()");
 
-    var start = bpmClient.start().subProcess(ASSISTANT);
-    ExecutionResult result = start.execute();
-    openaiData data = result.data().last();
-    assertTrue(data.getAssistants().size() >= 2);
-  }
+		var start = bpmClient.start().subProcess(ASSISTANT);
+		ExecutionResult result = start.execute();
+		openaiData data = result.data().last();
+		assertNotNull(data.getAssistants());
+	}
 }

@@ -9,5 +9,5 @@
 Variables:
   openaiConnector:
     # your openai key
-    #[password]
+    # [password]
     apiKey: ''

@@ -3,7 +3,6 @@ package com.axonivy.connector.openai.test;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.junit.jupiter.api.TestTemplate;
-import org.junit.jupiter.api.extension.ExtensionContext;
 
 import com.axonivy.connector.openai.BaseSetup;
 import com.axonivy.connector.openai.constants.OpenAiTestConstants;

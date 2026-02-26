@@ -16,13 +16,13 @@ import ch.ivyteam.ivy.bpm.engine.client.element.BpmProcess;
 
 public class GetAssistantTest extends BaseSetup {
 
-	@TestTemplate
-	public void getAssistants(BpmClient bpmClient, ExtensionContext context) {
-		BpmElement ASSISTANT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("getAssistants()");
+  @TestTemplate
+  public void getAssisstants(BpmClient bpmClient) {
+    BpmElement ASSISTANT = BpmProcess.path(OpenAiTestConstants.OPEN_AI).elementName("getAssistants()");
 
-		var start = bpmClient.start().subProcess(ASSISTANT);
-		ExecutionResult result = start.execute();
-		openaiData data = result.data().last();
-		assertNotNull(data.getAssistants());
-	}
+    var start = bpmClient.start().subProcess(ASSISTANT);
+    ExecutionResult result = start.execute();
+    openaiData data = result.data().last();
+    assertNotNull(data.getAssistants());
+  }
 }

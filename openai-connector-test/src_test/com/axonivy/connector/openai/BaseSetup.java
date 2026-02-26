@@ -36,7 +36,7 @@ public class BaseSetup {
   private Runnable runRealEnv(AppFixture fixture) {
     return () -> {
       String openApiKey = System.getProperty(OpenAiTestConstants.OPENAI_KEY);
-      fixture.var("openai-connector.apiKey", openApiKey);
+      fixture.var("openaiConnector.apiKey", openApiKey);
     };
   }
 

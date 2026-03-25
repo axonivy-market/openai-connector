@@ -22,7 +22,7 @@ Enums:
                 name: System Analyst
 Labels:
   Approve: Approve
-  CandiateMostImportantSkill: Candidate most important skill
+  CandidateMostImportantSkill: Candidate most important skill
   CandidateEmail: Candidate email
   CandidateName: Candidate name
   Company: Company

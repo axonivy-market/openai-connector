@@ -7,6 +7,14 @@ This connector:
 - is based on the OpenAI API 'https://platform.openai.com/'
 - provides a simple chat frontend for seamless integration into Axon Ivy applications
 
+### Key features
+
+- Generate conversational AI responses with the reusable callable `openai:chatGpt(String,com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum,BigDecimal)`, supporting configurable model and temperature.
+- Retrieve and manage Assistants via the callable `openai:getAssistants()` to list configurable AI agents for reuse in your processes.
+- Built-in OpenAI REST client with automatic authentication (`OpenAIAuthFeature`) using the API key configured in `config/rest-clients.yaml`.
+- Generated OpenAPI client models under `com.openai.api.v1.client` for typed request/response mapping.
+- Simple integration into Axon Ivy: callable subprocesses and data mappings let you embed AI capabilities into existing workflows.
+
 ## Demo
 
 ### ChatGPT Demo
@@ -72,3 +80,52 @@ Chat GPT requests do not come for free. However, when you register a new account
 ```
 @variables.yaml@
 ```
+
+## Components
+
+### Callables
+
+From `processes/openai.p.json`:
+
+- `chatGpt(String what, com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum model, BigDecimal temperature)`
+	- Input: `what: String`
+	- Input: `model: com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum`
+	- Input: `temperature: BigDecimal`
+	- Result: `answer: String`
+
+- `getAssistants()`
+	- Result: `assistants: List<com.openai.api.v1.client.AssistantObject>`
+
+### API / OpenAPI
+
+- OpenAPI Spec: https://raw.githubusercontent.com/axonivy-market/openai-openapi/refs/heads/master/openapi.yaml
+- Client namespace: `com.openai.api.v1.client`
+
+### Artifacts
+
+1. **openai-connector-demo** (installer: `maven-import`, type: `iar`)
+
+```xml
+<dependency>
+	<groupId>com.axonivy.connector.openai</groupId>
+	<artifactId>openai-connector-demo</artifactId>
+	<version>13.2.1</version>
+	<type>iar</type>
+</dependency>
+```
+
+2. **openai-connector** (installer: `maven-dependency`, type: `iar`)
+
+```xml
+<dependency>
+	<groupId>com.axonivy.connector.openai</groupId>
+	<artifactId>openai-connector</artifactId>
+	<version>13.2.1</version>
+	<type>iar</type>
+</dependency>
+```
+
+### Form components
+
+No form components were detected in the main module.
+

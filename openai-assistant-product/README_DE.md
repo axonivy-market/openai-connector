@@ -1,6 +1,6 @@
-> [!CAUTION]
+> [!Caution]
 > ## Deprecated
-> Dieser Connector ist veraltet und wird nicht mehr weiterentwickelt oder unterstützt. Er wird in Release 14 entfernt.
+> ChatGPT-Assistent ist veraltet und wird nicht mehr weiterentwickelt oder unterstützt. Er wird in Release 14 entfernt.
 > 
 > **Empfohlene Alternative:** [Smart Workflow](https://market.axonivy.com/smart-workflow?version=14.0.0-b4#description)
 

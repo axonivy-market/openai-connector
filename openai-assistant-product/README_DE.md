@@ -1,3 +1,9 @@
+> [!CAUTION]
+> ## Deprecated
+> Dieser Connector ist veraltet und wird nicht mehr weiterentwickelt oder unterstützt. Er wird in Release 14 entfernt.
+> 
+> **Empfohlene Alternative:** [Smart Workflow](https://market.axonivy.com/smart-workflow?version=14.0.0-b4#description)
+
 ## Unterstützung für Entwickler: der ChatGPT Assistent
 
 Axon Ivys **ChatGPT-Assistent** ist eine Anpassung der OpenAI API für die Integration in den Axon Ivy Designer. Der Assistent liefert ein Kontextmenü, mit der dir KI-gestützt Code erklärt, gefixt oder hinzufügt werden kann.

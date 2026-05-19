@@ -1,3 +1,11 @@
+> [!CAUTION]
+> ## Deprecated
+> This connector is deprecated and will no longer be maintained or supported. It will be removed in Release 14.
+>
+> **Recommended alternative:** [Smart Workflow](https://market.axonivy.com/smart-workflow?version=14.0.0-b4#description)
+
+
+
 # ChatGPT Code Assistant
 
 Axon Ivy's ChatGPT Code Assistant is an integration of the OpenAI API into the Axon Ivy Designer. The assistant provides a context menu that allows you to use AI to explain, fix or add code.  

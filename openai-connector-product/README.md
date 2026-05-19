@@ -1,3 +1,9 @@
+> [!CAUTION]
+> ## Deprecated
+> These connectors are deprecated and will no longer receive updates or support. It will not be available for Release 14 anymore.
+> **Recommended alternative:** [Smart Workflow](https://market.axonivy.com/smart-workflow?version=14.0.0-b4#description)
+
+
 # OpenAI ChatGPT API
 
 ChatGPT is an AI model developed by [OpenAI](https://openai.com/). It can communicate with you in natural language and support you in various language-based tasks, such as answering questions, writing texts or developing new ideas. With the OpenAI ChatGPT API connector, you can integrate ChatGPT into your Axon Ivy business applications. 

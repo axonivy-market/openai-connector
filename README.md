@@ -4,7 +4,8 @@
 
 > [!CAUTION]
 > ## Deprecated
-> These connectors are deprecated and will no longer receive updates or support. It will not be available for Release 14 anymore.
+> These connectors are deprecated and will no longer be maintained or supported. They will be removed in Release 14.
+>
 > **Recommended alternative:** [Smart Workflow](https://market.axonivy.com/smart-workflow?version=14.0.0-b4#description)
 
 Read our documentation:

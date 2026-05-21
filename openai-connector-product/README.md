@@ -1,11 +1,15 @@
 # OpenAI ChatGPT API
 
-ChatGPT is an AI model developed by [OpenAI](https://openai.com/). It can communicate with you in natural language and support you in various language-based tasks, such as answering questions, writing texts or developing new ideas. With the OpenAI ChatGPT API connector, you can integrate ChatGPT into your Axon Ivy business applications. 
+OpenAI ChatGPT API connector integrates ChatGPT into Axon Ivy applications, enabling your processes and dialogs to send messages and receive AI-generated responses directly within the platform. It provides a ready-to-use chat frontend, a preconfigured REST client for the OpenAI API, and demo workflows for chat completion, assistant listing, and email generation. Learn more at https://platform.openai.com/.
 
-This connector:
+## Key features
 
-- is based on the OpenAI API 'https://platform.openai.com/'
-- provides a simple chat frontend for seamless integration into Axon Ivy applications
+- Send messages to ChatGPT and receive contextual AI responses directly within Axon Ivy processes and dialogs.
+- Configure model and temperature to control response creativity and precision.
+- Retrieve and manage Assistants from OpenAI for specialized agent-driven workflows.
+- Evaluate integration quickly using built-in demo workflows: ChatGPT, Assistant listing, and Email generation.
+- Seamless connectivity to the OpenAI API with a preconfigured REST client and OpenAPI spec support.
+- Generate personalized emails from templates to streamline communications.
 
 ### Key features
 
@@ -17,115 +21,117 @@ This connector:
 
 ## Demo
 
-### ChatGPT Demo
-Experience intelligent conversations with ChatGPT seamlessly with this demo. Ask any question in any language and instantly receive accurate, natural, and insightful responses—right within Axon Ivy. Enjoy a clean, intuitive interface, instant feedback, and full flexibility for any situation.
+Check the demo implementations provided to experience the connector's capabilities and user interfaces. The demos show typical user flows such as starting a chat, listing available Assistants, and generating personalized emails.
 
-You can further personalize your AI experience by selecting different models and configuring the temperature parameter—ranging from 0.0 to 2.0—to control the balance between accuracy and creativity.
+### Demo workflows
 
-- Lower values (e.g., 0.0–0.3) → Deterministic, precise, and fact-focused responses.
+#### OpenAI Connector Demo (openai-connector-demo)
 
-- Medium values (e.g., 0.4–0.7) → Balanced answers with a mix of accuracy and variety.
+##### ChatGPT Demo
+1. Launch the ChatGPT demo from the demo menu.
+2. You'll see a chat dialog where you can type a question or prompt.
+3. Enter your prompt and send it.
+4. The system displays an AI-generated response produced by the ChatGPT model.
+5. Optionally adjust the model and temperature to refine creativity and precision.
 
-- Higher values (e.g., 0.8–1.5) → More creative, diverse, and exploratory responses, but with slightly less predictability.
+![ChatGPT demo](images/demo1.png)
 
-- Very high values (>1.5) → Highly creative, experimental outputs, often suitable for brainstorming rather than factual accuracy.
+##### GetAssistant Demo
+1. Launch the Get Assistant demo from the demo menu.
+2. A list of Assistants from your OpenAI account is displayed.
+3. Select an Assistant to view details such as name, ID, and model.
+4. Use the selected Assistant in subsequent chat workflows as needed.
 
-![demo-dialog](images/demo1.png)
+![GetAssistant demo](images/demo4.png)
 
-![demo-dialog](images/demo3.png)
+##### EmailGenerator Demo
+1. Launch the Email Generator demo from the demo menu.
+2. Fill in candidate details, job position, and relevant metadata in the form.
+3. Generate a personalized email preview based on the provided inputs.
+4. Review and send the generated email or copy it for further edits.
 
-This is a process of ChatGPT demo 
-
-![demo-dialog](images/demo0.png)
-
-## EmailGenerator Demo
-
-Experience the power of AI in automating your recruitment email process directly within this demo. Simply enter the candidate’s details, job position, key skills, interview results, and interviewer information — the system will automatically generate personalized emails with professional, natural, and context-appropriate content (for either acceptance or rejection).
-
-Fast – Accurate – Convenient:
-
-- Intuitive interface: Enter all required information in just a few steps.
-
-- Smart personalization: Email content is tailored based on the data you provide.
-
-- Seamless integration: Send the email to the candidate right after generation, without switching applications.
-
-With OpenAI Assistant support, every recruitment email you send will save time while maintaining professionalism and showing genuine care for the candidate.
-
-![demo-dialog](images/demo2.png)
-
-### GetAssistant Demo
-This demo allows you to quickly list and identify available Assistants, making it easier to select the right one for conversations, content generation, or specialized tasks (such as RFI assistance or BPMN creation).
-
-Displays a list of Assistants created in your OpenAI account. Each Assistant is a configurable AI agent with its own:
-
-- ID – a unique identifier for calling or managing the Assistant.
-
-- Name – a descriptive label indicating its function or role (e.g., Axon Ivy RFI Helper, BPMN Modeling Generator).
-
-- Model – the AI model version it uses (e.g., gpt-4o-mini, gpt-4o-2024-08-06).
-
-![demo-dialog](images/demo4.png)
+![EmailGenerator demo](images/demo2.png)
 
 ## Setup
 
-Chat GPT requests do not come for free. However, when you register a new account,
- 5$ are automatically added to it. This is perfect to develop your Chat GPT integration free of charge.
+- **Roles:** Everybody (configured in config/roles.xml)
+- **OpenAPI:** Spec URL: https://raw.githubusercontent.com/axonivy-market/openai-openapi/refs/heads/master/openapi.yaml — Namespace: com.openai.api.v1.client
 
-1. Register an account on [platform.openai.com](https://platform.openai.com/overview).
-2. Once logged in, click on your user icon on the upper right corner.
-3. In the menu, use the "View API keys" option.
-4. Generate a new API key and store it in your variables.yaml under `Variables.openai-connector.apiKey`
+### Variables
+```yaml
+# yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.2.0/variables.json
+# == Variables ==
+# 
+# You can define here your project Variables.
+# If you want to define/override a Variable for a specific Environment, 
+# add an additional ‘variables.yaml’ file in a subdirectory in the ‘Config’ folder: 
+# '<project>/Config/_<environment>/variables.yaml
+#
+Variables:
+	openaiConnector:
+		# your openai key
+		# [password]
+		apiKey: ''
+```
 
-```
-@variables.yaml@
-```
+1. Register an account on https://platform.openai.com/overview.
+2. Create an API key in your account settings.
+3. Store the API key in the project variables: add it to `config/variables.yaml` under `Variables.openaiConnector.apiKey`.
+4. Restart or reload the application configuration if necessary.
 
 ## Components
 
-### Callables
+### Connector Processes
 
-From `processes/openai.p.json`:
+#### openai.p.json
 
-- `chatGpt(String what, com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum model, BigDecimal temperature)`
-	- Input: `what: String`
-	- Input: `model: com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum`
-	- Input: `temperature: BigDecimal`
-	- Result: `answer: String`
+- **chatGpt(String what, com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum model, BigDecimal temperature) -> answer: String**
+		- Input:
+				- `what` (String) — 
+				- `model` (com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum) — 
+				- `temperature` (BigDecimal) — 
+		- Result:
+				- `answer` (String) — 
 
-- `getAssistants()`
-	- Result: `assistants: List<com.openai.api.v1.client.AssistantObject>`
+- **getAssistants() -> assistants: List<com.openai.api.v1.client.AssistantObject>**
+		- Input: (none)
+		- Result:
+				- `assistants` (List<com.openai.api.v1.client.AssistantObject>) — List with available Assistants
 
-### API / OpenAPI
+### Form Components
 
-- OpenAPI Spec: https://raw.githubusercontent.com/axonivy-market/openai-openapi/refs/heads/master/openapi.yaml
-- Client namespace: `com.openai.api.v1.client`
+#### openaiData — Data Class
 
-### Artifacts
+- **Namespace:** com.openai.connector
+- **Component type:** Data Class
+- **Fields:**
+	 - `message` (com.openai.api.v1.client.ChatCompletionRequestMessage) — 
+	 - `logitBias` (java.util.Map) — 
+	 - `answer` (String) — 
+	 - `assistants` (List<com.openai.api.v1.client.AssistantObject>) — 
+	 - `model` (com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum) — 
+	 - `temperature` (java.math.BigDecimal) — 
+- **Where used:** openai.p.json (chatGpt, getAssistants)
+- **Purpose:** Data container for chat requests and responses
 
-1. **openai-connector-demo** (installer: `maven-import`, type: `iar`)
+### Maven artifacts
 
-```xml
-<dependency>
-	<groupId>com.axonivy.connector.openai</groupId>
-	<artifactId>openai-connector-demo</artifactId>
-	<version>13.2.1</version>
-	<type>iar</type>
-</dependency>
-```
-
-2. **openai-connector** (installer: `maven-dependency`, type: `iar`)
-
+1. openai-connector
 ```xml
 <dependency>
 	<groupId>com.axonivy.connector.openai</groupId>
 	<artifactId>openai-connector</artifactId>
-	<version>13.2.1</version>
+	<version>@version@</version>
 	<type>iar</type>
 </dependency>
 ```
 
-### Form components
-
-No form components were detected in the main module.
-
+2. openai-connector-demo
+```xml
+<dependency>
+	<groupId>com.axonivy.connector.openai</groupId>
+	<artifactId>openai-connector-demo</artifactId>
+	<version>@version@</version>
+	<type>iar</type>
+</dependency>
+```

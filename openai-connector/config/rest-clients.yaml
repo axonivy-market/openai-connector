@@ -1,13 +1,13 @@
-# yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.2.1/rest-clients.json
+# yaml-language-server: $schema=https://json-schema.axonivy.com/14.0-dev/config/rest-clients-1.json
 RestClients:
   #APIs for sampling from and fine-tuning language models
   openai:
-    UUID: 6840e778-eb27-42a0-afdc-87588ffae871
+    Name: openai
     Url: https://api.openai.com/v1
     Icon: res:/webContent/logo/OpenAI_Logo.png
     Features:
-    - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
-    - com.axonivy.connector.openai.OpenAIAuthFeature
+      - ch.ivyteam.ivy.rest.client.mapper.JsonFeature
+      - com.axonivy.connector.openai.OpenAIAuthFeature
     Properties:
       AUTH.openaiKey: ${decrypt:ES2Xa1SwntJScMVVMDcKorZb0xIWJkS7fQOH0Eq0dOw54uwO9m6uRSjXZRVrYsRN}
       JSON.Serialization.PROPERTY_INCLUSION: NON_NULL
@@ -15,3 +15,4 @@ RestClients:
     OpenAPI:
       SpecUrl: https://raw.githubusercontent.com/axonivy-market/openai-openapi/refs/heads/master/openapi.yaml
       Namespace: com.openai.api.v1.client
+    LegacyUUID: 6840e778-eb27-42a0-afdc-87588ffae871

@@ -1,5 +1,5 @@
 {
-  "$schema" : "https://json-schema.axonivy.com/process/13.2.0/process.json",
+  "$schema" : "https://json-schema.axonivy.com/14.0-dev/project/process.json",
   "id" : "187997E4FAE2FBE9",
   "kind" : "CALLABLE_SUB",
   "config" : {
@@ -69,7 +69,7 @@
       "config" : {
         "method" : "POST",
         "target" : {
-          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+          "clientId" : "openai",
           "path" : "/chat/completions"
         },
         "body" : {
@@ -137,7 +137,7 @@
       "name" : "Get Assistants",
       "config" : {
         "target" : {
-          "clientId" : "6840e778-eb27-42a0-afdc-87588ffae871",
+          "clientId" : "openai",
           "path" : "/assistants",
           "headers" : {
             "OpenAI-Beta" : "\"assistants=v2\""

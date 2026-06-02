@@ -1,137 +1,146 @@
-# OpenAI ChatGPT API
+# OpenAI ChatGPT 4 AxonIvy
 
-OpenAI ChatGPT API connector integrates ChatGPT into Axon Ivy applications, enabling your processes and dialogs to send messages and receive AI-generated responses directly within the platform. It provides a ready-to-use chat frontend, a preconfigured REST client for the OpenAI API, and demo workflows for chat completion, assistant listing, and email generation. Learn more at https://platform.openai.com/.
+OpenAI ChatGPT 4 AxonIvy connects your Axon Ivy processes to OpenAI services so you can run chat completions, inspect assistants, and generate tailored emails from business data.
 
-## Key features
+The connector talks to the OpenAI API at [api.openai.com/v1](https://api.openai.com/v1) and uses a dedicated REST client configuration for secure, reusable access.
 
-- Send messages to ChatGPT and receive contextual AI responses directly within Axon Ivy processes and dialogs.
-- Configure model and temperature to control response creativity and precision.
-- Retrieve and manage Assistants from OpenAI for specialized agent-driven workflows.
-- Evaluate integration quickly using built-in demo workflows: ChatGPT, Assistant listing, and Email generation.
-- Seamless connectivity to the OpenAI API with a preconfigured REST client and OpenAPI spec support.
-- Generate personalized emails from templates to streamline communications.
+![OpenAI connector process overview](images/demo0.png)
 
-### Key features
+**Key features**
 
-- Generate conversational AI responses with the reusable callable `openai:chatGpt(String,com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum,BigDecimal)`, supporting configurable model and temperature.
-- Retrieve and manage Assistants via the callable `openai:getAssistants()` to list configurable AI agents for reuse in your processes.
-- Built-in OpenAI REST client with automatic authentication (`OpenAIAuthFeature`) using the API key configured in `config/rest-clients.yaml`.
-- Generated OpenAPI client models under `com.openai.api.v1.client` for typed request/response mapping.
-- Simple integration into Axon Ivy: callable subprocesses and data mappings let you embed AI capabilities into existing workflows.
+- Ask questions and continue conversations inside Axon Ivy with OpenAI-backed chat responses.
+- Generate personalized candidate emails from process data, reducing manual drafting work.
+- List OpenAI assistants in a simple UI so you can review available agents quickly.
+- Control the model and temperature from the dialog, giving users easy tuning without code changes.
+- Reuse connector callable subprocesses from other processes to keep AI integration centralized.
+- Configure secure REST access with a dedicated auth feature and OpenAPI endpoint metadata.
 
 ## Demo
 
-Check the demo implementations provided to experience the connector's capabilities and user interfaces. The demos show typical user flows such as starting a chat, listing available Assistants, and generating personalized emails.
+Try the included demos to see the connector in action across chat, assistant lookup, and email generation.
 
-### Demo workflows
+### Demo Workflows
 
-#### OpenAI Connector Demo (openai-connector-demo)
+#### openai-connector-demo (openai-connector-demo)
 
-##### ChatGPT Demo
-1. Launch the ChatGPT demo from the demo menu.
-2. You'll see a chat dialog where you can type a question or prompt.
-3. Enter your prompt and send it.
-4. The system displays an AI-generated response produced by the ChatGPT model.
-5. Optionally adjust the model and temperature to refine creativity and precision.
+##### AI Chat
 
-![ChatGPT demo](images/demo1.png)
+1. Launch the AI Chat demo from the task or start list.
+2. Open the configuration dialog to choose the model and temperature that fit your use case.
 
-##### GetAssistant Demo
-1. Launch the Get Assistant demo from the demo menu.
-2. A list of Assistants from your OpenAI account is displayed.
-3. Select an Assistant to view details such as name, ID, and model.
-4. Use the selected Assistant in subsequent chat workflows as needed.
+![AI Chat configuration](images/demo1.png)
 
-![GetAssistant demo](images/demo4.png)
+3. Enter your question, then send it to the AI.
+4. Review the conversation history and continue the discussion as needed.
 
-##### EmailGenerator Demo
-1. Launch the Email Generator demo from the demo menu.
-2. Fill in candidate details, job position, and relevant metadata in the form.
-3. Generate a personalized email preview based on the provided inputs.
-4. Review and send the generated email or copy it for further edits.
+![AI Chat conversation](images/demo3.png)
 
-![EmailGenerator demo](images/demo2.png)
+##### Get list of Assistants
+
+1. Launch the assistant list demo.
+2. Wait for the app to call the OpenAI Assistants API and load the results.
+
+![Assistants list](images/demo4.png)
+
+3. Review the assistant ID, name, and model in the table.
+4. Close the view when you are done.
+
+##### AI Mail Generator
+
+1. Launch the AI Mail Generator demo.
+2. Fill in the candidate and interview details, then choose the job position and decision.
+
+![AI Mail Generator](images/demo2.png)
+
+3. Generate the email draft and review the subject and content that are created for you.
+4. Send the mail to the candidate once you are satisfied with the result.
 
 ## Setup
 
-- **Roles:** Everybody (configured in config/roles.xml)
-- **OpenAPI:** Spec URL: https://raw.githubusercontent.com/axonivy-market/openai-openapi/refs/heads/master/openapi.yaml — Namespace: com.openai.api.v1.client
+- **Roles:** Everybody (configured in `config/roles.xml`)
+- **OpenAPI:** https://raw.githubusercontent.com/axonivy-market/openai-openapi/refs/heads/master/openapi.yaml
+
+1. Add your OpenAI API key to `config/variables.yaml` in `openaiConnector.apiKey`.
+2. Keep the REST client configured with the OpenAI base URL `https://api.openai.com/v1`.
+3. Leave the `OpenAIAuthFeature` in place so the connector sends the API key as `Authorization: Bearer ...`.
+4. Verify that the OpenAPI spec URL points to the OpenAI schema used by the connector.
 
 ### Variables
-```yaml
-# yaml-language-server: $schema=https://json-schema.axonivy.com/app/13.2.0/variables.json
-# == Variables ==
-# 
-# You can define here your project Variables.
-# If you want to define/override a Variable for a specific Environment, 
-# add an additional ‘variables.yaml’ file in a subdirectory in the ‘Config’ folder: 
-# '<project>/Config/_<environment>/variables.yaml
-#
-Variables:
-	openaiConnector:
-		# your openai key
-		# [password]
-		apiKey: ''
-```
 
-1. Register an account on https://platform.openai.com/overview.
-2. Create an API key in your account settings.
-3. Store the API key in the project variables: add it to `config/variables.yaml` under `Variables.openaiConnector.apiKey`.
-4. Restart or reload the application configuration if necessary.
+```
+@variables.yaml@
+```
 
 ## Components
 
-### Connector Processes
+### Callable Subprocesses
 
 #### openai.p.json
 
-- **chatGpt(String what, com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum model, BigDecimal temperature) -> answer: String**
-		- Input:
-				- `what` (String) — 
-				- `model` (com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum) — 
-				- `temperature` (BigDecimal) — 
-		- Result:
-				- `answer` (String) — 
+- **Signature**: chatGpt(String what, com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum model, BigDecimal temperature) -> answer: String
+  - **Description**: The client request sets up all required and optional variables to send a request and receive content generated by the AI model.
+  - **Input:**
+    - `what` (String) - The message or prompt to send to the model.
+    - `model` (com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum) - The model to use for the response.
+    - `temperature` (BigDecimal) - The temperature that controls response creativity.
+  - **Result:**
+    - `answer` (String) - The generated answer returned by OpenAI.
 
-- **getAssistants() -> assistants: List<com.openai.api.v1.client.AssistantObject>**
-		- Input: (none)
-		- Result:
-				- `assistants` (List<com.openai.api.v1.client.AssistantObject>) — List with available Assistants
+- **Signature**: getAssistants() -> assistants: List<com.openai.api.v1.client.AssistantObject>
+  - **Description**: Retrieve the current assistants from the OpenAI Assistants API and return them to the calling process.
+  - **Input:** (none)
+  - **Result:**
+    - `assistants` (List<com.openai.api.v1.client.AssistantObject>) - The assistants returned by the OpenAI API.
 
-### Form Components
+### Dialog Components
 
-#### openaiData — Data Class
+#### ChatWithAi — Chat with the AI assistant from a simple dialog
 
-- **Namespace:** com.openai.connector
-- **Component type:** Data Class
+- **Namespace:** com.openai.connector.demo.ChatWithAi
+- **Component type:** UI dialog
 - **Fields:**
-	 - `message` (com.openai.api.v1.client.ChatCompletionRequestMessage) — 
-	 - `logitBias` (java.util.Map) — 
-	 - `answer` (String) — 
-	 - `assistants` (List<com.openai.api.v1.client.AssistantObject>) — 
-	 - `model` (com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum) — 
-	 - `temperature` (java.math.BigDecimal) — 
-- **Where used:** openai.p.json (chatGpt, getAssistants)
-- **Purpose:** Data container for chat requests and responses
+  - `message` (String) — The prompt the user enters before sending a chat message.
+  - `conversation` (java.util.List<com.openai.connector.demo.Message>) — The conversation history shown in the dialog.
+  - `model` (com.openai.api.v1.client.CreateChatCompletionRequest.ModelEnum) — The selected model for the AI response.
+  - `temperature` (java.math.BigDecimal) — The response temperature used to tune creativity.
+- **Purpose:** Lets you chat with OpenAI, adjust the model configuration, and review the full conversation in one place.
 
-### Maven artifacts
+#### GetAssistants — Show the assistants available in OpenAI
+
+- **Namespace:** com.openai.connector.demo.GetAssistants
+- **Component type:** UI dialog
+- **Fields:**
+  - `assistants` (List<com.openai.api.v1.client.AssistantObject>) — The assistants loaded from the OpenAI API.
+- **Purpose:** Displays the assistant list so you can inspect IDs, names, and models before choosing one.
+
+#### MailGenerator — Generate a personalized email for a candidate
+
+- **Namespace:** com.openai.connector.demo.MailGenerator
+- **Component type:** UI dialog
+- **Fields:**
+  - `mail` (com.openai.connector.demo.AIGeneratedMail) — The generated mail content that is shown and sent.
+  - `message` (String) — The prompt text that gets sent to the AI model.
+  - `candidateInformation` (com.openai.connector.demo.CandidateInformation) — The candidate details used to create the mail draft.
+- **Purpose:** Helps you draft and send a tailored email based on candidate and interview information.
+
+### Maven Artifacts
 
 1. openai-connector
+
 ```xml
 <dependency>
-	<groupId>com.axonivy.connector.openai</groupId>
-	<artifactId>openai-connector</artifactId>
-	<version>@version@</version>
-	<type>iar</type>
+  <groupId>com.axonivy.connector.openai</groupId>
+  <artifactId>openai-connector</artifactId>
+  <type>iar</type>
 </dependency>
 ```
 
 2. openai-connector-demo
+
 ```xml
 <dependency>
-	<groupId>com.axonivy.connector.openai</groupId>
-	<artifactId>openai-connector-demo</artifactId>
-	<version>@version@</version>
-	<type>iar</type>
+  <groupId>com.axonivy.connector.openai</groupId>
+  <artifactId>openai-connector-demo</artifactId>
+  <type>iar</type>
 </dependency>
 ```

@@ -30,10 +30,8 @@
             "ChatCompletionRequestUserMessage message = new ChatCompletionRequestUserMessage();",
             "ChatCompletionRequestMessageContentPartText content = new ChatCompletionRequestMessageContentPartText();",
             "content.setText(param.what);",
-            "content.setType(\"text\");",
             "message.addContentItem(content);",
             "message.name = ivy.session.getSessionUserName();",
-            "message.role = \"user\";",
             "out.message = message;"
           ]
         },

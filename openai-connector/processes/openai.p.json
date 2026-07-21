@@ -30,10 +30,10 @@
             "ChatCompletionRequestUserMessage message = new ChatCompletionRequestUserMessage();",
             "ChatCompletionRequestMessageContentPartText content = new ChatCompletionRequestMessageContentPartText();",
             "content.setText(param.what);",
-            "content.setType(\"text\");",
+            "// content.setType(\"text\"); // DO NOT set: ChatCompletionRequestUserMessageContentPart's @JsonTypeInfo already injects \"type\", setting it here too causes OpenAI 400 'duplicate JSON key type' (see README)",
             "message.addContentItem(content);",
             "message.name = ivy.session.getSessionUserName();",
-            "message.role = \"user\";",
+            "// message.role = \"user\"; // DO NOT set: ChatCompletionRequestMessage's @JsonTypeInfo already injects \"role\", setting it here too causes OpenAI 400 'duplicate JSON key role' (see README)",
             "out.message = message;"
           ]
         },

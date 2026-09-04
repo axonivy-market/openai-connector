@@ -1,5 +1,10 @@
 # OpenAI ChatGPT 4 AxonIvy
 
+> [!CAUTION]
+> ## Deprecated
+> These connectors are deprecated and will no longer be maintained or supported. It will be removed in Release 14.
+>
+
 [![CI Build](https://github.com/axonivy-market/openai-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/openai-connector/actions/workflows/ci.yml)
 
 >  [!WARNING] 

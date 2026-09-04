@@ -1,5 +1,11 @@
 # OpenAI ChatGPT 4 AxonIvy
 
+> [!CAUTION]
+> ## Deprecated
+> These connectors are deprecated and will no longer be maintained or supported. It will be removed in Release 14.
+>
+> **Recommended alternative:** [This connector is no longer maintained, since there are great successors available.  openai-assistent: vscode-designer extension contains rich built-in AI assistant support for any model vendor openai-connector: smart-workflow provides AI assistants for your process landscape](https://github.com/axonivy-market/smart-workflow/)
+
 [![CI Build](https://github.com/axonivy-market/openai-connector/actions/workflows/ci.yml/badge.svg)](https://github.com/axonivy-market/openai-connector/actions/workflows/ci.yml)
 
 >  [!WARNING] 
